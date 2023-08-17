@@ -49,7 +49,7 @@ public class MemberController {
 		} else {
 			model.addAttribute("result","로그인 실패");
 		}
-		return "result";
+		return "redirect:../index.jsp";			// 로그인 로직 구성해야됨
 	}
 	
 }
