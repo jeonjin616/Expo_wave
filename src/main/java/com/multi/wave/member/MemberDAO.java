@@ -22,7 +22,7 @@ public class MemberDAO {
 	
 	// 로그인
 	public String login(MemberVO vo) {
-		String getPw = my.selectOne("my.pwCheck", vo);
+		String getPw = my.selectOne("member.pwCheck", vo);
 		System.out.println("매퍼에서 받은 비밀번호 출력 : " + getPw);
 		if(getPw != null) {
 			return getPw;	
