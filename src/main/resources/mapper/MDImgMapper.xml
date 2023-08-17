@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MD">
+<!-- 전체 쓸지 안쓸지 모릅니다.. 일단 만들어만 뒀어요 기능 상세히 수정 안했습니다.-->
+	<insert id="insert" parameterType="MDImgDTO" useGeneratedKeys="true" keyProperty="movie_id">
+		insert into md_imgs values (null, #{MD_img}, #{MD_id})
+	</insert>
+
+
+
+</mapper>

@@ -1,0 +1,112 @@
+@charset "UTF-8";
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+header {
+    background-color: #ffffff;
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+hr {
+    margin: 20px 0;
+    border: none;
+    border-top: 1px solid #ccc;
+}
+
+.image-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.image {
+    width: calc(33.33% - 10px);
+    margin-bottom: 20px;
+}
+
+.image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.post {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+}
+
+.image {
+    flex: 0 0 auto;
+    width: 100px; /* 이미지의 너비 조정 */
+    height: 100px; /* 이미지의 높이 조정 */
+    margin-right: 20px;
+}
+
+.image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.post-details {
+    flex: 1;
+}
+
+.post-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #007bff;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.post-content {
+    color: #333;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.post-time {
+    color: #777;
+    font-size: 14px;
+}
+
+
+.add-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.add-button button {
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.add-button button:hover {
+    background-color: #0056b3;
+}

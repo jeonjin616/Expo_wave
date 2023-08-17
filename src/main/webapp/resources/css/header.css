@@ -1,0 +1,45 @@
+/* header.css */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+}
+
+.image img {
+    height: auto;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.label .navbar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.label .text {
+    color: #000;
+    font-family: "Imprima-Regular", Helvetica, sans-serif;
+    font-size: 17px;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-align: center;
+}
+
+.label .box .rectangle {
+    border-width: 6px;
+    border-color: #062d92;
+    border-style: solid;
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 10px;
+}
+
+.label .box .image img {
+    height: auto;
+    max-height: 100%;
+    max-width: 100%;
+}

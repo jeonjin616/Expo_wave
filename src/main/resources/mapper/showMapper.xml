@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="show">
+
+	<insert id="insert" parameterType="showVO">
+		INSERT INTO `show`
+		VALUES (
+		#{show_id}, #{show_name}, #{show_start}, #{show_end}, #{show_place},
+		#{show_actor}, #{show_crew},
+		#{show_runtime}, #{show_age},
+		#{show_company}, #{show_charge}, #{show_poster},
+		#{show_story},
+		#{show_genre}, #{show_when}
+		)
+	</insert>
+
+	<delete id="deleteAll">
+		DELETE FROM `show`
+	</delete>
+
+
+	<select id="list" resultType="showVO">
+		SELECT show_id, show_name, show_poster
+		FROM `show`
+	</select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+

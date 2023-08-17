@@ -1,0 +1,81 @@
+/* 게시글 작성 폼 전체 스타일 */
+form {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 게시글 제목 입력 스타일 */
+.MDTitle input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+/* 게시글 내용 입력 스타일 */
+.content input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+/* 이미지 업로드 박스 스타일 */
+#MD_post_Thumbnail {
+    display: inline-block;
+    margin-bottom: 10px;
+    max-width: 100%; /* 이미지 가로 크기 최대 값 */
+    height: auto;
+}
+
+/* 이미지 업로드 미리보기 이미지 스타일 */
+#preview {
+    max-width: 100%;
+    max-height: 600px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #f8f8f8;
+}
+
+/* 작성하기 버튼 스타일 */
+button[type="submit"] {
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* 게시글 작성 테이블 스타일 */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table td {
+    padding: 10px;
+    vertical-align: top;
+}
+
+.MDTitle,
+.content {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    width: 100%; /* 제목과 내용의 너비 최대 값 */
+}

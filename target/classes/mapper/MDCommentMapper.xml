@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MD">
+
+	<select id="CommentAll" resultType="MDCommentDTO">
+		select * from md_comment
+		where MD_id = #{MD_id}
+	</select>
+
+	<insert id="CommentMake" parameterType="MDCommentDTO">
+		insert into md_comment
+		(MD_comment,MD_id)
+		values (#{MD_comment},#{MD_id})
+	</insert>
+
+	<!-- 사용여부 모름 일단 작성만 해둠 -->
+	<select id="GetCommentById" resultType="MDCommentDTO">
+		select * from md_comment
+		where MD_id = #{MD_id}
+	</select>
+	<!-- 사용여부 모름 일단 작성만 해둠 -->
+
+
+	<update id="CommentUpdate" parameterType="MDCommentDTO">
+		update md_comment
+		set
+		MD_id = #{MD_id},
+		MD_comment = #{MD_comment},
+		MD_comment_modifi = null
+		where MD_comment_id = #{MD_comment_id}
+	</update>
+
+	<delete id="CommentDelete" parameterType="MDCommentDTO">
+		delete from md_comment
+		where
+		MD_comment_id = #{MD_comment_id}
+	</delete>
+
+</mapper>
