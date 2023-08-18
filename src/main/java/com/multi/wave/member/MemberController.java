@@ -1,5 +1,7 @@
 package com.multi.wave.member;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,14 +44,14 @@ public class MemberController {
 	
 	// 로그인
 	@RequestMapping("member/login")
-	public String login(MemberVO vo, Model model) {
+	@ResponseBody
+	public boolean login(MemberVO vo, HttpSession session) {
 		boolean result = service.login(vo);
-		if(result) {
-			model.addAttribute("result","로그인 성공");
-		} else {
-			model.addAttribute("result","로그인 실패");
-		}
-		return "redirect:../index.jsp";			// 로그인 로직 구성해야됨
+		if(result) {	
+			// 로그인 성공 시 세션 변수 지정
+			session.setAttribute("loginMember", vo.getMem_id());
+		} 
+		return result;
 	}
 	
 }

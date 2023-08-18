@@ -33,8 +33,9 @@ public class MemberService {
 	// 로그인 하기
 	public boolean login(MemberVO vo) {
 		String getPw = dao.login(vo);
+		System.out.println("서비스 vo 출력 : " + vo.getMem_id());
 		System.out.println("dao에서 받은 비밀번호 출력 : " + getPw);
-		if(pwEncoder.matches(vo.getMem_pw(), getPw)){	
+		if(getPw != null & pwEncoder.matches(vo.getMem_pw(), getPw)){	
 			return true;
 		}
 		return false;
