@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,13 +16,20 @@
         <div class="label">
             <div class="text-wrapper">
                 <div class="navbar">
-                    <div class="text"><a href="member/login.jsp">로그인</a></div>
-                    <div class="text">마이페이지</div>
-                    <div class="text"><a href="member/join.jsp">회원가입</a></div>
+                	<!-- 로그인 하기전 보여줄 메뉴 -->
+                	<c:if test="${empty sessionScope.loginMember}">
+	                    <div class="text"><a href="member/login.jsp">로그인</a></div>
+	                    <div class="text"><a href="member/join.jsp">회원가입</a></div>
+                    </c:if>
+                    <!-- 로그인 후 보여줄 메뉴 -->
+                    <c:if test="${not empty sessionScope.loginMember}">
+                    	<span>${sessionScope.loginMember}님 환영합니다.</span>
+	                    <div class="text">로그아웃</div>
+	                    <div class="text">마이페이지</div>
+                    </c:if>
+                    <!-- 공통 -->
                     <div class="text"><a href="notice/home.jsp">고객센터</div>
                     <div class="text"><a href="md/MDAll">MD's pick1</a></div>
-                <!--  main\webapp\header.jsp-->
-                <!--  main\webapp\header.jsp-->
                 </div>
             </div>
         </div>
