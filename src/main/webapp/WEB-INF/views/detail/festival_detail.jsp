@@ -48,7 +48,7 @@
 		</div>
 
 		<div class="container mt-5 mb-5">
-			<form action="/festivaldetail/caferestaurant" method="get"
+			<form action="../festivaldetail/caferestaurant" method="get"
 				class="d-flex align-items-center">
 				<input type="hidden" id="addressInput" name="address" value="">
 				<button type="submit" name="type" value="카페"
@@ -64,17 +64,13 @@
 				document.getElementById("addressInput").value = address;
 
 				function openParkingInfo() {
-					var searchQuery = address + " 주차장";
+					var searchQuery = address + " 주변 주차장";
 					var url = "https://map.kakao.com/link/search/"
 							+ encodeURIComponent(searchQuery);
 					window.open(url, "_blank");
 				}
 			</script>
 		</div>
-		<script>
-			var address = "${festival.fsv_add}".trim();
-			document.getElementById("addressInput").value = address;
-		</script>
 	</div>
 
 	<div class="container">
@@ -82,7 +78,7 @@
 		<div class="row">
 			<c:forEach var="recommended" items="${recommendedFestival}">
 				<div class="col-md-4">
-					<a href="/festivaldetail/${recommended.fsv_id}"
+					<a href="../festivaldetail/${recommended.fsv_id}"
 						style="display: block; border: 1px solid #ccc; margin: 10px; padding: 10px; text-align: center;">
 						<img
 						src="${empty recommended.fsv_orgimg ? 'https://i.postimg.cc/K8jZmpLy/001.jpg' : recommended.fsv_orgimg}"
