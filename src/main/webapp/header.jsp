@@ -32,6 +32,14 @@
                     <div class="text"><a href="md/MDAll">MD's pick1</a></div>
                 </div>
             </div>
+            
+            
+            
+            <!-- 임시 -->
+            
+            
+            
+            
         </div>
    	<div class="box">
 			<div class="image">
