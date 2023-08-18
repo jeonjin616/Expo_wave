@@ -26,8 +26,8 @@
 <body>
     <div class="container">
         <div class="centered-links">
-            <a href="../festivaldetail/411" class="btn btn-primary">페스티벌</a><br>
-            <a href="../showdetail/AF1" class="btn btn-primary">공연</a><br><br>
+            <a href="../festivaldetail/1807" class="btn btn-primary">페스티벌</a><br>
+            <a href="../showdetail/PF223983" class="btn btn-primary">공연</a><br><br>
         </div>
     </div>
 
