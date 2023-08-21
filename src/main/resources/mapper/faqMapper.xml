@@ -4,7 +4,7 @@
 	<insert id="insert" parameterType="faqVO"
 		useGeneratedKeys="true" keyProperty="faq_id">
 		insert into FAQ values
-		(null,#{faq_title},#{faq_question},null,null,#{img})
+		(null,#{faq_title},#{faq_content},NOW(),#{img})
 	</insert>
 
 	<delete id="delete" parameterType="FaqVO">
@@ -14,7 +14,7 @@
 	<update id="update">
 		update faq
 		set faq_title=#{faq_title},
-		faq_question=#{faq_question}, img=#{img},
+		faq_content=#{faq_content}, img=#{img},
 		faq_create_date=DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s')
 		where faq_id=#{faq_id}
 	</update>

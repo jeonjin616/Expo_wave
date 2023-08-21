@@ -5,8 +5,7 @@ import java.util.Date;
 public class FaqVO {
 	private int faq_id;
 	private String faq_title;
-	private String faq_question;
-	private String faq_answer;
+	private String faq_content;
 	private String faq_create_date;
 	private String img;
 	
@@ -35,17 +34,12 @@ public class FaqVO {
 	public void setFaq_title(String faq_title) {
 		this.faq_title = faq_title;
 	}
-	public String getFaq_question() {
-		return faq_question;
+	
+	public String getFaq_content() {
+		return faq_content;
 	}
-	public void setFaq_question(String faq_question) {
-		this.faq_question = faq_question;
-	}
-	public String getFaq_answer() {
-		return faq_answer;
-	}
-	public void setFaq_answer(String faq_answer) {
-		this.faq_answer = faq_answer;
+	public void setFaq_content(String faq_content) {
+		this.faq_content = faq_content;
 	}
 	public String getFaq_create_date() {
 		return faq_create_date;

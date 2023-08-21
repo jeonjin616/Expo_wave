@@ -28,7 +28,7 @@
 	                    <div class="text">마이페이지</div>
                     </c:if>
                     <!-- 공통 -->
-                    <div class="text"><a href="notice/home.jsp">고객센터</div>
+                    <div class="text"><a href="notice/notice">고객센터</a></div>
                     <div class="text"><a href="md/MDAll">MD's pick1</a></div>
                 </div>
             </div>
