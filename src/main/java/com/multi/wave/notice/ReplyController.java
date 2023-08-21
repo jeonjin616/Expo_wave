@@ -18,7 +18,7 @@ public class ReplyController {
 
     @PostMapping
     public void create(@RequestBody ReplyVO replyVO) {
-    	System.out.println(replyVO); // �޾ƿ� �� �α�
+        System.out.println(replyVO); // 諛???媛 濡源
         replyDAO.create(replyVO);
     }
 

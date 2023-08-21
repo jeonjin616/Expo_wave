@@ -26,7 +26,7 @@
                     <c:if test="${not empty sessionScope.loginMember}">
                     	<span>${sessionScope.loginMember}님 환영합니다.</span>
 	                    <div class="text"><a href="logout">로그아웃</a></div>
-	                    <div class="text"><a href="mypage">마이페이지</div>
+	                    <div class="text"><a href="mypage">마이페이지</a></div>
                     </c:if>
                     <!-- 공통 -->
                     <div class="text"><a href="notice/notice">고객센터</a></div>

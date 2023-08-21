@@ -35,7 +35,7 @@ public class InquiryController {
 			String test = UUID.randomUUID().toString();
             String savedName = test+"_"+file.getOriginalFilename();
 
-            String uploadPath = "C:\\Users\\User\\Documents\\workspace-sts-3.9.12.RELEASE\\Expo_wave555\\src\\main\\webapp\\resources\\upload";
+            String uploadPath = "C:\\Users\\User\\Documents\\workspace-sts-3.9.12.RELEASE\\Expo_wave555\\src\\main\\webapp\\resources\\img";
             File target = new File(uploadPath + "/" + savedName);
             
             file.transferTo(target);
@@ -48,36 +48,36 @@ public class InquiryController {
             
             
             dao.insert(dto);
-            redirectAttributes.addFlashAttribute("message", "Ãß°¡°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù."); 
+            redirectAttributes.addFlashAttribute("message", "ï¿½ß°ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½."); 
             return "redirect:inqu";
 
     }
 	
 	@GetMapping("notice/inqu_edit")
 	public String edit(@RequestParam("inqu_id") int inqu_id, Model model) {
-		InquiryVO dto = dao.oneById(inqu_id); // »õ·Î¿î ¸Þ¼­µå È£Ãâ
+		InquiryVO dto = dao.oneById(inqu_id); // ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ È£ï¿½ï¿½
 		model.addAttribute("dto", dto);
-		return "notice/inqu_update"; // ¼öÁ¤ ÆäÀÌÁö·Î ÀÌµ¿
+		return "notice/inqu_update"; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 	}
 
-	// ¼öÁ¤ ÀÛ¾÷À» Ã³¸®ÇÏ´Â ¸Þ¼­µå
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	@PostMapping("notice/inqu_update_action")
 	public String update(@RequestParam("file") MultipartFile file, @RequestParam("inqu_id") int inquId, 
 			@RequestParam("inqu_title") String title, @RequestParam("inqu_question") String question,
 			RedirectAttributes redirectAttributes) throws Exception {
 
 		InquiryVO dto = new InquiryVO();
-		dto.setInqu_id(inquId); // id¸¦ ¼³Á¤
-		dto.setInqu_title(title); // title ¼³Á¤
-		dto.setInqu_question(question); // question ¼³Á¤
+		dto.setInqu_id(inquId); // idï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		dto.setInqu_title(title); // title ï¿½ï¿½ï¿½ï¿½
+		dto.setInqu_question(question); // question ï¿½ï¿½ï¿½ï¿½
 
-		InquiryVO existingBoard = dao.oneById(inquId); // ÆÄ¶ó¹ÌÅÍ·Î ¹ÞÀº id¸¦ »ç¿ë
+		InquiryVO existingBoard = dao.oneById(inquId); // ï¿½Ä¶ï¿½ï¿½ï¿½Í·ï¿½ ï¿½ï¿½ï¿½ï¿½ idï¿½ï¿½ ï¿½ï¿½ï¿½
 
 		if (existingBoard != null) {
 			String test = UUID.randomUUID().toString();
 			String savedName = (file != null && !file.isEmpty()) ? test+"_"+file.getOriginalFilename() : "";
 			if (!savedName.isEmpty()) {
-				String uploadPath = "C:\\Users\\User\\Documents\\workspace-sts-3.9.12.RELEASE\\Expo_wave555\\src\\main\\webapp\\resources\\upload";
+				String uploadPath = "C:\\Users\\User\\Documents\\workspace-sts-3.9.12.RELEASE\\Expo_wave555\\src\\main\\webapp\\resources\\img";
 				File target = new File(uploadPath + "/" + savedName);
 				file.transferTo(target);
 				dto.setImg(savedName);
@@ -94,7 +94,7 @@ public class InquiryController {
 		}
 
 		dao.update(dto);
-		redirectAttributes.addFlashAttribute("message", "¼öÁ¤ÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù."); 
+		redirectAttributes.addFlashAttribute("message", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½."); 
 		
 		return "redirect:inqu"; 
 	}
@@ -113,14 +113,14 @@ public class InquiryController {
 	public String one(int id, String title, Model model) {
 	    InquiryVO dto = dao.one(id, title);
 	    model.addAttribute("dto", dto);
-	    return "notice/inqu_one"; // Á¶È¸ °á°ú¸¦ º¸¿©ÁÙ ºä ÀÌ¸§
+	    return "notice/inqu_one"; // ï¿½ï¿½È¸ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì¸ï¿½
 	}
 	
 	@RequestMapping("notice/inqu_one2")
 	public String one2(@RequestParam("id") int id, Model model) {
-		InquiryVO dto = dao.oneById(id); // ID¸¸ »ç¿ëÇÏ¿© µ¥ÀÌÅÍ Á¶È¸
+		InquiryVO dto = dao.oneById(id); // IDï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 		model.addAttribute("dto", dto);
-		return "notice/faq_one"; // Á¶È¸ °á°ú¸¦ º¸¿©ÁÙ ºä ÀÌ¸§
+		return "notice/faq_one"; // ï¿½ï¿½È¸ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì¸ï¿½
 	}
 	
 	
