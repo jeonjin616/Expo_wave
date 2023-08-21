@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="resources/css/menuCss2.css">
+<link rel="stylesheet" type="text/css" href="resources/css/notice/menuCss2.csss">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="replyMapper">
+
+  <insert id="create" parameterType="ReplyVO">
+        INSERT INTO reply (post_id, content, writer) VALUES (#{post_id}, #{content}, #{writer})
+    </insert>
+    <select id="list" resultType="ReplyVO">
+        SELECT * FROM reply WHERE post_id = #{post_id} ORDER BY reg_date DESC
+    </select>
+</mapper>

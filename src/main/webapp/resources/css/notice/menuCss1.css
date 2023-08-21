@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+/* Reset some default styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Set full viewport height */
+#total {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f0f0;
+}
+
+/* Style for the center container */
+#center {
+  text-align: left;
+  border: 1px solid grey;
+  padding: 20px;
+  width: 80%; /* Adjust the width as needed */
+  background-color: white;
+  margin: 2px; /* Set horizontal margin to 2px */
+  box-sizing: border-box;
+}
+
+/* Style for the title */
+h3 {
+  font-weight: bold; /* Make the title bold */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 10px;
+}
+
+/* Style for the text labels */
+.label-text {
+  font-weight: bold;
+}
+
+/* Style for the dividing line */
+hr {
+  margin: 10px 0;
+  border: 0;
+  border-top: 1px solid grey;
+}
+
+
+/* Style for the submit button section */
+.btn-submit {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+/* Style for the content textarea */
+.form-control-content {
+  height: 600px; /* Adjust the height as needed */
+  resize: vertical; /* Allow vertical resizing */
+  width: 100%; /* Make the textarea full width */
+  box-sizing: border-box;
+}

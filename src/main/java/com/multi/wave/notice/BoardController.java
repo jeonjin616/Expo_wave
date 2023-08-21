@@ -1,7 +1,10 @@
 package com.multi.wave.notice;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,25 +31,29 @@ public class BoardController {
 	public String insert2(@RequestParam("file") MultipartFile file,
 	                      @RequestParam("board_title") String title,
 	                      @RequestParam("board_content") String content,
+	                      RedirectAttributes redirectAttributes,
 	                      Model model)throws Exception {
-        
-            String savedName = file.getOriginalFilename();
+		
+			String test = UUID.randomUUID().toString();
+            String savedName = test+"_"+file.getOriginalFilename();
 
-            String uploadPath = "C:\\Users\\User\\Documents\\workspace-sts-3.9.12.RELEASE\\Expo_wave333\\src\\main\\webapp\\resources\\img";
+            String uploadPath = "C:\\Users\\User\\Documents\\workspace-sts-3.9.12.RELEASE\\Expo_wave555\\src\\main\\webapp\\resources\\upload";
             File target = new File(uploadPath + "/" + savedName);
             
             file.transferTo(target);
 
-            model.addAttribute("savedName", savedName);
+			/* model.addAttribute("savedName", savedName); */
 
-            // 이 부분에서 BoardVO 객체를 생성하고 필드를 채워넣어야 합니다.
+
+
             BoardVO dto = new BoardVO();
             dto.setBoard_title(title);
             dto.setBoard_content(content);
             dto.setImg(savedName);
             
+            
             dao.insert(dto);
-
+            redirectAttributes.addFlashAttribute("message", "추가가 완료되었습니다."); 
             return "redirect:notice";
 
     }
@@ -72,9 +79,10 @@ public class BoardController {
 		BoardVO existingBoard = dao.oneById(boardId); // 파라미터로 받은 id를 사용
 
 		if (existingBoard != null) {
-			String savedName = (file != null && !file.isEmpty()) ? file.getOriginalFilename() : "";
+			String test = UUID.randomUUID().toString();
+			String savedName = (file != null && !file.isEmpty()) ? test+"_"+file.getOriginalFilename() : "";
 			if (!savedName.isEmpty()) {
-				String uploadPath = "C:\\Users\\User\\Documents\\workspace-sts-3.9.12.RELEASE\\Expo_wave333\\src\\main\\webapp\\resources\\img";
+				String uploadPath = "C:\\Users\\User\\Documents\\workspace-sts-3.9.12.RELEASE\\Expo_wave555\\src\\main\\webapp\\resources\\upload";
 				File target = new File(uploadPath + "/" + savedName);
 				file.transferTo(target);
 				dto.setImg(savedName);
@@ -103,7 +111,7 @@ public class BoardController {
 
 	    int result = dao.delete(boardVO);
 
-	    return "redirect:notice"; // 리다이렉트 경로를 프로젝트에 맞게 수정
+	    return "redirect:notice"; 
 	}
 	
 	@RequestMapping("notice/one")
@@ -120,15 +128,12 @@ public class BoardController {
 		return "notice/faq_one"; // 조회 결과를 보여줄 뷰 이름
 	}
 	
-	@RequestMapping("notice/notice")
+	
+	@RequestMapping("notice/notice") 
 	public String list(Model model) {
-		List<BoardVO> list = dao.list();
-		model.addAttribute("list", list);
-		return "notice/notice";
+	  List<BoardVO> list = dao.list();
+	  model.addAttribute("list", list);
+	  return "notice/notice";
 	}
-	
-	
-	
-	
-	
+
 }
