@@ -81,7 +81,7 @@ a:hover {
     $(document).ready(function(){
         function loadReplies(){
           $.ajax({
-            url: "/replies/" + ${inqu.inqu_id}, // post_id와 동일
+            url: "/replies/" + ${inqu.inqu_id}, 
             method: "GET",
             success: function(data) {
               $("#reply-list").empty();
