@@ -54,4 +54,11 @@ public class MemberController {
 		return result;
 	}
 	
+	// 로그아웃
+	@RequestMapping("logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/index.jsp";
+	}
+	
 }
