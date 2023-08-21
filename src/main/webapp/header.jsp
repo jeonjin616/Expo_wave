@@ -24,22 +24,14 @@
                     <!-- 로그인 후 보여줄 메뉴 -->
                     <c:if test="${not empty sessionScope.loginMember}">
                     	<span>${sessionScope.loginMember}님 환영합니다.</span>
-	                    <div class="text">로그아웃</div>
-	                    <div class="text">마이페이지</div>
+	                    <div class="text"><a href="logout">로그아웃</a></div>
+	                    <div class="text"><a href="mypage">마이페이지</div>
                     </c:if>
                     <!-- 공통 -->
                     <div class="text"><a href="notice/home.jsp">고객센터</div>
                     <div class="text"><a href="md/MDAll">MD's pick1</a></div>
                 </div>
             </div>
-            
-            
-            
-            <!-- 임시 -->
-            
-            
-            
-            
         </div>
    	<div class="box">
 			<div class="image">
@@ -64,7 +56,6 @@
                     내게 맞는 문화전시 <!--이것도 텍스트가 아니라 이미지라 cultureexpo로 임의로 이름붙였습니다-->
                 </div>
             </div>
-            
         </div>
         
         <div class="box">
