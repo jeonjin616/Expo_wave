@@ -33,6 +33,8 @@ public class MypageController {
             model.addAttribute("mem_id", member.getMem_id());
             model.addAttribute("mem_name", member.getMem_name());
             model.addAttribute("mem_nickname", member.getMem_nickname());
+            model.addAttribute("mem_joy1", member.getMem_joy1());
+            model.addAttribute("mem_joy2", member.getMem_joy2());
             model.addAttribute("mem_pw", member.getMem_pw());
         }
         return "mypage/mypage"; // JSP 페이지 경로
