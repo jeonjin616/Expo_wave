@@ -7,12 +7,21 @@
 
 	<update id="changePassword" parameterType="map">
 		UPDATE member
-		SET mem_pw = #{newPassword}
+		SET
+		mem_pw = #{newPassword}
 		WHERE mem_id = #{mem_id}
 	</update>
 
-    <select id="getMemberById" parameterType="string" resultType="com.multi.wave.member.MemberVO">
-        SELECT * FROM member WHERE mem_id = #{mem_id}
-    </select>
-	
+	<select id="getMemberById" parameterType="string"
+		resultType="com.multi.wave.member.MemberVO">
+		SELECT * FROM member WHERE mem_id = #{mem_id}
+	</select>
+
+
+	<update id="updateProfileImage" parameterType="map">
+		UPDATE member
+		SET mem_img = #{filename}
+		WHERE mem_id = #{mem_id}
+	</update>
+
 </mapper>
