@@ -1,12 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Website</title>
-    <link rel="stylesheet" href="resources/css/header.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Website</title>
+<link rel="stylesheet" href="resources/css/header.css">
 </head>
 <body>
     <header>
@@ -24,22 +25,14 @@
                     <!-- 로그인 후 보여줄 메뉴 -->
                     <c:if test="${not empty sessionScope.loginMember}">
                     	<span>${sessionScope.loginMember}님 환영합니다.</span>
-	                    <div class="text">로그아웃</div>
-	                    <div class="text">마이페이지</div>
+	                    <div class="text"><a href="logout">로그아웃</a></div>
+	                    <div class="text"><a href="mypage">마이페이지</a></div>
                     </c:if>
                     <!-- 공통 -->
                     <div class="text"><a href="notice/notice">고객센터</a></div>
                     <div class="text"><a href="md/MDAll">MD's pick1</a></div>
                 </div>
             </div>
-            
-            
-            
-            <!-- 임시 -->
-            
-            
-            
-            
         </div>
    	<div class="box">
 			<div class="image">
@@ -47,8 +40,8 @@
 			</div>
 			<div class="label">
 				<div class="text-wrapper">
-					<a href="list/festivallist">축제 보기</a> 
-					<a href="list/showlist">공연 보기</a>
+					<a href="list/festivallist">축제 보기</a> <a href="list/showlist">공연
+						보기</a>
 
 				</div>
 
@@ -64,7 +57,6 @@
                     내게 맞는 문화전시 <!--이것도 텍스트가 아니라 이미지라 cultureexpo로 임의로 이름붙였습니다-->
                 </div>
             </div>
-            
         </div>
         
         <div class="box">

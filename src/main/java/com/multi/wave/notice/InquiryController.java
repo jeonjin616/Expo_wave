@@ -40,37 +40,35 @@ public class InquiryController {
 
 		file.transferTo(target);
 
-		file.transferTo(target);
-
 		InquiryVO dto = new InquiryVO();
 		dto.setInqu_title(title);
 		dto.setInqu_question(question);
 		dto.setImg(savedName);
 
 		dao.insert(dto);
-		redirectAttributes.addFlashAttribute("message", "추가가 완료되었습니다.");
+		redirectAttributes.addFlashAttribute("message", "異붽�媛� �셿猷뚮릺�뿀�뒿�땲�떎.");
 		return "redirect:inqu";
 	}
 
 	@GetMapping("notice/inqu_edit")
 	public String edit(@RequestParam("inqu_id") int inqu_id, Model model) {
-		InquiryVO dto = dao.oneById(inqu_id); // 占쏙옙占싸울옙 占쌨쇽옙占쏙옙 호占쏙옙
+		InquiryVO dto = dao.oneById(inqu_id); // �뜝�룞�삕�뜝�떥�슱�삕 �뜝�뙣�눦�삕�뜝�룞�삕 �샇�뜝�룞�삕
 		model.addAttribute("dto", dto);
-		return "notice/inqu_update"; // 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占싱듸옙
+		return "notice/inqu_update"; // �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�떛�벝�삕
 	}
 
-	// 占쏙옙占쏙옙 占쌜억옙占쏙옙 처占쏙옙占싹댐옙 占쌨쇽옙占쏙옙
+	// �뜝�룞�삕�뜝�룞�삕 �뜝�뙗�뼲�삕�뜝�룞�삕 泥섇뜝�룞�삕�뜝�떦�뙋�삕 �뜝�뙣�눦�삕�뜝�룞�삕
 	@PostMapping("notice/inqu_update_action")
 	public String update(@RequestParam("file") MultipartFile file, @RequestParam("inqu_id") int inquId,
 			@RequestParam("inqu_title") String title, @RequestParam("inqu_question") String question,
 			RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception {
 
 		InquiryVO dto = new InquiryVO();
-		dto.setInqu_id(inquId); // id를 설정
-		dto.setInqu_title(title); // title 설정
-		dto.setInqu_question(question); // question 설정
+		dto.setInqu_id(inquId); // id瑜� �꽕�젙
+		dto.setInqu_title(title); // title �꽕�젙
+		dto.setInqu_question(question); // question �꽕�젙
 
-		InquiryVO existingInquiry = dao.oneById(inquId); // 파라미터로 받은 id를 사용
+		InquiryVO existingInquiry = dao.oneById(inquId); // �뙆�씪誘명꽣濡� 諛쏆� id瑜� �궗�슜
 
 		if (existingInquiry != null) {
 			String test = UUID.randomUUID().toString();
@@ -93,7 +91,7 @@ public class InquiryController {
 		}
 
 		dao.update(dto);
-		redirectAttributes.addFlashAttribute("message", "수정이 완료되었습니다.");
+		redirectAttributes.addFlashAttribute("message", "�닔�젙�씠 �셿猷뚮릺�뿀�뒿�땲�떎.");
 
 		return "redirect:inqu";
 	}
@@ -112,14 +110,14 @@ public class InquiryController {
 	public String one(int id, String title, Model model) {
 		InquiryVO dto = dao.one(id, title);
 		model.addAttribute("dto", dto);
-		return "notice/inqu_one"; // 占쏙옙회 占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙 占쏙옙 占싱몌옙
+		return "notice/inqu_one"; // �뜝�룞�삕�쉶 �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕 �뜝�떛紐뚯삕
 	}
 
 	@RequestMapping("notice/inqu_one2")
 	public String one2(@RequestParam("id") int id, Model model) {
-		InquiryVO dto = dao.oneById(id); // ID占쏙옙 占쏙옙占쏙옙臼占� 占쏙옙占쏙옙占쏙옙 占쏙옙회
+		InquiryVO dto = dao.oneById(id); // ID�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�눥�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�쉶
 		model.addAttribute("dto", dto);
-		return "notice/faq_one"; // 占쏙옙회 占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙 占쏙옙 占싱몌옙
+		return "notice/faq_one"; // �뜝�룞�삕�쉶 �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕 �뜝�떛紐뚯삕
 	}
 
 	@RequestMapping("notice/inqu")

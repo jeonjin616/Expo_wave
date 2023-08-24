@@ -22,8 +22,9 @@
 	<mappers>
 		<!-- SQL문 정의하는 파일들의 목록을 지정. 테이블당 한개 사용 -->
 		<mapper resource="mapper/memberMapper.xml" />
-		<mapper resource="mapper/ShowDetailMapper.xml" />
-		<mapper resource="mapper/FestivalDetailMapper.xml" />
+		<mapper resource="mapper/mypageMapper.xml" />
+		<mapper resource="mapper/showDetailMapper.xml" />
+		<mapper resource="mapper/festivalDetailMapper.xml" />
 		<mapper resource="mapper/MDPostMapper.xml" />
       	<mapper resource="mapper/MDImgMapper.xml"/>
       	<mapper resource="mapper/MDCommentMapper.xml"/>

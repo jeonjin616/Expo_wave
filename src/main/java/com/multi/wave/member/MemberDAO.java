@@ -30,5 +30,4 @@ public class MemberDAO {
 		}
 		return "null";	// null을 스트링으로 만들어 리턴
 	}
-	
 }
