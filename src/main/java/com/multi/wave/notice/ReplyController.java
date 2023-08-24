@@ -16,7 +16,7 @@ public class ReplyController {
     @Autowired
     private ReplyDAO dao;
 
-    // "/{post_id}" ê²½ë¡œë¥¼ ì¶”ê°€í•´ì¤ë‹ˆë‹¤.
+    // "/{post_id}" °æ·Î¸¦ Ãß°¡ÇØÁİ´Ï´Ù.
     @PostMapping("/{post_id}")
     public void create(@PathVariable int post_id, @RequestParam String content) {
         ReplyVO replyVO = new ReplyVO();
@@ -24,7 +24,7 @@ public class ReplyController {
         replyVO.setContent(content);
         
         System.out.println(replyVO);
-        dao.create(replyVO); // DBì— ì¶”ê°€
+        dao.create(replyVO); // DB¿¡ Ãß°¡
     }
 
     @GetMapping("/{post_id}")
