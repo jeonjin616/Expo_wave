@@ -10,18 +10,18 @@
 		<!-- TLS 포트 사용-->
 		<property name="port" value="587" />
 		<property name="username" value="" />		<!-- 아이디 -->
-		<property name="password" value="" />	<!-- 비밀번호 -->
+		<property name="password" value="" />	<!--앱키 비밀번호 -->
 		<property name="javaMailProperties">
 			<props>
 				<prop key="mail.transport.protocol">smtp</prop>
-				<prop key="mail.smtp.auth">true</prop>
-				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.auth">true</prop>				<!-- SMTP 인증 사용 -->
+				<prop key="mail.smtp.starttls.enable">true</prop>	<!-- TLS 보안 연결을 사용함 --> 
 				<!-- 구글메일은 SSLSocketFactory를 추가해야 smtp 사용가능(보안이슈) -->
 				<prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
 				<prop key="mail.debug">true</prop>
 				<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
-				<!-- 1.3해보고 오류 있으면 1.2로 변경하기 -->
-				<prop key="mail.smtp.ssl.protocols">TLSv1.3</prop>	
+				<!-- 1.3은 오류 발생함 -->
+				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>	
 			</props>
 		</property>
 	</bean>

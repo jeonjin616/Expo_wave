@@ -230,12 +230,12 @@
 			<version>4.2</version>
 		</dependency>
 		
-		<!-- 메일 발송  -->
-		<!-- https://mvnrepository.com/artifact/javax.mail/javax.mail-api -->
+		<!-- 메일 발송  의존성 2개 주입 -->
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
 		<dependency>
 		    <groupId>javax.mail</groupId>
-		    <artifactId>javax.mail-api</artifactId>
-		    <version>1.6.2</version>
+		    <artifactId>mail</artifactId>
+		    <version>1.4.7</version>
 		</dependency>
 
 		<dependency>
@@ -244,14 +244,6 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 		
-		<!-- 메일 발송 2
-		https://mvnrepository.com/artifact/com.sun.mail/javax.mail
-		<dependency>
-		    <groupId>com.sun.mail</groupId>
-		    <artifactId>javax.mail</artifactId>
-		    <version>1.6.2</version>
-		</dependency> -->
-
 	</dependencies>
 	<build>
 		<plugins>
