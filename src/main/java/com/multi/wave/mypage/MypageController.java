@@ -21,51 +21,49 @@ import com.multi.wave.member.MemberVO;
 @Controller
 @RequestMapping("/mypage")
 public class MypageController {
-	
+
 	@Autowired
-    private MypageService mypageService;
+	private MypageService mypageService;
 
-    @Autowired
-    private PasswordEncoder pwEncoder;
+	@Autowired
+	private PasswordEncoder pwEncoder;
 
-    @Autowired
-    private ServletContext servletContext;
+	@Autowired
+	private ServletContext servletContext;
 
-    @PostMapping("/uploadProfileImage")
-    @ResponseBody
-    public String uploadProfileImage(@RequestParam("file") MultipartFile file, HttpSession session) {
-        MemberVO member = (MemberVO) session.getAttribute("member");
-        if (!file.isEmpty()) {
-            try {
-                String filename = file.getOriginalFilename();
-                String realPath = servletContext.getRealPath("/resources/img/profileImg/") + filename;
-                File dest = new File(realPath);
+	@PostMapping("/uploadProfileImage")
+	@ResponseBody
+	public String uploadProfileImage(@RequestParam("file") MultipartFile file, HttpSession session) {
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		if (!file.isEmpty()) {
+			try {
+				String filename = file.getOriginalFilename();
+				String realPath = servletContext.getRealPath("/resources/img/profileImg/") + filename;
+				File dest = new File(realPath);
 
-                // 기존 프로필 사진 파일 삭제 (선택 사항)
-                String oldFilename = member.getMem_img();
-                if (oldFilename != null && !oldFilename.isEmpty()) {
-                    String oldFilePath = servletContext.getRealPath("/resources/img/profileImg/") + oldFilename;
-                    File oldFile = new File(oldFilePath);
-                    oldFile.delete();
-                }
+				// 기존 프로필 사진 파일 삭제 (선택 사항)
+				String oldFilename = member.getMem_img();
+				if (oldFilename != null && !oldFilename.isEmpty()) {
+					String oldFilePath = servletContext.getRealPath("/resources/img/profileImg/") + oldFilename;
+					File oldFile = new File(oldFilePath);
+					oldFile.delete();
+				}
 
-                // 새 프로필 사진 파일 저장
-                file.transferTo(dest);
+				// 새 프로필 사진 파일 저장
+				file.transferTo(dest);
 
-                // DB에 파일명 업데이트
-                mypageService.updateProfileImage(member.getMem_id(), filename);
+				// DB에 파일명 업데이트
+				mypageService.updateProfileImage(member.getMem_id(), filename);
 
-                return "success";
-            } catch (Exception e) {
-                e.printStackTrace();
-                return "error";
-            }
-        } else {
-            return "empty";
-        }
-    }
-
-
+				return "success";
+			} catch (Exception e) {
+				e.printStackTrace();
+				return "error";
+			}
+		} else {
+			return "empty";
+		}
+	}
 
 	@GetMapping
 	public String showMypage(HttpSession session, Model model) {
