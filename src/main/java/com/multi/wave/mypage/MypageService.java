@@ -1,12 +1,8 @@
 package com.multi.wave.mypage;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.multi.wave.member.MemberVO;
 
@@ -24,7 +20,6 @@ public class MypageService {
 		return mypageDAO.getMemberById(mem_id);
 	}
 
-	
 	public void updateProfileImage(String mem_id, String filename) {
 	    mypageDAO.updateProfileImage(mem_id, filename);
 	}
