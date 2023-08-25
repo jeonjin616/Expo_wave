@@ -6,8 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css"
-	href="resources/css/notice/menuCss2.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/notice/menuCss2.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -127,7 +126,7 @@ a:hover {
 					href="inqu_edit?inqu_id=${dto.inqu_id}">수정</a>
 			</p>
 			<hr color="grey">
-			<br> <img src="<c:url value='/resources/img/${dto.img}' />"
+			<br> <img src="<c:url value='/resources/upload/${dto.img}' />"
 				alt="이미지를 불러오는데 실패하였습니다."> <br> <br>
 			${dto.inqu_question}<br> <br>
 			<p class="back">

@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>FAQ 수정</title>
-<link rel="stylesheet" type="text/css" href="resources/css/notice/menuCss1.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/notice/menuCss1.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
