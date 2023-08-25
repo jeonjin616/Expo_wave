@@ -38,11 +38,11 @@
 				</div>
 				<div >
 					<span>이름</span>
-					<input type="text" id="mem_name" placeholder="이름" >
+					<input type="text" id="mem_name" placeholder="이름" value="나나나">
 				</div>
 				<div>
 					<span>이메일 주소</span>
-					<input type="text" id="insertEmail" class="inputTextEmail"><span> @ </span>
+					<input type="text" id="insertEmail" class="inputTextEmail" value="as26149"><span> @ </span>
 					<input type="text" id="domainText" class="inputTextEmail">
 					<select name="domainList" id="domainList" class="insertMemInfo">	<!-- 이메일(도메인) 선택 -->
 						<option value="directInput" selected>직접입력</option>
@@ -56,10 +56,10 @@
 					<button type="button" id="mailRequestBtn"><span>인증번호 받기</span></button>
 				</div>
 				<div>
-					<span id="mailCheckWarn"></span>
+					<span id="mailCheckMsg"></span>
 				</div>
 				<div class="nextBtnWrap">
-					<button type="button" class="nextBtn" id="idNextBtn"><span id="nextBtnText">다음</span></button>
+					<button type="button" id="idNextBtn"><span id="nextBtnText">다음</span></button>
 				</div>
 			</div>
 		</div>
