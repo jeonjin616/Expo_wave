@@ -3,7 +3,7 @@
 <mapper namespace="faq">
 	<insert id="insert" parameterType="faqVO"
 		useGeneratedKeys="true" keyProperty="faq_id">
-		insert into FAQ values
+		insert into faq values
 		(null,#{faq_title},#{faq_content},NOW(),#{img})
 	</insert>
 

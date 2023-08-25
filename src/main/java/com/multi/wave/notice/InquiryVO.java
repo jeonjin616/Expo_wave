@@ -10,6 +10,7 @@ public class InquiryVO {
     private String img;
     
     
+    
 	public int getInqu_id() {
 		return inqu_id;
 	}
