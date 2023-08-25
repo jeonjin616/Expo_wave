@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="resources/css/menuCss1.css">
+<link rel="stylesheet" type="text/css" href="resources/css/notice/menuCss1.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -16,7 +16,7 @@
 		<div id="center">
 			<h3>FAQ 게시물 등록</h3>
 			<hr color="grey">
-			<form action="faq_insert2" id="form" method="post" enctype="multipart/form-data">
+			<form action="inqu_insert2" id="form" method="post" enctype="multipart/form-data">
 				<span class="label-text">제목</span><br><br>
 				<div class="form-group">
 					<input type="text" class="form-control input-sm" name="faq_title" placeholder="제목을 입력해주세요">

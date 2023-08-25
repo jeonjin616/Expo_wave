@@ -15,8 +15,9 @@
 		<typeAlias type="com.multi.wave.show.ShowVO" alias="showVO"></typeAlias>
 		<typeAlias type="com.multi.wave.notice.BoardVO" alias="BoardVO" />
 		<typeAlias type="com.multi.wave.notice.FaqVO" alias="FaqVO" />
-		<typeAlias type="com.multi.wave.notice.InquiryVO" alias="InquVO" />
-		
+		<typeAlias type="com.multi.wave.notice.InquiryVO" alias="InquiryVO" />
+		<typeAlias type="com.multi.wave.notice.ReplyVO" alias="ReplyVO" />
+		<typeAlias type="com.multi.wave.notice.ChatVO" alias="ChatVO" />
 		</typeAliases>
 	<mappers>
 		<!-- SQL문 정의하는 파일들의 목록을 지정. 테이블당 한개 사용 -->
@@ -32,6 +33,7 @@
 		<mapper resource="mapper/boardMapper.xml" />
 		<mapper resource="mapper/faqMapper.xml" />
 		<mapper resource="mapper/inquiryMapper.xml" />
+		<mapper resource="mapper/replyMapper.xml" />
 		
 	</mappers>
 </configuration>

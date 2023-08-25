@@ -5,7 +5,7 @@
 			parameterType="boardVO" 
 			useGeneratedKeys="true" 
 			keyProperty="board_id">
-		insert into board values (null,null,#{board_title},null,#{board_content},#{img})
+		insert into board values (null,null,#{board_title},NOW(),#{board_content},#{img})
 	</insert>
 	
 	<delete id="delete" parameterType="BoardVO">
