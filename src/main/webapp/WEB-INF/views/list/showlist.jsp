@@ -78,7 +78,7 @@
                 <div class="col-md-3">
                     <div class="card">
                         <!-- 이미지와 제목을 클릭하면 해당 공연의 세부 정보 페이지로 이동 -->
-                        <a href="${show.show_id}">
+                        <a href="<c:url value='/showdetail/${show.show_id}'/>">
                             <div class="image-container">
                                 <img src="${show.show_poster}" alt="${show.show_name}" class="card-img-top">
                             </div>

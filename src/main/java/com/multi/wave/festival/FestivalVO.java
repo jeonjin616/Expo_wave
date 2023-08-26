@@ -3,7 +3,8 @@ package com.multi.wave.festival;
 import java.math.BigDecimal;
 
 public class FestivalVO {
-	
+	private int fsv_no;
+	private int fsv_id;
 	private String fsv_name;
 	private String fsv_tel;
 	private String fsv_start;
@@ -13,8 +14,18 @@ public class FestivalVO {
 	private String fsv_add;
 	private BigDecimal fsv_lat;
 	private BigDecimal fsv_lon;
-	
-	
+	public int getFsv_no() {
+		return fsv_no;
+	}
+	public void setFsv_no(int fsv_no) {
+		this.fsv_no = fsv_no;
+	}
+	public int getFsv_id() {
+		return fsv_id;
+	}
+	public void setFsv_id(int fsv_id) {
+		this.fsv_id = fsv_id;
+	}
 	public String getFsv_name() {
 		return fsv_name;
 	}
@@ -71,11 +82,10 @@ public class FestivalVO {
 	}
 	@Override
 	public String toString() {
-		return "Test3VO [fsv_name=" + fsv_name + ", fsv_tel=" + fsv_tel + ", fsv_start=" + fsv_start + ", fsv_end="
-				+ fsv_end + ", fsv_orgimg=" + fsv_orgimg + ", fsv_thumb=" + fsv_thumb + ", fsv_add=" + fsv_add
-				+ ", fsv_lat=" + fsv_lat + ", fsv_lon=" + fsv_lon + "]";
+		return "FestivalVO [fsv_no=" + fsv_no + ", fsv_id=" + fsv_id + ", fsv_name=" + fsv_name + ", fsv_tel=" + fsv_tel
+				+ ", fsv_start=" + fsv_start + ", fsv_end=" + fsv_end + ", fsv_orgimg=" + fsv_orgimg + ", fsv_thumb="
+				+ fsv_thumb + ", fsv_add=" + fsv_add + ", fsv_lat=" + fsv_lat + ", fsv_lon=" + fsv_lon + "]";
 	}
-	
 	
 	
 }

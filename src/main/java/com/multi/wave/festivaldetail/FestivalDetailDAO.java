@@ -13,11 +13,11 @@ public class FestivalDetailDAO {
 
 	
     public FestivalDetailVO selectOne(String fsv_id) {
-        return my.selectOne("FestivalDetailMapper.selectOne", fsv_id);
+        return my.selectOne("com.multi.wave.festivaldetail.FestivalDetailMapper.selectOne", fsv_id);
     }
     
     public List<FestivalDetailVO> selectByDate(String fsv_start) {
-    	return my.selectList("FestivalDetailMapper.selectByDate", fsv_start);
+    	return my.selectList("com.multi.wave.festivaldetail.FestivalDetailMapper.selectByDate", fsv_start);
     }
 
 }
