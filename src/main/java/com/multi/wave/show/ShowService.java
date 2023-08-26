@@ -51,5 +51,13 @@ public class ShowService {
     public List<ShowVO> list() {
         return showDAO.list();
     }
+    
+    public List<ShowVO> search(String query) {
+        return showDAO.search(query);
+    }
+    
+    public List<ShowVO> searchlist(Page1VO vo) {
+        return showDAO.searchlist(vo);
+    }
 }
 

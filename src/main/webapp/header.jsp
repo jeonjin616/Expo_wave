@@ -40,7 +40,7 @@
 			</div>
 			<div class="label">
 				<div class="text-wrapper">
-					<a href="list/festivallist">축제 보기</a> <a href="list/showlist">공연
+					<a href="list/festivalAll?page=1">축제 보기</a> <a href="list/showAll?page=1">공연
 						보기</a>
 
 				</div>

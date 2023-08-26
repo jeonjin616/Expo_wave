@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/showdetail")
 public class ShowDetailController {
 
 	@Autowired
 	ShowDetailService showService;
 
-	@RequestMapping("showdetail/{show_id}")
+	@RequestMapping("/{show_id}")
 	public String viewShow(@PathVariable("show_id") String show_id, Model model) {
 		ShowDetailVO show = showService.selectShow(show_id);
 		List<ShowDetailVO> recommendedShow = showService.selectRecommendedShow(show.getShow_genre());
@@ -24,7 +25,7 @@ public class ShowDetailController {
 		return "detail/show_detail";
 	}
 
-	@RequestMapping("showdetail/caferestaurant")
+	@RequestMapping("/caferestaurant")
 	public String viewCafeRestaurant() {
 	    return "detail/caferestaurant";
 	}

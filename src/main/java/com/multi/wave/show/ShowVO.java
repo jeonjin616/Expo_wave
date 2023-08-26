@@ -2,6 +2,7 @@ package com.multi.wave.show;
 
 public class ShowVO {
 
+	private int show_no;
 	 private String show_id; 
 	  private String show_name; 
 	  private String show_start;
@@ -17,6 +18,12 @@ public class ShowVO {
 	  private String show_story; 
 	  private String show_genre; 
 	  private String show_when;
+	public int getShow_no() {
+		return show_no;
+	}
+	public void setShow_no(int show_no) {
+		this.show_no = show_no;
+	}
 	public String getShow_id() {
 		return show_id;
 	}
@@ -109,13 +116,13 @@ public class ShowVO {
 	}
 	@Override
 	public String toString() {
-		return "Test2VO [show_id=" + show_id + ", show_name=" + show_name + ", show_start=" + show_start + ", show_end="
-				+ show_end + ", show_place=" + show_place + ", show_actor=" + show_actor + ", show_crew=" + show_crew
-				+ ", show_runtime=" + show_runtime + ", show_age=" + show_age + ", show_company=" + show_company
-				+ ", show_charge=" + show_charge + ", show_poster=" + show_poster + ", show_story=" + show_story
-				+ ", show_genre=" + show_genre + ", show_when=" + show_when + "]";
+		return "ShowVO [show_no=" + show_no + ", show_id=" + show_id + ", show_name=" + show_name + ", show_start="
+				+ show_start + ", show_end=" + show_end + ", show_place=" + show_place + ", show_actor=" + show_actor
+				+ ", show_crew=" + show_crew + ", show_runtime=" + show_runtime + ", show_age=" + show_age
+				+ ", show_company=" + show_company + ", show_charge=" + show_charge + ", show_poster=" + show_poster
+				+ ", show_story=" + show_story + ", show_genre=" + show_genre + ", show_when=" + show_when + "]";
 	}
-	 
+	
 
 	
 }
