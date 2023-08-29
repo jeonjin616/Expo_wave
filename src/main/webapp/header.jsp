@@ -1,76 +1,150 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Website</title>
-    <link rel="stylesheet" href="resources/css/header.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Main Page Header</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Header */
+  .header {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+  }
+  
+  .header-inner {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .bottom-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    margin-right: 15px;
+  }
+  
+  .nav-links li {
+    margin-left: 20px;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: #555555;
+  }
+  
+  /* Search Bar */
+  .search-bar {
+    background-color: #f1f1f1;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    padding: 6px 10px;
+    width: 300px;
+  }
+  
+  .search-bar input {
+    border: none;
+    background-color: #f1f1f1;
+    padding: 6px 10px;
+    width: 100%;
+  }
+  
+  .search-icon {
+    margin-right: 8px;
+  }
+  
+  /* Menu Bar */
+  .menu-bar {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  .margin1 {
+    margin-left: 8px;
+  }
+  .marginleft {
+    margin-left: 50px;
+  }
+  
+  .menu-bar a {
+    text-decoration: none;
+    color: #555555;
+  }
+  
+</style>
 </head>
 <body>
-    <header>
-        <div class="image">
-            <img src="resources/img/logo.png" alt="Logo" class="logo-fin">
+  <header class="header">
+    <div class="header-inner">
+      <div class="top-row">
+        <div class="logo">
+          <a href="mainpage.jsp">
+          	<img src="http://localhost:8080/wave/resources/img/logo_white.jpg" width="76" height="70">
+          </a>
         </div>
-        <div class="label">
-            <div class="text-wrapper">
-                <div class="navbar">
-                	<!-- 로그인 하기전 보여줄 메뉴 -->
-                	<c:if test="${empty sessionScope.loginMember}">
-	                    <div class="text"><a href="member/login.jsp">로그인</a></div>
-	                    <div class="text"><a href="member/join.jsp">회원가입</a></div>
-                    </c:if>
-                    <!-- 로그인 후 보여줄 메뉴 -->
-                    <c:if test="${not empty sessionScope.loginMember}">
-                    	<span>${sessionScope.loginMember}님 환영합니다.</span>
-	                    <div class="text">로그아웃</div>
-	                    <div class="text">마이페이지</div>
-                    </c:if>
-                    <!-- 공통 -->
-                    <div class="text"><a href="notice/home.jsp">고객센터</div>
-                    <div class="text"><a href="md/MDAll">MD's pick1</a></div>
-                </div>
-            </div>
+        <nav>
+          <ul class="nav-links">
+          	<c:if test="${empty sessionScope.loginMember}">
+            	<li><a href="member/login.jsp">Login</a></li>
+           		<li><a href="member/join.jsp">Sign Up</a></li>
+            </c:if>
+            <!-- 로그인 후 보여줄 메뉴 -->
+            <c:if test="${not empty sessionScope.loginMember}">
+              <span>${sessionScope.loginMember}님 환영합니다.</span>
+              	<li><a href="logout">Log Out</a></li>
+           			<li><a href="mypage">My Page</a></li>
+            </c:if>
+          </ul>
+        </nav>
+      </div>
+      <div class="bottom-row">
+        <ul class="menu-bar">
+          <li class="margin1"><a href="list/festivalAll?page=1">축제</a></li>
+          <li class="marginleft"><a href="list/showAll?page=1">공연</a></li>
+          <li class="marginleft"><a href="#">Instagram</a></li>
+          <li class="marginleft"><a href="md/MDAll">MD's Pick</a></li>
+          <li class="marginleft"><a href="WEB-INF/views/review/list.jsp">Review</a></li>
+          <li class="marginleft"><a href="notice/notice">고객센터</a></li>
+          <li class="marginleft"><a href="#">내게 맞는 행사</a></li>
+        </ul>
+        <div class="search-bar">
+          <div class="search-icon">&#128269;</div>
+          <input type="text" placeholder="Search...">
         </div>
-   	<div class="box">
-			<div class="image">
-				<img src="resources/img/etcmenu.png" alt="Etc Menu" class="category">
-			</div>
-			<div class="label">
-				<div class="text-wrapper">
-					<a href="list/festivallist">축제 보기</a> 
-					<a href="list/showlist">공연 보기</a>
-
-				</div>
-
-			</div>
-		</div>
-
-        <div class="box">
-            <div class="image">
-                <img src="resources/img/cultureexpo.png" alt="Culture Expo" class="category">
-            </div>
-            <div class="label">
-                <div class="text-wrapper">
-                    내게 맞는 문화전시 <!--이것도 텍스트가 아니라 이미지라 cultureexpo로 임의로 이름붙였습니다-->
-                </div>
-            </div>
-            
-        </div>
-        
-        <div class="box">
-            <div class="rectangle">
-                <div class="image">
-                    <img src="resources/img/searchicon.png" alt="Search Icon" class="img">
-                </div>
-                <div class="label">
-                    <div class="text-wrapper">
-                        검색아이콘 <!--돋보기 모양 아이콘 임의로 searchicon이라고 이름붙였습니다-->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+      </div>
+    </div>
+  </header>
+  <!-- <div style="height: 1000px; background-color: #f7f7f7;"></div> -->
 </body>
 </html>
