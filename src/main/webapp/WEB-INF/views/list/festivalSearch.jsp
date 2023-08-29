@@ -198,8 +198,8 @@
 <body>
  <jsp:include page="/header.jsp" />
  <div class="mb-3">
-	<div class="container">
-		<div class="row">
+	<div class="container" >
+		<div class="row" style="display:none" >
 			<div class="col-md-12">
 				<!-- 검색 창 -->
 				<div class="input-group mt-3">
@@ -213,7 +213,7 @@
 			</div>
 		</div>
 	<br>
-		<h3>'${query}' 에 대한 검색 결과 : ${count}</h3>
+		<h3>'${query}' 에 대한 축제 검색 결과 : ${count}</h3>
 
 
 

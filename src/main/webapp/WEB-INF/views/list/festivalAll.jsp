@@ -202,9 +202,9 @@
  <jsp:include page="/header.jsp" />
 <div class="mb-3">
 	<div class="container">
-		<div class="row">
+		<!-- <div class="row">
 			<div class="col-md-12">
-				<!-- 검색 창 -->
+				검색 창
 				<div class="input-group mt-3">
 					<input type="text" id="searchInput" class="form-control" placeholder="검색어를 입력하세요">
 					<div class="input-group-append">
@@ -213,12 +213,11 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	<br>
 				<h3>축제 목록 : ${count}</h3>
 				
 				<hr color="white">
-<hr color="white">
 		 <div class="row2">
         <c:forEach items="${list2}" var="festival" varStatus="status">
             <div class="col-md-3">
