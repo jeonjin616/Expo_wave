@@ -4,7 +4,8 @@ public class PageVO {
 	private int start;
 	private int end;
 	private int page;
-
+    private String query;
+	 
 	public void setStartEnd(int page) {
 		//page별로 start, end값만 구해주면 됨.
 		start = 1 + (page - 1) * 16; 
@@ -16,6 +17,14 @@ public class PageVO {
 		//2page: 2 * 10 => end 20
 	}
 
+	   public String getQuery() {
+	        return query;
+	    }
+
+	    public void setQuery(String query) {
+	        this.query = query;
+	    }
+	    
 	public int getPage() {
 		return page;
 	}
@@ -42,9 +51,8 @@ public class PageVO {
 
 	@Override
 	public String toString() {
-		return "PageVO [start=" + start + ", end=" + end + ", page=" + page + "]";
+		return "Page1VO [start=" + start + ", end=" + end + ", page=" + page + ", query=" + query + "]";
 	}
+	
 
-	
-	
 }
