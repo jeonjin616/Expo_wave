@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+	<!-- 메일보내기 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<!-- gmail은 해당값이 이렇고 다른 메일을 사용할 경우, 찾아서 변경해주어야 함 -->
+		<property name="host" value="smtp.gmail.com" />	
+		<!-- TLS 포트 사용-->
+		<property name="port" value="587" />
+		<property name="username" value="" />		<!-- 아이디 -->
+		<property name="password" value="" />	<!--앱키 비밀번호 -->
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>				<!-- SMTP 인증 사용 -->
+				<prop key="mail.smtp.starttls.enable">true</prop>	<!-- TLS 보안 연결을 사용함 --> 
+				<!-- 구글메일은 SSLSocketFactory를 추가해야 smtp 사용가능(보안이슈) -->
+				<prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+				<prop key="mail.debug">true</prop>
+				<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+				<!-- 1.3은 오류 발생함 -->
+				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>	
+			</props>
+		</property>
+	</bean>
+</beans>

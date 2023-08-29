@@ -23,7 +23,19 @@ public class FestivalDAO {
     public List<FestivalVO> list() {
         return my.selectList("festival.list");
     }
+   
+    public List<FestivalVO> all(PageVO vo) {
+		return my.selectList("festival.all", vo);
+	}
 	
+	public List<FestivalVO> list2(PageVO vo) {
+		return my.selectList("festival.list2", vo);
+	}
+	
+	public int count() {
+		return my.selectOne("festival.count");
+	} 
+    
 }
 
 

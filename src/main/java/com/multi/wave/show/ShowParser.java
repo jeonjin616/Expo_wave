@@ -17,11 +17,11 @@ public class ShowParser {
 
 	    public ArrayList<ShowVO> parse(int page) throws Exception {
 	        String baseApiUrl = "http://kopis.or.kr/openApi/restful/pblprfr";
-	        String service = "735a254e97384b56a65b6c589b726f2e";
+	        String service = "";
 	        String stdate = "20230101";
 	        String eddate = "20301231";
 	        int cpage = page;
-	        String rows = "100";
+	        String rows = "500";
 
 	        String param = "?service=" + service + "&stdate=" + stdate + "&eddate=" + eddate + "&cpage=" + cpage + "&rows="
 	                + rows;

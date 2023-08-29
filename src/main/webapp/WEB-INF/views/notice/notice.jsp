@@ -195,12 +195,11 @@ body {
 
 <header>
   <nav>
-    <ul>
-	  <li><a  href="home.jsp">홈</a>    
+    <ul>    
       <li><a  href="notice">공지사항</a></li>
       <li><a  href="faq">자주하는 질문</a></li>
-      <li><a  href="inqu.jsp">회원 1:1 문의게시판</a></li>
-      <li><a  href="chatbot.jsp">챗봇</a></li>
+      <li><a  href="inqu">회원 1:1 문의게시판</a></li>
+      <li><a  href="chat">챗봇</a></li>
     </ul>
   </nav>
   

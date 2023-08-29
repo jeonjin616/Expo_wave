@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -103,6 +104,7 @@
   }
   
 </style>
+
 </head>
 <body>
   <header class="header">
@@ -145,6 +147,6 @@
       </div>
     </div>
   </header>
-  <!-- <div style="height: 1000px; background-color: #f7f7f7;"></div> -->
+  
 </body>
 </html>

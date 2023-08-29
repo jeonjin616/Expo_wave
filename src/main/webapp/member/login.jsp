@@ -25,7 +25,7 @@
 			<input type="password" class="inputTxt" name="pw" id="pw" placeholder="비밀번호">
 			<br><br><br>
 			<div class="option" style="text-align: center;">
-				<a href=""><span>아이디 찾기</span></a>
+				<a href="idSearch.jsp"><span>아이디 찾기</span></a>
 				<span>/</span>
 				<a href=""><span>비밀번호 찾기</span></a>
 			</div>

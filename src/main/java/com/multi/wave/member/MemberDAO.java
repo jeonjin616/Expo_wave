@@ -31,4 +31,20 @@ public class MemberDAO {
 		return "null";	// null을 스트링으로 만들어 리턴
 	}
 	
+	// 이메일 인증번호 요청하기
+	// 1-1. 이름과 이메일 체크
+	public String nameCheck(MemberVO vo) {
+		String get_email = my.selectOne("member.idInfoCheck",vo);
+		System.out.println("이름 : " + vo.getMem_name());
+		System.out.println("매퍼에서 받은 이메일 : " + get_email);
+		if(get_email != null) {
+			return get_email;
+		}
+		return "fail";
+	}
+	
+	// 1-2. 아이디 알려주기
+	public String knowId(MemberVO vo) {
+		return my.selectOne("member.knowId", vo);
+	}
 }

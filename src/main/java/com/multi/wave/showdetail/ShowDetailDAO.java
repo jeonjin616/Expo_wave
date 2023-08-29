@@ -13,10 +13,10 @@ public class ShowDetailDAO {
     private SqlSessionTemplate my;
 
     public ShowDetailVO selectOne(String show_id) {
-        return my.selectOne("ShowDetailMapper.selectOne", show_id);
+        return my.selectOne("com.multi.wave.showdetail.showDetailMapper.selectOne", show_id);
     }
 
     public List<ShowDetailVO> selectByGenre(String show_genre) {
-        return my.selectList("ShowDetailMapper.selectByGenre", show_genre);
+        return my.selectList("com.multi.wave.showdetail.showDetailMapper.selectByGenre", show_genre);
     }
 }
