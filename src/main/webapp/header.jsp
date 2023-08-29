@@ -19,7 +19,7 @@
     background-color: #ffffff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 10px 0;
-    position: fixed;
+    position: relative;
     width: 100%;
     z-index: 1000;
   }
@@ -111,34 +111,35 @@
     <div class="header-inner">
       <div class="top-row">
         <div class="logo">
-          <a href="mainpage.jsp">
-          	<img src="http://localhost:8080/wave/resources/img/logo_white.jpg" width="76" height="70">
-          </a>
+			<a href="<c:url value='/index.jsp'/>">
+  			  <img src="<c:url value='/resources/img/logo_white.jpg'/>" width="76" height="70">
+</a>
+
         </div>
         <nav>
           <ul class="nav-links">
           	<c:if test="${empty sessionScope.loginMember}">
-            	<li><a href="member/login.jsp">Login</a></li>
-           		<li><a href="member/join.jsp">Sign Up</a></li>
+				<li><a href="<c:url value='/member/login.jsp'/>">Login</a></li>
+				<li><a href="<c:url value='/member/join.jsp'/>">Sign Up</a></li>
             </c:if>
             <!-- 로그인 후 보여줄 메뉴 -->
             <c:if test="${not empty sessionScope.loginMember}">
               <span>${sessionScope.loginMember}님 환영합니다.</span>
-              	<li><a href="logout">Log Out</a></li>
-           			<li><a href="mypage">My Page</a></li>
+				<li><a href="<c:url value='/logout'/>">Log Out</a></li>
+				<li><a href="<c:url value='/mypage'/>">My Page</a></li>
             </c:if>
           </ul>
         </nav>
       </div>
       <div class="bottom-row">
         <ul class="menu-bar">
-          <li class="margin1"><a href="list/festivalAll?page=1">축제</a></li>
-          <li class="marginleft"><a href="list/showAll?page=1">공연</a></li>
-          <li class="marginleft"><a href="#">Instagram</a></li>
-          <li class="marginleft"><a href="md/MDAll">MD's Pick</a></li>
-          <li class="marginleft"><a href="WEB-INF/views/review/list.jsp">Review</a></li>
-          <li class="marginleft"><a href="notice/notice">고객센터</a></li>
-          <li class="marginleft"><a href="#">내게 맞는 행사</a></li>
+			<li class="margin1"><a href="<c:url value='/list/festivalAll?page=1'/>">축제</a></li>
+			<li class="marginleft"><a href="<c:url value='/list/showAll?page=1'/>">공연</a></li>
+			<li class="marginleft"><a href="#">Instagram</a></li>
+			<li class="marginleft"><a href="<c:url value='/md/MDAll'/>">MD's Pick</a></li>
+			<li class="marginleft"><a href="<c:url value='/WEB-INF/views/review/list.jsp'/>">Review</a></li>
+			<li class="marginleft"><a href="<c:url value='/notice/notice'/>">고객센터</a></li>
+			<li class="marginleft"><a href="#">내게 맞는 행사</a></li>
         </ul>
         <div class="search-bar">
           <div class="search-icon">&#128269;</div>
