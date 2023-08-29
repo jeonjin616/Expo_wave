@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.multi.wave.festival.FestivalVO;
-import com.multi.wave.festival.PageVO;
 
 @Controller
 @RequestMapping("/list")
@@ -80,24 +78,23 @@ public class ShowController {
 		return "list/showAll";
 	}
 	
-    @RequestMapping("/loadPage")
-    public String loadPage(Page1VO vo, Model model) {
-        vo.setStartEnd(vo.getPage());
-        List<ShowVO> list2 = showDAO.all(vo);
-        model.addAttribute("list2", list2);
-        return "list/showAll :: row2"; // Return only the row2 fragment of the view
-    }
+	/*
+	 * @RequestMapping("/loadPage") public String loadPage(Page1VO vo, Model model)
+	 * { vo.setStartEnd(vo.getPage()); List<ShowVO> list2 = showDAO.all(vo);
+	 * model.addAttribute("list2", list2); return "list/showAll :: row2"; // Return
+	 * only the row2 fragment of the view }
+	 */
 
-    @RequestMapping("/searchResults")
-    public String searchResults(
+    @RequestMapping("/showSearch")
+    public String showSearch(
         @RequestParam("query") String query,
         Page1VO vo,
         Model model
     ) {
         vo.setStartEnd(vo.getPage());
 
-        List<ShowVO> searchResults = showService.search(query);
-        int count = searchResults.size();
+        List<ShowVO> showSearch = showService.search(query);
+        int count = showSearch.size();
         int itemsPerPage = 16; // 페이지당 보여줄 아이템 수
         int totalPages = (int) Math.ceil((double) count / itemsPerPage);
 
@@ -108,22 +105,28 @@ public class ShowController {
         // 현재 페이지에 해당하는 검색 결과를 가져오기 위해 부분 리스트를 가져옴
         int startIndex = (vo.getPage() - 1) * itemsPerPage;
         int endIndex = Math.min(startIndex + itemsPerPage, count);
-        List<ShowVO> searchResultsPerPage = searchResults.subList(startIndex, endIndex);
-        model.addAttribute("searchResults", searchResultsPerPage);
+        List<ShowVO> showSearchPerPage = showSearch.subList(startIndex, endIndex);
+        model.addAttribute("showSearch", showSearchPerPage);
 
-        return "list/searchResults";
+        return "list/showSearch";
     }
     
-    @RequestMapping("/searchResults2")
-    public String searchResults2(Page1VO vo, Model model) {
+    @RequestMapping("/showSearch2")
+    public void showSearch2(Page1VO vo, Model model) {
         vo.setStartEnd(vo.getPage()); // 시작과 종료 인덱스 계산
 
         List<ShowVO> searchlist = showService.searchlist(vo);
-        model.addAttribute("searchlist", searchlist);
+        model.addAttribute("showSearch2", searchlist);
 
         // 검색 결과를 보여줄 뷰 템플릿의 이름 리턴
-        return "list/searchResults2"; 
+        //return "list/searchResults2"; 
     }
 	
+	/*
+	 * @RequestMapping("/showlist2") public void list2(Page1VO vo, Model model) {
+	 * vo.setStartEnd(vo.getPage()); List<ShowVO> list2 = showDAO.list2(vo); //
+	 * System.out.println(list2.size()); model.addAttribute("list2", list2); }
+	 */
+
 
 }

@@ -7,6 +7,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import com.multi.wave.show.Page1VO;
+import com.multi.wave.show.ShowVO;
+
 @Service
 @EnableScheduling
 public class FestivalService {
@@ -53,6 +56,13 @@ public class FestivalService {
 	    }
 	  
 	
-}
-
+	    
+	    public List<FestivalVO> search(String query) {
+	        return festivalDAO.search(query);
+	    }
+	    
+	    public List<FestivalVO> searchlist(PageVO vo) {
+	        return festivalDAO.searchlist(vo);
+	    }
+	}
 
