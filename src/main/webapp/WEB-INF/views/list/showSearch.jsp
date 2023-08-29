@@ -199,7 +199,7 @@
  <jsp:include page="/header.jsp" />
 <div class="mb-3">
 	<div class="container">
-		<div class="row">
+		<div class="row"  style="display:none">
 			<div class="col-md-12">
 				<!-- 검색 창 -->
 				<div class="input-group mt-3">
@@ -213,7 +213,7 @@
 			</div>
 		</div>
 		<br>
-		<h3>'${query}' 에 대한 검색 결과 : ${count}</h3>
+		<h3>'${query}' 에 대한 공연 검색 결과 : ${count}</h3>
 
 		<hr color="white">
 		<div class="row2">
@@ -237,25 +237,28 @@
 		<hr color="white">
 		<div class="pagination mt-3 d-flex justify-content-center">
 			<button class="btn btn-secondary pages" data-page="1"><<</button>
-			<button class="btn btn-secondary pages" data-page="${pages - 1}" id="prevPageSetBtn"><</button>
+			<button class="btn btn-secondary pages" data-page="${pages - 1}"
+				id="prevPageSetBtn"><</button>
 			<c:choose>
 				<c:when test="${pages <= 10}">
 					<!-- Display all page links when total pages are 10 or less -->
 					<c:forEach begin="1" end="${pages}" var="pageNumber">
-						<button class="btn btn-secondary keyword-button pages"
+						<button
+							class="btn btn-secondary keyword-button pages page-item ${pageNumber == currentPage ? 'active' : ''}"
 							data-page="${pageNumber}">${pageNumber}</button>
 					</c:forEach>
 				</c:when>
 				<c:otherwise>
 					<!-- Display the first 10 pages -->
 					<c:forEach begin="1" end="10" var="pageNumber">
-						<button class="btn btn-secondary keyword-button pages"
+						<button
+							class="btn btn-secondary keyword-button pages page-item ${pageNumber == currentPage ? 'active' : ''}"
 							data-page="${pageNumber}">${pageNumber}</button>
 					</c:forEach>
 					<!-- Add the navigation buttons for the next set of pages -->
-					<button class="btn btn-secondary keyword-button pages"
-						data-page="${pages + 1}"id="nextPageSetBtn">></button>
-					<button class="btn btn-secondary keyword-button pages"
+					<button class="btn btn-secondary keyword-button pages page-item"
+						data-page="${pages + 1}" id="nextPageSetBtn">></button>
+					<button class="btn btn-secondary keyword-button pages page-item"
 						id="lastPageBtn" data-page="${pages}">>></button>
 				</c:otherwise>
 			</c:choose>
