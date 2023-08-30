@@ -45,7 +45,7 @@ public class FestivalController {
 		return "list/festivallist";
 	}
 
-	@RequestMapping("festivaldetail/{{fsv_id}")
+	@RequestMapping("festivaldetail/{fsv_id}")
 	public String festivalDetail(@PathVariable("fsv_id") int showId, Model model) {
 		return "festivaldetail"; // Return the name of the JSP view
 	}
