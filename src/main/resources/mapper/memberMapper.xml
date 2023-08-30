@@ -20,7 +20,17 @@
 	<select id="pwCheck" parameterType="memberVO" resultType="String">
 		SELECT mem_pw FROM member WHERE mem_id =#{mem_id}
 	</select>	
-
+	
+	<!-- 이메일 인증번호 요청하기 -->
+	<!-- 1-1. 이름과 이메일 체크 -->
+	<select id="idInfoCheck" parameterType="memberVO" resultType="String">
+		SELECT mem_email FROM member WHERE mem_name = #{mem_name} and mem_email = #{mem_email}
+	</select>
+	<!-- 1-2. 아이디 알려주기 -->
+	<select id="knowId" parameterType="memberVO" resultType="String">
+		SELECT mem_id FROM member WHERE mem_name = #{mem_name} and mem_email = #{mem_email}
+	</select>
+	
 </mapper>
 
 

@@ -1,16 +1,15 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ page contentType="text/html; charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ include file="/header.jsp" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>축제 상세</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
-<script src="https://kit.fontawesome.com/a076d05399.js"
-	crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 	function goBack() {
 		window.history.back();
@@ -48,7 +47,7 @@
 		</div>
 
 		<div class="container mt-5 mb-5">
-			<form action="/festivaldetail/caferestaurant" method="get"
+			<form action="../festivaldetail/caferestaurant" method="get"
 				class="d-flex align-items-center">
 				<input type="hidden" id="addressInput" name="address" value="">
 				<button type="submit" name="type" value="카페"
@@ -64,17 +63,13 @@
 				document.getElementById("addressInput").value = address;
 
 				function openParkingInfo() {
-					var searchQuery = address + " 주차장";
+					var searchQuery = address + " 주변 주차장";
 					var url = "https://map.kakao.com/link/search/"
 							+ encodeURIComponent(searchQuery);
 					window.open(url, "_blank");
 				}
 			</script>
 		</div>
-		<script>
-			var address = "${festival.fsv_add}".trim();
-			document.getElementById("addressInput").value = address;
-		</script>
 	</div>
 
 	<div class="container">
@@ -82,7 +77,7 @@
 		<div class="row">
 			<c:forEach var="recommended" items="${recommendedFestival}">
 				<div class="col-md-4">
-					<a href="/festivaldetail/${recommended.fsv_id}"
+					<a href="../festivaldetail/${recommended.fsv_id}"
 						style="display: block; border: 1px solid #ccc; margin: 10px; padding: 10px; text-align: center;">
 						<img
 						src="${empty recommended.fsv_orgimg ? 'https://i.postimg.cc/K8jZmpLy/001.jpg' : recommended.fsv_orgimg}"
@@ -100,6 +95,6 @@
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+		src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

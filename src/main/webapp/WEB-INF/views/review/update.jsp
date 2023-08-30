@@ -5,10 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<style>
+	body {
+		background-color: lightblue;
+	}
+</style>
 </head>
 <body>
-Response.Write("<script>alert('공지사항 추가가 완료되었습니다!');</script>");
-Response.Write("<script>location.href='notice';</script>");
+	Review가 수정되었습니다.
 </body>
 </html>

@@ -3,14 +3,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	body {
+		background-color: lightblue;
+	}
+</style>
 </head>
 <body>
-
-
-Response.Write("<script>alert('faq 삭제가 완료되었습니다!');</script>");
-Response.Write("<script>location.href='faq';</script>");
-
+	Review가 등록되었습니다.
 </body>
 </html>

@@ -90,17 +90,17 @@ th {
 	background-color: transparent;
 }
 
-.faq_id {
+.inqu_id {
 	width: 10%;
 	text-align: center;
 }
 
-.faq_title {
+.inqu_title {
 	width: 70%;
 	text-align: center;
 }
 
-.faq_create_date {
+.inqu_create_date {
 	width: 20%;
 	text-align: center;
 }
@@ -193,11 +193,10 @@ ul li a {
 	<header>
 		<nav>
 			<ul>
-				<li><a href="home.jsp">홈</a>
 				<li><a href="notice">공지사항</a></li>
 				<li><a href="faq">자주하는 질문</a></li>
-				<li><a href="inqu.jsp">회원 1:1 문의게시판</a></li>
-				<li><a href="chatbot.jsp">챗봇</a></li>
+				<li><a href="inqu">회원 1:1 문의게시판</a></li>
+				<li><a href="chat">챗봇</a></li>
 			</ul>
 		</nav>
 
@@ -245,7 +244,7 @@ svg {
     </script> -->
 
 	<footer>
-		<h1>자주하는 질문</h1>
+		<h1>회원 1:1 문의</h1>
 		<hr>
 		<br>
 		<table>
@@ -259,7 +258,7 @@ svg {
 			</tr>
 			<c:forEach var="inqu" items="${list}">
 				<tr>
-					<td class="inqu_id">${faq.faq_id}</td>
+					<td class="inqu_id">${inqu.inqu_id}</td>
 					<!-- 클래스 적용 -->
 					<td class="inqu_title"><a
 						href="inqu_one?id=${inqu.inqu_id}&title=${inqu.inqu_title}">${inqu.inqu_title}</a></td>
@@ -272,7 +271,7 @@ svg {
 
 		</table>
 
-		<a href="inqu_write_post.jsp" class="post-button">게시글 작성하기</a>
+		<a href="inquiry_write_post.jsp" class="post-button">게시글 작성하기</a>
 	</footer>
 </body>
 </html>

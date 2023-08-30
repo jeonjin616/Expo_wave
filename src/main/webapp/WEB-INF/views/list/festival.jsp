@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="header.jsp">메인화면</a>
+<button onclick="goBack()" class="btn btn-secondary mb-3">뒤로가기</button><br><br>
 </body>
 </html>

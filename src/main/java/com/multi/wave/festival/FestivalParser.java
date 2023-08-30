@@ -19,7 +19,7 @@ public class FestivalParser {
 
 	
 		public ArrayList<FestivalVO> parse(int page) throws Exception {
-			String numOfRows = "100";
+			String numOfRows = "500";
 			String pageNo = "1";
 			String mobileOS = "ETC";
 			String mobileApp = "APPTest";
@@ -30,7 +30,7 @@ public class FestivalParser {
 			String eventStartDate = sdf.format(new Date());
 
 			String str = "http://apis.data.go.kr/B551011/KorService1/searchFestival1?"
-					+ "serviceKey=H4XP2iKQgbcN1FUv3TvI3JXLrN1OKDumB0jcEj5KPz%2F8FuVt4784DvJXodia69ed32T5pBCmCh%2BBw8HvqYVeSA%3D%3D"
+					+ "serviceKey="
 					+ "&numOfRows=" + numOfRows + "&pageNo=" + pageNo + "&MobileOS=" + mobileOS + "&MobileApp=" + mobileApp
 					+ "&_type=" + type + "&listYN=" + listYN + "&arrange=" + arrange + "&eventStartDate=" + eventStartDate;
 

@@ -1,8 +1,11 @@
 package com.multi.wave.notice;
 
 import java.io.File;
-import java.util.Date;
 import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,27 +31,30 @@ public class FaqController {
 
 	@RequestMapping("notice/faq_insert2")
 	public String insert2(@RequestParam("file") MultipartFile file, @RequestParam("faq_title") String title,
-			@RequestParam("faq_question") String question, Model model) throws Exception {
-		String savedName = file.getOriginalFilename();
+	                      @RequestParam("faq_content") String content, RedirectAttributes redirectAttributes,
+	                      Model model, HttpServletRequest request) throws Exception {
 
-		String uploadPath = "C:\\Users\\User\\Documents\\workspace-sts-3.9.12.RELEASE\\Expo_wave333\\src\\main\\webapp\\resources\\img";
-		File target = new File(uploadPath + "/" + savedName);
+	    String test = UUID.randomUUID().toString();
+	    String savedName = test + "_" + file.getOriginalFilename();
 
-		file.transferTo(target);
+	    String uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload");
+	    File target = new File(uploadPath + "/" + savedName);
 
-		model.addAttribute("savedName", savedName);
+	    file.transferTo(target);
 
-		// 이 부분에서 BoardVO 객체를 생성하고 필드를 채워넣어야 합니다.
-		FaqVO dto = new FaqVO();
-		dto.setFaq_title(title);
-		dto.setFaq_question(question);
-		dto.setImg(savedName);
+	    // model.addAttribute("savedName", savedName); // 이 부분은 필요 없음
 
-		dao.insert(dto);
+	    FaqVO dto = new FaqVO();
+	    dto.setFaq_title(title);
+	    dto.setFaq_content(content);
+	    dto.setImg(savedName);
 
-		return "redirect:faq";
-
+	    dao.insert(dto);
+	    redirectAttributes.addFlashAttribute("message", "추가가 완료되었습니다.");
+	    return "redirect:faq";
 	}
+
+
 
 	@GetMapping("notice/faq_edit")
 	public String edit(@RequestParam("faq_id") int faq_id, Model model) {
@@ -59,43 +65,44 @@ public class FaqController {
 
 	// 수정 작업을 처리하는 메서드
 	@PostMapping("notice/faq_update_action")
-	public String update(@RequestParam("file") MultipartFile file, @RequestParam("faq_id") int faqId, 
-			@RequestParam("faq_title") String title, @RequestParam("faq_question") String question,
-			RedirectAttributes redirectAttributes) throws Exception {
+	public String update(@RequestParam("file") MultipartFile file, @RequestParam("faq_id") int faqId,
+	                     @RequestParam("faq_title") String title, @RequestParam("faq_content") String content,
+	                     RedirectAttributes redirectAttributes,
+	                     HttpServletRequest request) throws Exception {
 
-		FaqVO dto = new FaqVO();
-		dto.setFaq_id(faqId); // faq_id를 설정
-		dto.setFaq_title(title); // title 설정
-		dto.setFaq_question(question); // question 설정
+	    FaqVO dto = new FaqVO();
+	    dto.setFaq_id(faqId); // faq_id를 설정
+	    dto.setFaq_title(title); // title 설정
+	    dto.setFaq_content(content); // question 설정
 
-		FaqVO existingFaq = dao.oneById(faqId); // 파라미터로 받은 faq_id를 사용
+	    FaqVO existingFaq = dao.oneById(faqId); // 파라미터로 받은 faq_id를 사용
 
-		if (existingFaq != null) {
-			String savedName = (file != null && !file.isEmpty()) ? file.getOriginalFilename() : "";
-			if (!savedName.isEmpty()) {
-				String uploadPath = "C:\\Users\\User\\Documents\\workspace-sts-3.9.12.RELEASE\\Expo_wave333\\src\\main\\webapp\\resources\\img";
-				File target = new File(uploadPath + "/" + savedName);
-				file.transferTo(target);
-				dto.setImg(savedName);
-			} else {
-				dto.setImg(existingFaq.getImg());
-			}
+	    if (existingFaq != null) {
+	        String test = UUID.randomUUID().toString();
+	        String savedName = (file != null && !file.isEmpty()) ? test + "_" + file.getOriginalFilename() : "";
+	        if (!savedName.isEmpty()) {
+	        	String uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload");
+	            File target = new File(uploadPath + "/" + savedName);
+	            file.transferTo(target);
+	            dto.setImg(savedName);
+	        } else {
+	            dto.setImg(existingFaq.getImg());
+	        }
 
-			if (dto.getFaq_title().isEmpty()) {
-				dto.setFaq_title(existingFaq.getFaq_title());
-			}
-			if (dto.getFaq_question().isEmpty()) {
-				dto.setFaq_question(existingFaq.getFaq_question());
-			}
-		}
+	        if (dto.getFaq_title().isEmpty()) {
+	            dto.setFaq_title(existingFaq.getFaq_title());
+	        }
+	        if (dto.getFaq_content().isEmpty()) {
+	            dto.setFaq_content(existingFaq.getFaq_content());
+	        }
+	    }
 
-		
-		
-		dao.update(dto);
-		redirectAttributes.addFlashAttribute("message", "수정이 완료되었습니다."); 
-		
-		return "redirect:faq"; 
+	    dao.update(dto);
+	    redirectAttributes.addFlashAttribute("message", "수정이 완료되었습니다.");
+
+	    return "redirect:faq";
 	}
+
 
 	@RequestMapping("notice/faq_delete")
 	public String delete(@RequestParam("faq_id") int faq_id) {
