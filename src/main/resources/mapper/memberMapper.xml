@@ -16,8 +16,8 @@
 		SELECT mem_id FROM member WHERE mem_id = #{mem_id}
 	</select>
 	
-	<!-- 로그인(비밀번호 체크) -->
-	<select id="memberLogin" parameterType="memberVO" resultType="String">
+	<!-- 비밀번호 체크(로그인 시 사용) -->
+	<select id="pwCheck" parameterType="memberVO" resultType="String">
 		SELECT mem_pw FROM member WHERE mem_id =#{mem_id}
 	</select>	
 	
