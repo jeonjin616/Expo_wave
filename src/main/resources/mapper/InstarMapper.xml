@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Instar">
+
+	<!-- 인스타 가져오기 -->
+	<select id="InstarAll" resultType="InstarVO">
+		select * from instar
+	</select>
+
+	<!-- 인스타 삭제 -->
+	<delete id="deleteAll">
+		delete from instar
+	</delete>
+	<!-- 인스타 넣기 -->
+	
+	<insert id="InstarUpdate" parameterType="InstarVO">
+		insert into instar
+		(id, media_type,media_url,permalink,username,caption) values
+		(#{id},#{media_type},#{media_url},#{permalink},#{username},#{caption})
+	</insert>
+
+</mapper>

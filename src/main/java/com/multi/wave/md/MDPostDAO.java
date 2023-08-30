@@ -14,26 +14,40 @@ public class MDPostDAO {
 	SqlSessionTemplate mdPostSST;
 
 	
-	public List<MDPostDTO> MDAll() {
-		return mdPostSST.selectList("MD.PostsAll");
+	public List<MDPostVO> MDAll(PagingVO vo) {
+		return mdPostSST.selectList("MD.postsAll",vo);
+	}
+	
+	
+	public List<MDPostVO> getMDPostByTitle(String md_title) {
+		return mdPostSST.selectList("MD.getPostsByTitle", md_title);
+	}
+	
+	public MDPostVO getMDPostById(int id) {
+		return mdPostSST.selectOne("MD.getPostsById", id);
 	}
 
-	public MDPostDTO getMDPostById(int id) {
-		return mdPostSST.selectOne("MD.GetPostsById", id);
+	
+	public int MDPostinsert(MDPostVO mdPostDTO) {
+		return mdPostSST.insert("MD.postsMake", mdPostDTO);
 	}
 
 	
-	public int MDPostinsert(MDPostDTO mdPostDTO) {
-		return mdPostSST.insert("MD.PostsMake", mdPostDTO);
+	public int MDPostUpdate(MDPostVO mdPostDTO) {
+		return mdPostSST.update("MD.postUpdate", mdPostDTO);
+	}
+	
+	
+	public int MDPostDelete(MDPostVO mdPostDTO) {
+		return mdPostSST.delete("MD.postDelete", mdPostDTO);
 	}
 
-	
-	public int MDPostUpdate(MDPostDTO mdPostDTO) {
-		return mdPostSST.update("MD.PostUpdate", mdPostDTO);
+	public int MDPostCount() {
+		return mdPostSST.selectOne("MD.postCount");
+	}
+	public int Count() {
+		return mdPostSST.selectOne("MD.count");
 	}
 	
-	
-	public int MDPostDelete(MDPostDTO mdPostDTO) {
-		return mdPostSST.delete("MD.PostDelete", mdPostDTO);
-	}
+
 }
