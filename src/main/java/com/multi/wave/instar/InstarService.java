@@ -107,6 +107,7 @@ public class InstarService {
 		        	vo.setMedia_url((String) obj.get("media_url"));
 		        	vo.setPermalink((String) obj.get("permalink"));
 		        	vo.setUsername((String) obj.get("username"));
+		        	vo.setCaption((String) obj.get("caption"));
 
 //					System.out.println(obj.get("id"));
 //					System.out.println(obj.get("media_type"));
