@@ -12,6 +12,28 @@
 			padding-left:30px;
 		}
 	</style>
+	<script type="text/javascript" 
+	src="../resources/js/jquery-3.6.1.js" ></script>
+	<script type="text/javascript">
+		$(function() {
+			//alert("dom tree 메모리에 로딩됨.")
+			$('#b1').click(function() {
+				$.ajax({
+					url: "delete",
+					data: {
+						review_id : '${one.review_id}'
+					},
+					success: function(views_result) {
+						alert(views_result)
+						window.location.href="list";
+					},
+					error: function() {
+						alert("실패!")
+					}//error
+				})
+			}) //b1
+		}) //$
+	</script>
 <body>
 	<div class="header">
 		<jsp:include page="../../../header.jsp" />
@@ -35,9 +57,11 @@
 				<td>${one.review_image}</td>
 			</tr>
 		</table> <br>
+		
 		<a href="review_update.jsp?review_id=${one.review_id}
 		&review_title=${one.review_title}
 		&review_content=${one.review_content}">수정</a>
+		<input id="b1" type="button" value="삭제">
 	</div>
 </body>
 </html>
