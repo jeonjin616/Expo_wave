@@ -11,6 +11,7 @@
       	<typeAlias type="com.multi.wave.md.MDPostVO" alias="mdPostVO"></typeAlias>
       	<typeAlias type="com.multi.wave.md.MDImgVO" alias="mdImgVO"></typeAlias>      	
       	<typeAlias type="com.multi.wave.md.MDCommentVO" alias="mdCommentVO"></typeAlias>
+      	<typeAlias type="com.multi.wave.instar.InstarVO" alias="instarVO"></typeAlias>
       	<typeAlias type="com.multi.wave.festival.FestivalVO" alias="festivalVO"></typeAlias>
 		<typeAlias type="com.multi.wave.show.ShowVO" alias="showVO"></typeAlias>
 		<typeAlias type="com.multi.wave.festival.PageVO" alias="pageVO"></typeAlias>
@@ -22,6 +23,7 @@
 		<typeAlias type="com.multi.wave.my.MyVO" alias="MyVO"></typeAlias>
 		<typeAlias type="com.multi.wave.md.PagingVO" alias="PagingVO"></typeAlias>
 	</typeAliases>
+
 	<mappers>
 		<!-- SQL문 정의하는 파일들의 목록을 지정. 테이블당 한개 사용 -->
 		<mapper resource="mapper/memberMapper.xml" />
@@ -31,6 +33,7 @@
 		<mapper resource="mapper/MDPostMapper.xml" />
       	<mapper resource="mapper/MDImgMapper.xml"/>
       	<mapper resource="mapper/MDCommentMapper.xml"/>
+      	<mapper resource="mapper/InstarMapper.xml"/>
       	<mapper resource="mapper/festivalMapper.xml" />
 		<mapper resource="mapper/showMapper.xml" />
 		<mapper resource="mapper/boardMapper.xml" />
