@@ -12,7 +12,9 @@
 						alt="${show.show_name}" class="card-img-top">
 				</div>
 				<div class="card-body">
-					<h5 class="card-title">${show.show_name}</h5>
+						<h5 class="card-title truncate bold-text">${show.show_name}</h5>
+								<h5 class="card-title smaller-text">${show.show_start} ~ ${show.show_end}</h5>
+								
 				</div>
 			</a>
 		</div>

@@ -14,11 +14,15 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+
+
 @Component
 public class FestivalParser {
 
+	public ArrayList<FestivalVO> parse(int page) throws Exception {
 	
-		public ArrayList<FestivalVO> parse(int page) throws Exception {
+		
+		    
 			String numOfRows = "500";
 			String pageNo = "1";
 			String mobileOS = "ETC";
@@ -56,11 +60,11 @@ public class FestivalParser {
 			}
 			br.close();
 			String str2 = buf.toString();
-			System.out.println(str2);
+			//System.out.println(str2);
 
 			RestTemplate restTemplate = new RestTemplate();
 			String jsonResponse = restTemplate.getForObject(uri.toString(), String.class);
-			System.out.println(jsonResponse);
+			//System.out.println(jsonResponse);
 			JSONObject response = new JSONObject(str2);
 			JSONObject body = response.getJSONObject("response").getJSONObject("body");
 			JSONObject items = body.getJSONObject("items");
@@ -83,7 +87,7 @@ public class FestivalParser {
 
 				list.add(vo);
 				System.out.println(list.size());
-				System.out.println(list);
+				//System.out.println(list);
 			}
 			return list;
 		}

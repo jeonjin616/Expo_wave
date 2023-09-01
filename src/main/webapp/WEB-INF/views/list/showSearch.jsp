@@ -7,17 +7,12 @@
 <script type="text/javascript" src="../resources/js/jquery-3.6.1.js"></script>
 <script type="text/javascript">
 	$(function() {
+		
 		// 페이지 버튼 클릭 이벤트 처리
-		$(document)
-				.on(
-						'click',
-						'.pages',
-						function() {
+	$(document).on('click', '.pages', function() {
 							var pageNumber = $(this).data('page');
 							var query = $('#searchInput').val();
-							var link = 'showSearch?query='
-									+ encodeURIComponent(query) + '&page='
-									+ pageNumber;
+							var link = 'showSearch?query=' + encodeURIComponent(query) + '&page=' + pageNumber;						
 							window.location.href = link;
 						});
 
@@ -28,21 +23,6 @@
 			$('#searchInput').val(query);
 			search(page);
 		}
-		/* $('.pagination .pages').click(function() {
-		    var pageNumber = $(this).text(); // 클릭한 페이지 번호 가져오기
-		    $.ajax({
-		        url: "searchResults2", //views/list/showlist2.jsp가 결과!
-		        data: {
-		            page: pageNumber
-		        },
-		        success: function(result) {
-		            $('.row2').html(result);
-		        },
-		        error: function() {
-		            alert('페이지 로딩에 실패했습니다.');
-		        }
-		    });
-		}); */
 		// 검색 버튼 클릭 이벤트 처리
 		$('#searchBtn').click(
 				function(event) {
@@ -91,107 +71,113 @@
 				});
 			}
 		}
-		  var currentPage = 1; // Initialize current page
-		    var totalPages = ${pages}; // Your server-side value
+		
+		// 페이지 버튼과 페이지네이션 작동
+	    $(document).on('click', '.pagination .pages', function() {
+	        var pageNumber = $(this).data('page');
+	        currentPage = pageNumber;
+	        updatePageLinks();
 
-		    function updatePageLinks() {
-		        var startPage = currentPage; // Starting page of the current set
-		        var endPage = startPage + 9; // Ending page of the current set
-		        endPage = Math.min(endPage, totalPages); // Limit to actual total pages
+	        $('.pagination .pages').removeClass('active');
+	        $(`.pagination .pages[data-page="${currentPage}"]`).addClass('active');
 
-		        $('.pagination').empty(); // Clear existing pagination buttons
+	        loadPage(pageNumber);
+	    });
+	});
+		
 
-		        // Display << button
-		        if (startPage > 1) {
-		            $('.pagination').append('<button class="btn btn-secondary pages" data-page="1"><<</button>');
-		            $('.pagination').append('<button class="btn btn-secondary pages" data-page="' + (startPage - 1) + '"><</button>');
-		        }
-
-		        // Display page links
-		        for (var i = startPage; i <= endPage; i++) {
-		            $('.pagination').append('<button class="btn btn-secondary keyword-button pages" data-page="' + i + '">' + i + '</button>');
-		        }
-
-		        // Display >> button
-		        if (endPage < totalPages) {
-		            $('.pagination').append('<button class="btn btn-secondary keyword-button pages" data-page="' + (startPage + 1) + '" >></button>');
-		            $('.pagination').append('<button class="btn btn-secondary keyword-button pages" id="lastPageBtn" data-page="' + totalPages + '">>></button>');
-		        }
-		    }
-
-		    updatePageLinks(); // Initial call to update pagination links
-
-		    $(document).on('click', '.pagination .pages', function() {
-		        var pageNumber = $(this).data('page');
-		        currentPage = pageNumber; // Update current page
-		        updatePageLinks(); // Update pagination links
-		        $('.pagination .pages').removeClass('active'); // Remove active class from all page links
-		        $(this).addClass('active'); // Add active class to the clicked page link
-		        loadPage(pageNumber); // 페이지 번호에 해당하는 데이터를 불러와서 표시
-		    });
-
-		    $(document).on('click', '#prevPageSetBtn', function() {
-		        currentPage -= 10; // Move to the previous set of pages
-		        updatePageLinks();
-		        loadPage(currentPage); // 페이지 번호에 해당하는 데이터를 불러와서 표시
-		    });
-
-		    $(document).on('click', '#nextPageSetBtn', function() {
-		        currentPage += 10; // Move to the next set of pages
-		        updatePageLinks();
-		        loadPage(currentPage); // 페이지 번호에 해당하는 데이터를 불러와서 표시
-		    });
-
-		    $(document).on('click', '#lastPageBtn', function() {
-		        var lastPageNumber = totalPages - totalPages % 10; // Calculate last page in the current set
-		        currentPage = lastPageNumber + 1; // Move to the next set of pages
-		        updatePageLinks();
-		        loadPage(currentPage); // 페이지 번호에 해당하는 데이터를 불러와서 표시
-		    });
-		});
 </script>
 <meta charset="UTF-8">
-<title>공연 목록</title>
+<title>공연 검색 결과</title>
 <!-- Bootstrap CSS를 추가할 수 있습니다. -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <style>
+.body {
+    margin-bottom: 40px; /* Add margin at the bottom of the entire page */
+}
+
+.mb-3 {
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
 .card {
-	width: 250px;
-	height: 380px; /* 이미지와 내용을 함께 고려한 높이 조절 */
-	margin-bottom: 20px; /* 카드 사이 간격 설정 */
+    width: 250px;
+    height: 380px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 더 부드러운 그림자 효과 */
+    border: none; /* 기본 테두리 제거 */
+    transition: transform 0.3s, box-shadow 0.3s; /* 호버 효과에 애니메이션 적용 */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* 마우스 호버 시 약간 위로 올라가는 효과 */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 강화 */
 }
 
 .card-img-top {
-	height: 250px; /* 이미지 높이 조절 */
-	object-fit: cover; /* 이미지를 카드에 맞추어 보이도록 설정 */
+    height: 250px;
+    object-fit: cover;
 }
 
 .image-container {
-	height: 250px; /* 이미지 컨테이너 높이 조절 */
-	overflow: hidden; /* 이미지가 컨테이너를 넘어가지 않도록 설정 */
+    height: 250px;
+    overflow: hidden;
 }
 
 .card-body {
-	height: 130px; /* 내용 영역 높이 조절 */
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
-.card-body {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center; /* 가로 정렬을 위해 추가 */
-	text-align: center; /* 텍스트 가운데 정렬 */
+.card-title {
+    font-size: 1rem;
+    margin-top: 10px;
+    color: #333;
+}
+.card a {
+    text-decoration: none; /* 링크의 밑줄 제거 */
 }
 
 .row2 {
-	display: flex;
-	flex-wrap: wrap;
-	margin: -10px; /* Adjust margin for row gutter */
+    display: flex;
+    flex-wrap: wrap;
+    margin: -10px; /* Adjust margin for row gutter */
+    justify-content: flex-start; /* 카드 간격을 고정으로 */
+    margin-bottom: 40px; /* 하단에 여백 주기  */
+    margin-top: 40px; /* 상단에 여백 주기  */
 }
 
 .row2 .col-md-3 {
-	padding: 10px; /* Adjust padding for column gutter */
+    flex: 0 0 calc(25% - 20px); /* 4개의 카드가 한 줄에 나오도록 함 */
+    padding: 10px; /* Adjust padding for column gutter */
+}
+
+.pagination {
+	display: flex;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pagination .page-item {
+	margin: 0 5px;
+}
+
+.pagination .page-link {
+    text-decoration: none;
+    color: #333; /* Change the color to your desired value */
+}
+
+.pagination .active {
+    background-color: #0511f7; /* Your chosen active page background color */
+    color: white;
+    border-radius: 4px;
+    padding: 5px 10px;
 }
 </style>
 </head>
@@ -227,7 +213,8 @@
 									alt="${show.show_name}" class="card-img-top">
 							</div>
 							<div class="card-body">
-								<h5 class="card-title">${show.show_name}</h5>
+								<h5 class="card-title truncate">${show.show_name}</h5>
+								<h5 class="card-title">${show.show_start} ~ ${show.show_end}</h5>
 							</div>
 						</a>
 					</div>
@@ -235,35 +222,47 @@
 			</c:forEach>
 		</div>
 		<hr color="white">
-		<div class="pagination mt-3 d-flex justify-content-center">
-			<button class="btn btn-secondary pages" data-page="1"><<</button>
-			<button class="btn btn-secondary pages" data-page="${pages - 1}"
-				id="prevPageSetBtn"><</button>
-			<c:choose>
-				<c:when test="${pages <= 10}">
-					<!-- Display all page links when total pages are 10 or less -->
-					<c:forEach begin="1" end="${pages}" var="pageNumber">
-						<button
-							class="btn btn-secondary keyword-button pages page-item ${pageNumber == currentPage ? 'active' : ''}"
-							data-page="${pageNumber}">${pageNumber}</button>
-					</c:forEach>
-				</c:when>
-				<c:otherwise>
-					<!-- Display the first 10 pages -->
-					<c:forEach begin="1" end="10" var="pageNumber">
-						<button
-							class="btn btn-secondary keyword-button pages page-item ${pageNumber == currentPage ? 'active' : ''}"
-							data-page="${pageNumber}">${pageNumber}</button>
-					</c:forEach>
-					<!-- Add the navigation buttons for the next set of pages -->
-					<button class="btn btn-secondary keyword-button pages page-item"
-						data-page="${pages + 1}" id="nextPageSetBtn">></button>
-					<button class="btn btn-secondary keyword-button pages page-item"
-						id="lastPageBtn" data-page="${pages}">>></button>
-				</c:otherwise>
-			</c:choose>
-		</div>
+		
+   <div class="pagination mt-3 d-flex justify-content-center">
+	 <c:choose>
+        <c:when test="${pages <= 10}">
+            <!-- Display all page links when total pages are 10 or less -->
+            <c:forEach begin="1" end="${pages}" var="pageNumber">
+                <button class="btn btn-secondary keyword-button pages ${page == pageNumber ? 'active' : ''}"
+                    data-page="${pageNumber}">${pageNumber}</button>
+            </c:forEach>
+        </c:when>
+        <c:otherwise>
+            <!-- Display page numbers with current page centered -->
+            <c:choose>
+                <c:when test="${page <= 5}">
+                    <!-- Display first 10 pages -->
+                    <c:forEach begin="1" end="10" var="pageNumber">
+                        <button class="btn btn-secondary keyword-button pages ${page == pageNumber ? 'active' : ''}"
+                            data-page="${pageNumber}">${pageNumber}</button>
+                    </c:forEach>
+                </c:when>
+                <c:when test="${page > pages - 5}">
+                    <!-- Display last 10 pages -->
+                    <c:forEach begin="${pages - 9}" end="${pages}" var="pageNumber">
+                        <button class="btn btn-secondary keyword-button pages ${page == pageNumber ? 'active' : ''}"
+                            data-page="${pageNumber}">${pageNumber}</button>
+                    </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    <!-- Display pages with current page centered -->
+                    <c:forEach begin="${page - 5}" end="${page + 4}" var="pageNumber">
+                        <button class="btn btn-secondary keyword-button pages ${page == pageNumber ? 'active' : ''}"
+                            data-page="${pageNumber}">${pageNumber}</button>
+                    </c:forEach>
+                </c:otherwise>
+            </c:choose>
+        </c:otherwise>
+    </c:choose>
+</div>
+
 	</div>
 	</div>
 </body>
+<!-- <div style="margin-bottom: 60px;"></div> -->
 </html>

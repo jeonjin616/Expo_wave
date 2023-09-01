@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,17 +21,22 @@ public class ShowController {
 
 	@Autowired
 	ShowDAO showDAO;
-
+	
+	/*
+	 * @Value("${show.serviceKey}") // Import this annotation private String key; //
+	 * Define a field to hold the serviceKey value
+	 * 
+	 */
 	@RequestMapping("/show")
 	public void insert(ShowParser parser) throws Exception {
 
 		showDAO.deleteAll();
 
-		for (int i = 1; i < 2; i++) {
-			ArrayList<ShowVO> list = parser.parse(i);
+		
+			ArrayList<ShowVO> list = parser.parse(1);
 			for (ShowVO showVO : list) {
 				showService.insert(showVO);
-			}
+			
 		}
 	}
 

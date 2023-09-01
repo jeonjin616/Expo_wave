@@ -11,9 +11,10 @@
                             <img src="${not empty festival.fsv_orgimg ? festival.fsv_orgimg : '../resources/img/thumb_ing.gif'}"
                                  alt="${festival.fsv_name}" class="card-img-top">
                         </div>
-                        <div class="card-body">
-                            <h5 class="card-title">${festival.fsv_name}</h5>
-                        </div>
+                       <div class="card-body">
+									<h5 class="card-title truncate bold-text">${festival.fsv_name}</h5>
+									<h4 class="card-title  smaller-text">${festival.fsv_start} ~ ${festival.fsv_end}</h4>
+								</div>
                     </a>
                 </div>
             </div>

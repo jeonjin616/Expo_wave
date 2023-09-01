@@ -20,9 +20,10 @@
 		<typeAlias type="com.multi.wave.notice.FaqVO" alias="FaqVO" />
 		<typeAlias type="com.multi.wave.notice.InquiryVO" alias="InquiryVO" />
 		<typeAlias type="com.multi.wave.notice.ReplyVO" alias="ReplyVO" />
-		<typeAlias type="com.multi.wave.my.MyVO" alias="MyVO"></typeAlias>	
+		<typeAlias type="com.multi.wave.my.MyVO" alias="MyVO"></typeAlias>
 		<typeAlias type="com.multi.wave.md.PagingVO" alias="PagingVO"></typeAlias>
-		</typeAliases>
+	</typeAliases>
+
 	<mappers>
 		<!-- SQL문 정의하는 파일들의 목록을 지정. 테이블당 한개 사용 -->
 		<mapper resource="mapper/memberMapper.xml" />

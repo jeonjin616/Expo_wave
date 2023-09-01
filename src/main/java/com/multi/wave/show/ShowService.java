@@ -1,5 +1,6 @@
 package com.multi.wave.show;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +21,18 @@ public class ShowService {
     @Autowired
     ShowParser parser;
     
+	/*
+	 * @Value("${show.serviceKey}") // Import this annotation private String key; //
+	 * Define a field to hold the serviceKey value
+	 * 
+	 */
     public void insert(ShowVO vo) {
         showDAO.insert(vo);
         
     }
     
-   // @Scheduled(fixedRate = 180000) // 1분마다 실행 , 60000(1분) 
-    @Scheduled(cron = "0 0 4 * * ?") // 4:00 AM 매일 실행됨
+    //@Scheduled(fixedRate = 300000) // 1분마다 실행 , 60000(1분) 
+    @Scheduled(cron = "0 0 4 1/30 * ?") // 30일 마다  4:00 AM 
     public void fetchDataAndInsert() {
         try {
         	
@@ -34,7 +40,7 @@ public class ShowService {
             showDAO.deleteAll();
             
             // 데이터를 받아오는 로직을 호출
-            List<ShowVO> fetchedData = parser.parse(1);
+            List<ShowVO> fetchedData = parseAndFilter(1);
 
             // 받아온 데이터 처리 또는 저장하는 로직을 추가
             for (ShowVO data : fetchedData) {
@@ -46,7 +52,23 @@ public class ShowService {
             // 예외 처리 로직 추가
         }
     }
-    
+    //중복 필터
+    public List<ShowVO> parseAndFilter(int limit) throws Exception {
+	    List<ShowVO> fetchedData = parser.parse(limit);
+	    List<ShowVO> filteredData = new ArrayList<>();
+
+	    for (ShowVO data : fetchedData) {
+	        if (!isDataAlreadyExists(data)) {
+	            filteredData.add(data);
+	        }
+	    }
+
+	    return filteredData;
+	}
+    //중복확인
+    private boolean isDataAlreadyExists(ShowVO data) { 
+		 List<ShowVO> existingData = showDAO.search(data.getShow_name()); 
+		 return !existingData.isEmpty(); }
     
     public List<ShowVO> list() {
         return showDAO.list();
