@@ -126,8 +126,16 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <style>
+.body {
+    margin-bottom: 40px; /* Add margin at the bottom of the entire page */
+}
+
+.mb-3 {
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
 .card {
-	 width: 250px;
+    width: 250px;
     height: 380px;
     margin-bottom: 20px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 더 부드러운 그림자 효과 */
@@ -139,22 +147,20 @@
     transform: translateY(-5px); /* 마우스 호버 시 약간 위로 올라가는 효과 */
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 강화 */
 }
+
 .card-img-top {
-	height: 250px; /* 이미지 높이 조절 */
-	object-fit: cover; /* 이미지를 카드에 맞추어 보이도록 설정 */
+    height: 250px;
+    object-fit: cover;
 }
 
 .image-container {
-	height: 250px; /* 이미지 컨테이너 높이 조절 */
-	overflow: hidden; /* 이미지가 컨테이너를 넘어가지 않도록 설정 */
+    height: 250px;
+    overflow: hidden;
 }
 
 .card-body {
-	height: 130px; /* 내용 영역 높이 조절 */
-}
-
-.card-body {
- display: flex;
+    height: 130px;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -162,24 +168,49 @@
 }
 
 .card-title {
-  font-size: 1.2rem;
+    font-size: 1rem;
     margin-top: 10px;
-    color: #333; /* 원하는 글씨 색상으로 변경 */
- 
+    color: #333;
 }
 .card a {
     text-decoration: none; /* 링크의 밑줄 제거 */
 }
 
-
 .row2 {
-	display: flex;
-	flex-wrap: wrap;
-	margin: -10px; /* Adjust margin for row gutter */
+    display: flex;
+    flex-wrap: wrap;
+    margin: -10px; /* Adjust margin for row gutter */
+    justify-content: flex-start; /* 카드 간격을 유지하면서 최대한 평균 분배 */
+    margin-bottom: 40px; /* 하단에 여백 주기  */
+    margin-top: 40px; /* 상단에 여백 주기  */
 }
 
 .row2 .col-md-3 {
-	padding: 10px; /* Adjust padding for column gutter */
+    flex: 0 0 calc(25% - 20px); /* 4개의 카드가 한 줄에 나오도록 함 */
+    padding: 10px; /* Adjust padding for column gutter */
+}
+
+.pagination {
+	display: flex;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pagination .page-item {
+	margin: 0 5px;
+}
+
+.pagination .page-link {
+    text-decoration: none;
+    color: #333; /* Change the color to your desired value */
+}
+
+.pagination .active {
+    background-color: #0511f7; /* Your chosen active page background color */
+    color: white;
+    border-radius: 4px;
+    padding: 5px 10px;
 }
 </style>
 </head>
@@ -217,7 +248,9 @@
                                  alt="${festival.fsv_name}" class="card-img-top">
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">${festival.fsv_name}</h5>
+                           <h5 class="card-title">${festival.fsv_name}</h5>
+						   <h5 class="card-title">${festival.fsv_start} ~ ${festival.fsv_end}</h5>
+								
                         </div>
                     </a>
                 </div>
@@ -266,4 +299,5 @@
 	</div>
 	</div>
 </body>
+<!-- <div style="margin-bottom: 60px;"></div> -->
 </html>

@@ -22,21 +22,23 @@ public class FestivalController {
 
 	@Autowired
 	FestivalDAO festivalDAO;
+	
 
 	@RequestMapping("/festival")
 	public void insert(FestivalParser parser) throws Exception {
-
+	
+		
 		festivalDAO.deleteAll();
 
-		for (int i = 1; i < 2; i++) {
+		
 
-			ArrayList<FestivalVO> list = parser.parse(i);
+			ArrayList<FestivalVO> list = parser.parse(1);
 			for (FestivalVO festivalVO : list) {
 				festivalService.insert(festivalVO);
 			}
 		}
 
-	}
+	
 
 	@RequestMapping("/festivallist")
 	public String list(Model model) {
@@ -45,7 +47,7 @@ public class FestivalController {
 		return "list/festivallist";
 	}
 
-	@RequestMapping("festivaldetail/{fsv_id}")
+	@RequestMapping("festivaldetail/{{fsv_id}")
 	public String festivalDetail(@PathVariable("fsv_id") int showId, Model model) {
 		return "festivaldetail"; // Return the name of the JSP view
 	}
