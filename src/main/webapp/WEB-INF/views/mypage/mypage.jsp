@@ -72,18 +72,6 @@
 					</div>
 
 					<div class="form-group">
-						<label for="memberFestivalTheme">선호축제테마:</label> <input
-							type="text" class="form-control" id="memberFestivalTheme"
-							value="${member.mem_joy1}" readonly>
-					</div>
-
-					<div class="form-group">
-						<label for="memberShowTheme">선호공연테마:</label> <input type="text"
-							class="form-control" id="memberShowTheme"
-							value="${member.mem_joy2}" readonly>
-					</div>
-
-					<div class="form-group">
 						<label>비밀번호:</label>
 						<button type="button" class="btn btn-primary"
 							id="changePasswordBtn">비밀번호 변경</button>
