@@ -113,23 +113,44 @@
          });
 
         
-        	    function loadPage(pageNumber) {
-        	        $.ajax({
-        	            url: "showlist2", 
-        	            data: {
-        	                page: pageNumber
-        	            },
-        	            success: function(result) {
-        	                $('.row2').html(result); 
-        	            },
-        	            error: function() {
-        	                alert('페이지 로딩에 실패했습니다.');
+         function loadPage(pageNumber) {
+        	    $.ajax({
+        	        url: "showlist2", 
+        	        data: {
+        	            page: pageNumber
+        	        },
+        	        success: function(result) {
+        	            $('.row2').html(result);
+
+        	            // Apply truncation logic to newly loaded content
+        	            $('.card-title.truncate').each(function() {
+        	                var originalText = $(this).text();
+        	                if (originalText.length > 24) {
+        	                    var truncatedText = originalText.substring(0, 24) + '...';
+        	                    $(this).text(truncatedText);
+        	                }
+        	            });
+        	        },
+        	        error: function() {
+        	            alert('페이지 로딩에 실패했습니다.');
+        	        }
+        	    });
+        	}
+
+
+        	    updatePageLinks();
+        	    
+        	   $(document).ready(function() {
+        	        $('.card-title.truncate').each(function() {
+        	            var originalText = $(this).text();
+        	            if (originalText.length > 24) {
+        	                var truncatedText = originalText.substring(0, 24) + '...';
+        	                $(this).text(truncatedText);
         	            }
         	        });
-        	    }
-
+        	    }); 
         	    
-        	    updatePageLinks();
+        	    
         	});
 
 		 
@@ -142,6 +163,13 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
   <style>
+.body {
+    margin-bottom: 40px; /* Add margin at the bottom of the entire page */
+}
+.mb-3 {
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
 .card {
     width: 250px;
     height: 380px;
@@ -174,12 +202,19 @@
     align-items: center;
     text-align: center;
 }
+.bold-text {
+      font-size: 1.1rem; /* Adjust the value as needed */
+    font-weight: bold; 
+}
+
+.smaller-text {
+    font-size: 0.9rem; /* Adjust the value as needed */
+}
 
 .card-title {
-  font-size: 1.2rem;
+    font-size: 1rem;
     margin-top: 10px;
-    color: #333; /* 원하는 글씨 색상으로 변경 */
- 
+    color: #333;
 }
 .card a {
     text-decoration: none; /* 링크의 밑줄 제거 */
@@ -189,7 +224,9 @@
     display: flex;
     flex-wrap: wrap;
     margin: -10px; /* Adjust margin for row gutter */
-    justify-content: space-between; /* 카드 간격을 유지하면서 최대한 평균 분배 */
+    justify-content: flex-start; /* 카드 간격을 유지하면서 최대한 평균 분배 */
+    margin-bottom: 40px; /* 하단에 여백 주기  */
+    margin-top: 40px; /* 상단에 여백 주기  */
 }
 
 .row2 .col-md-3 {
@@ -208,15 +245,17 @@
 	margin: 0 5px;
 }
 
-.pagination .active {
-	background-color: #0511f7; /* 원하는 강조 색상으로 변경 */
-	color: white;
-	border-radius: 4px;
-	padding: 5px 10px;
+.pagination .page-link {
+    text-decoration: none;
+    color: #333; /* Change the color to your desired value */
 }
 
-.pagination .page-link {
-	text-decoration: none;
+.pagination .active {
+    background-color: #0511f7; /* Your chosen active page background color */
+    color: white;
+    border-radius: 4px;
+    padding: 5px 10px;
+}
 </style>
 </head>
 <body>
@@ -267,7 +306,9 @@
 									alt="${show.show_name}" class="card-img-top">
 							</div>
 							<div class="card-body">
-								<h5 class="card-title">${show.show_name}</h5>
+								<h5 class="card-title truncate bold-text">${show.show_name}</h5>
+								<h5 class="card-title smaller-text">${show.show_start} ~ ${show.show_end}</h5>
+								
 							</div>
 						</a>
 					</div>
@@ -287,4 +328,5 @@
 	</div>
 </div>
 </body>
+<!-- <div style="margin-bottom: 60px;"></div> -->
 </html>

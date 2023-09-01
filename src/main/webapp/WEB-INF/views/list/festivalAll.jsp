@@ -141,6 +141,14 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <style>
+
+.body {
+    margin-bottom: 40px; /* Add margin at the bottom of the entire page */
+}
+.mb-3 {
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
 .card {
     width: 250px;
     height: 380px;
@@ -174,11 +182,19 @@
     text-align: center;
 }
 
+.bold-text {
+      font-size: 1.1rem; /* Adjust the value as needed */
+    font-weight: bold; 
+}
+
+.smaller-text {
+    font-size: 0.9rem; /* Adjust the value as needed */
+}
+
 .card-title {
-  font-size: 1.2rem;
+    
     margin-top: 10px;
-    color: #333; /* 원하는 글씨 색상으로 변경 */
- 
+    color: #333;
 }
 .card a {
     text-decoration: none; /* 링크의 밑줄 제거 */
@@ -188,7 +204,9 @@
     display: flex;
     flex-wrap: wrap;
     margin: -10px; /* Adjust margin for row gutter */
-    justify-content: space-between; /* 카드 간격을 유지하면서 최대한 평균 분배 */
+    justify-content: flex-start; /* 카드 간격을 유지하면서 최대한 평균 분배 */
+    margin-bottom: 40px; /* 하단에 여백 주기  */
+    margin-top: 40px; /* 상단에 여백 주기  */
 }
 
 .row2 .col-md-3 {
@@ -207,19 +225,22 @@
 	margin: 0 5px;
 }
 
-.pagination .active {
-	background-color: #0511f7; /* 원하는 강조 색상으로 변경 */
-	color: white;
-	border-radius: 4px;
-	padding: 5px 10px;
+.pagination .page-link {
+    text-decoration: none;
+    color: #333; /* Change the color to your desired value */
 }
 
-.pagination .page-link {
-	text-decoration: none;
+.pagination .active {
+    background-color: #0511f7; /* Your chosen active page background color */
+    color: white;
+    border-radius: 4px;
+    padding: 5px 10px;
+}
 </style>
 </head>
 <body>
 	<jsp:include page="/header.jsp" />
+	<!-- <div style="margin-bottom: 20px;"></div> -->
 	<div class="mb-3">
 		<div class="container">
 			 <div class="row" style="display:none">
@@ -236,7 +257,6 @@
 		</div> 
 			<br>
 			<h3>축제 목록 : ${count}</h3>
-
 			<hr color="white">
 			<div class="row2">
 				<c:forEach items="${list2}" var="festival" varStatus="status">
@@ -250,7 +270,8 @@
 										alt="${festival.fsv_name}" class="card-img-top">
 								</div>
 								<div class="card-body">
-									<h5 class="card-title">${festival.fsv_name}</h5>
+									<h5 class="card-title truncate bold-text">${festival.fsv_name}</h5>
+									<h4 class="card-title  smaller-text">${festival.fsv_start} ~ ${festival.fsv_end}</h4>
 								</div>
 							</a>
 						</div>
@@ -280,4 +301,5 @@
 		</div>
 	</div>
 </body>
+<!-- <div style="margin-bottom: 60px;"></div> -->
 </html>
