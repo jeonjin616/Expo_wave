@@ -1,10 +1,10 @@
 package com.multi.wave.notice;
 
+import java.awt.PageAttributes.MediaType;
 import java.io.File;
 import java.util.List;
 import java.util.UUID;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -134,5 +135,12 @@ public class FaqController {
 		model.addAttribute("list", list);
 		return "notice/faq";
 	}
+	
+	
+	@GetMapping(value = "notice/faq_ajaxSearch")
+    @ResponseBody
+    public List<FaqVO> ajaxSearch(@RequestParam("query") String query) {
+        return dao.searchFaq(query);
+    }
 
 }

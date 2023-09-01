@@ -31,6 +31,10 @@
 	<select id="all" resultType="FaqVO">
 		select * from faq
 	</select>
+	
+	<select id="searchFaq" parameterType="String" resultType="FaqVO">
+    	SELECT * FROM faq WHERE faq_title LIKE CONCAT('%', #{query}, '%')
+	</select>
 </mapper>
 
 

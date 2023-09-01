@@ -47,8 +47,8 @@ public class BoardDAO {
 		return my.selectList("board.all");
 	}
 	
-	/*
-	 * public BoardVO getBoardById(int id) { return
-	 * my.selectOne("BoardMapper.getBoardById", id); }
-	 */
+	public List<BoardVO> searchBoard(String keyword) {
+	    return my.selectList("board.searchBoard", keyword);
+	  }
+	
 }

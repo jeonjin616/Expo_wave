@@ -78,35 +78,42 @@ a:hover {
         }
     }
     $(document).ready(function(){
+        var postId = ${dto.inqu_id}; // 게시물 번호를 가져옴
+
         function loadReplies(){
           $.ajax({
-            url: "/replies/" + ${inqu.inqu_id}, 
+            url: '../notice/replies/' + postId, // 게시물 번호를 URL에 포함
             method: "GET",
-            success: function(data) {
-              $("#reply-list").empty();
-              data.forEach(function(reply) {
+            success: function(replyData) {
+                $("#reply-list").empty();
                 var replyHtml = '<div class="reply-item">' +
-                                  '<div class="writer">' + reply.writer + '</div>' +
-                                  '<div class="content">' + reply.content + '</div>' +
+                                  '<div class="writer">' + replyData.writer + '</div>' +
+                                  '<div class="content">' + replyData.content + '</div>' +
                                 '</div>';
                 $("#reply-list").append(replyHtml);
-              });
             }
           });
         }
 
         $("#reply-btn").click(function(){
-          var content = $("#reply-content").val();
-          $.ajax({
-            url: "/replies",
-            method: "POST",
-            contentType: "application/json",
-            data: JSON.stringify({ post_id: ${inqu.inqu_id}, content: content }),
-            success: function() {
-              $("#reply-content").val('');
-              loadReplies();
-            }
-          });
+            var content = $("#reply-content").val();
+            $.ajax({
+              url: '../notice/replies',
+              method: "POST",
+              contentType: "application/json",
+              dataType: 'json',
+              data: JSON.stringify({ post_id: postId, content: content, writer: "admin" }),
+              success: function() {
+                console.log("Successfully posted.");
+                $("#reply-content").val('');
+                loadReplies();
+              },
+              error: function(xhr, status, error) {  // 에러 콜백 추가
+                console.log("Error: " + error);
+                console.log("Status: " + status);
+                console.log(xhr);
+              }
+            });
         });
 
         loadReplies();

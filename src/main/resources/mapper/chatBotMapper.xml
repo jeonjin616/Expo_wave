@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="chatBotMapper">
+	<select id="findFestivalsByRegion" resultType="String">
+		SELECT fsv_name FROM festival
+		WHERE fsv_name LIKE CONCAT('%', #{region}, '%') OR fsv_add LIKE CONCAT('%',
+		#{region}, '%')
+		LIMIT 10
+	</select>
+	
+	<select id="findShowByRegion" resultType="String">
+		SELECT show_name FROM `show`
+		WHERE show_name LIKE CONCAT('%', #{region}, '%') OR show_place LIKE CONCAT('%', #{region}, '%')
+		LIMIT 10
+	</select>
+</mapper>
+
+
+
