@@ -8,12 +8,19 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 
 @Component
 public class ShowParser {
+	
+	/*
+	 * @Value("${show.serviceKey}") // Import this annotation private String
+	 * serviceKey; // Define a field to hold the serviceKey value
+	 */
 
 	    public ArrayList<ShowVO> parse(int page) throws Exception {
 	        String baseApiUrl = "http://kopis.or.kr/openApi/restful/pblprfr";

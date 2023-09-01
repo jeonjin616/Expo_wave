@@ -8,7 +8,7 @@
 <script type="text/javascript">
 	$(function() {
 		// 페이지 버튼 클릭 이벤트 처리
-		$(document)
+		/* $(document)
 				.on(
 						'click',
 						'.pages',
@@ -27,7 +27,7 @@
 		if (query !== null && page !== null) {
 			$('#searchInput').val(query);
 			search(page);
-		}
+		} */
 		/* $('.pagination .pages').click(function() {
 		    var pageNumber = $(this).text(); // 클릭한 페이지 번호 가져오기
 		    $.ajax({
@@ -44,154 +44,173 @@
 		    });
 		}); */
 		// 검색 버튼 클릭 이벤트 처리
-		$('#searchBtn').click(
-				function(event) {
-					event.preventDefault(); // 기본 동작 중단
+		 $(document).on('click', '.pages', function() {
+		        var pageNumber = $(this).data('page'); // Get the clicked page number
+		        var query = $('#searchInput').val(); 
+		        var link = 'festivalSearch?query=' + encodeURIComponent(query) + '&page=' + pageNumber;
+		        window.location.href = link; 
+		    });
 
-					var query = $('#searchInput').val(); // 검색어 가져오기
-					if (query !== "") {
-						var link = 'festivalSearch?query='
-								+ encodeURIComponent(query) + '&page=1';
-						window.location.href = link;
-					}
-				});
+		    
+		    var urlParams = new URLSearchParams(window.location.search);
+		    var query = urlParams.get('query');
+		    var page = urlParams.get('page');
 
-		// 엔터 키를 눌렀을 때 검색 실행
-		$('#searchInput').keypress(
-				function(event) {
-					if (event.which === 13) {
-						event.preventDefault(); // 기본 동작 중단
+		    if (query !== null && page !== null) {
+		        
+		        $('#searchInput').val(query); 
+		        search(page); 
+		    }
 
-						var query = $('#searchInput').val();
-						if (query !== "") {
-							var link = 'festivalSearch?query='
-									+ encodeURIComponent(query) + '&page=1';
-							window.location.href = link;
-						}
-					}
-				});
+		 // 검색 버튼 클릭 이벤트 처리
+		    $('#searchBtn').click(function(event) {
+		        event.preventDefault(); // 기본 동작 중단
 
-		// 검색 함수
-
-		function search(pageNumber) {
-			var query = $('#searchInput').val();
-			if (query !== "") {
-				$.ajax({
-					url : "festivalSearch2",
-					data : {
-						query : query,
-						page : pageNumber
-					},
-					success : function(result) {
-						$('.row2').html($(result).find('.row2').html());
-					},
-					error : function() {
-						alert('검색 실패했습니다.');
-					}
-				});
-			}
-		}
-		  var currentPage = 1; // Initialize current page
-		    var totalPages = ${pages}; // Your server-side value
-
-		    function updatePageLinks() {
-		        var startPage = currentPage; // Starting page of the current set
-		        var endPage = startPage + 9; // Ending page of the current set
-		        endPage = Math.min(endPage, totalPages); // Limit to actual total pages
-
-		        $('.pagination').empty(); // Clear existing pagination buttons
-
-		        // Display << button
-		        if (startPage > 1) {
-		            $('.pagination').append('<button class="btn btn-secondary pages" data-page="1"><<</button>');
-		            $('.pagination').append('<button class="btn btn-secondary pages" data-page="' + (startPage - 1) + '"><</button>');
+		        var query = $('#searchInput').val(); // 검색어 가져오기
+		        if (query !== "") {
+		            var link = 'festivalSearch?query=' + encodeURIComponent(query) + '&page=1';
+		            window.location.href = link; 
 		        }
+		    });
 
-		        // Display page links
-		        for (var i = startPage; i <= endPage; i++) {
-		            $('.pagination').append('<button class="btn btn-secondary keyword-button pages" data-page="' + i + '">' + i + '</button>');
+		 // 엔터 키를 눌렀을 때 검색 실행
+		    $('#searchInput').keypress(function(event) {
+		        if (event.which === 13) {
+		            event.preventDefault();  // 기본 동작 중단 (e.g., form submission)
+
+		            var query = $('#searchInput').val(); // Get the search query
+		            if (query !== "") {
+		                var link = 'festivalSearch?query=' + encodeURIComponent(query) + '&page=1';
+		                window.location.href = link; 
+		            }
 		        }
+		    });
 
-		        // Display >> button
-		        if (endPage < totalPages) {
-		            $('.pagination').append('<button class="btn btn-secondary keyword-button pages" data-page="' + (startPage + 1) + '" >></button>');
-		            $('.pagination').append('<button class="btn btn-secondary keyword-button pages" id="lastPageBtn" data-page="' + totalPages + '">>></button>');
+		 // 검색 함수
+		    function search(pageNumber) {
+		        var query = $('#searchInput').val(); // 검색어 가져오기
+		        if (query !== "") {
+		            $.ajax({
+		                url: "festivalSearch2",
+		                data: {
+		                    query: query,
+		                    page: pageNumber
+		                },
+		                success: function(result) {
+		                    $('.row2').html($(result).find('.row2').html());
+		                },
+		                error: function() {
+		                    alert('검색 실패했습니다.');
+		                }
+		            });
 		        }
 		    }
 
-		    updatePageLinks(); // Initial call to update pagination links
-
+		    // Click event handler for page buttons within pagination
 		    $(document).on('click', '.pagination .pages', function() {
 		        var pageNumber = $(this).data('page');
-		        currentPage = pageNumber; // Update current page
-		        updatePageLinks(); // Update pagination links
-		        $('.pagination .pages').removeClass('active'); // Remove active class from all page links
-		        $(this).addClass('active'); // Add active class to the clicked page link
-		        loadPage(pageNumber); // 페이지 번호에 해당하는 데이터를 불러와서 표시
-		    });
-
-		    $(document).on('click', '#prevPageSetBtn', function() {
-		        currentPage -= 10; // Move to the previous set of pages
+		        currentPage = pageNumber;
 		        updatePageLinks();
-		        loadPage(currentPage); // 페이지 번호에 해당하는 데이터를 불러와서 표시
-		    });
 
-		    $(document).on('click', '#nextPageSetBtn', function() {
-		        currentPage += 10; // Move to the next set of pages
-		        updatePageLinks();
-		        loadPage(currentPage); // 페이지 번호에 해당하는 데이터를 불러와서 표시
-		    });
+		        $('.pagination .pages').removeClass('active');
+		        $(`.pagination .pages[data-page="${currentPage}"]`).addClass('active');
 
-		    $(document).on('click', '#lastPageBtn', function() {
-		        var lastPageNumber = totalPages - totalPages % 10; // Calculate last page in the current set
-		        currentPage = lastPageNumber + 1; // Move to the next set of pages
-		        updatePageLinks();
-		        loadPage(currentPage); // 페이지 번호에 해당하는 데이터를 불러와서 표시
-		    })
-		})
+		        loadPage(pageNumber);
+		    });
+		});
+
 </script>
 <meta charset="UTF-8">
-<title>공연 목록</title>
+<title>축제 검색 결과</title>
 <!-- Bootstrap CSS를 추가할 수 있습니다. -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <style>
+.body {
+    margin-bottom: 40px; /* Add margin at the bottom of the entire page */
+}
+
+.mb-3 {
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
 .card {
-	width: 250px;
-	height: 380px; /* 이미지와 내용을 함께 고려한 높이 조절 */
-	margin-bottom: 20px; /* 카드 사이 간격 설정 */
+    width: 250px;
+    height: 380px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 더 부드러운 그림자 효과 */
+    border: none; /* 기본 테두리 제거 */
+    transition: transform 0.3s, box-shadow 0.3s; /* 호버 효과에 애니메이션 적용 */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* 마우스 호버 시 약간 위로 올라가는 효과 */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 강화 */
 }
 
 .card-img-top {
-	height: 250px; /* 이미지 높이 조절 */
-	object-fit: cover; /* 이미지를 카드에 맞추어 보이도록 설정 */
+    height: 250px;
+    object-fit: cover;
 }
 
 .image-container {
-	height: 250px; /* 이미지 컨테이너 높이 조절 */
-	overflow: hidden; /* 이미지가 컨테이너를 넘어가지 않도록 설정 */
+    height: 250px;
+    overflow: hidden;
 }
 
 .card-body {
-	height: 130px; /* 내용 영역 높이 조절 */
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
-.card-body {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center; /* 가로 정렬을 위해 추가 */
-	text-align: center; /* 텍스트 가운데 정렬 */
+.card-title {
+    font-size: 1rem;
+    margin-top: 10px;
+    color: #333;
+}
+.card a {
+    text-decoration: none; /* 링크의 밑줄 제거 */
 }
 
 .row2 {
-	display: flex;
-	flex-wrap: wrap;
-	margin: -10px; /* Adjust margin for row gutter */
+    display: flex;
+    flex-wrap: wrap;
+    margin: -10px; /* Adjust margin for row gutter */
+    justify-content: flex-start; /* 카드 간격을 유지하면서 최대한 평균 분배 */
+    margin-bottom: 40px; /* 하단에 여백 주기  */
+    margin-top: 40px; /* 상단에 여백 주기  */
 }
 
 .row2 .col-md-3 {
-	padding: 10px; /* Adjust padding for column gutter */
+    flex: 0 0 calc(25% - 20px); /* 4개의 카드가 한 줄에 나오도록 함 */
+    padding: 10px; /* Adjust padding for column gutter */
+}
+
+.pagination {
+	display: flex;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pagination .page-item {
+	margin: 0 5px;
+}
+
+.pagination .page-link {
+    text-decoration: none;
+    color: #333; /* Change the color to your desired value */
+}
+
+.pagination .active {
+    background-color: #0511f7; /* Your chosen active page background color */
+    color: white;
+    border-radius: 4px;
+    padding: 5px 10px;
 }
 </style>
 </head>
@@ -229,7 +248,9 @@
                                  alt="${festival.fsv_name}" class="card-img-top">
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">${festival.fsv_name}</h5>
+                           <h5 class="card-title">${festival.fsv_name}</h5>
+						   <h5 class="card-title">${festival.fsv_start} ~ ${festival.fsv_end}</h5>
+								
                         </div>
                     </a>
                 </div>
@@ -238,31 +259,45 @@
 		</div>
 		<hr color= whith>
 		<div class="pagination mt-3 d-flex justify-content-center">
-			<button class="btn btn-secondary pages" data-page="1"><<</button>
-			<button class="btn btn-secondary pages" data-page="${pages - 1}" id="prevPageSetBtn"><</button>
-			<c:choose>
-				<c:when test="${pages <= 10}">
-					<!-- Display all page links when total pages are 10 or less -->
-					<c:forEach begin="1" end="${pages}" var="pageNumber">
-						<button class="btn btn-secondary keyword-button pages"
-							data-page="${pageNumber}">${pageNumber}</button>
-					</c:forEach>
-				</c:when>
-				<c:otherwise>
-					<!-- Display the first 10 pages -->
-					<c:forEach begin="1" end="10" var="pageNumber">
-						<button class="btn btn-secondary keyword-button pages"
-							data-page="${pageNumber}">${pageNumber}</button>
-					</c:forEach>
-					<!-- Add the navigation buttons for the next set of pages -->
-					<button class="btn btn-secondary keyword-button pages"
-						data-page="${pages + 1}"id="nextPageSetBtn">></button>
-					<button class="btn btn-secondary keyword-button pages"
-						id="lastPageBtn" data-page="${pages}">>></button>
-				</c:otherwise>
-			</c:choose>
-		</div>
+    <c:choose>
+        <c:when test="${pages <= 10}">
+            <!-- Display all page links when total pages are 10 or less -->
+            <c:forEach begin="1" end="${pages}" var="pageNumber">
+                <button class="btn btn-secondary keyword-button pages ${page == pageNumber ? 'active' : ''}"
+                    data-page="${pageNumber}">${pageNumber}</button>
+            </c:forEach>
+        </c:when>
+        <c:otherwise>
+            <!-- Display page numbers with current page centered -->
+            <c:choose>
+                <c:when test="${page <= 5}">
+                    <!-- Display first 10 pages -->
+                    <c:forEach begin="1" end="10" var="pageNumber">
+                        <button class="btn btn-secondary keyword-button pages ${page == pageNumber ? 'active' : ''}"
+                            data-page="${pageNumber}">${pageNumber}</button>
+                    </c:forEach>
+                </c:when>
+                <c:when test="${page > pages - 5}">
+                    <!-- Display last 10 pages -->
+                    <c:forEach begin="${pages - 9}" end="${pages}" var="pageNumber">
+                        <button class="btn btn-secondary keyword-button pages ${page == pageNumber ? 'active' : ''}"
+                            data-page="${pageNumber}">${pageNumber}</button>
+                    </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    <!-- Display pages with current page centered -->
+                    <c:forEach begin="${page - 5}" end="${page + 4}" var="pageNumber">
+                        <button class="btn btn-secondary keyword-button pages ${page == pageNumber ? 'active' : ''}"
+                            data-page="${pageNumber}">${pageNumber}</button>
+                    </c:forEach>
+                </c:otherwise>
+            </c:choose>
+        </c:otherwise>
+    </c:choose>
+</div>
+
 	</div>
 	</div>
 </body>
+<!-- <div style="margin-bottom: 60px;"></div> -->
 </html>

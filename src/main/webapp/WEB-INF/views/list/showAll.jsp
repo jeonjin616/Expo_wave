@@ -59,183 +59,101 @@
                 });
             }
         } 
-         var currentPage = 1; // Initialize current page
-         var totalPages = ${pages}; // Your server-side value
+         var currentPage = 1; 
+         var totalPages = ${pages}; 
+         var pagesPerPageSet = 10; 
+         var totalSets = Math.ceil(totalPages / pagesPerPageSet); 
 
          function updatePageLinks() {
-             var startPage = currentPage; // Starting page of the current set
-             var endPage = startPage + 9; // Ending page of the current set
-             endPage = Math.min(endPage, totalPages); // Limit to actual total pages
+             var currentSet = Math.ceil(currentPage / pagesPerPageSet); 
+             //console.log('Current Set:', currentSet);
+             var startPage = (currentSet - 1) * pagesPerPageSet + 1; 
+             //console.log('Start Page:', startPage);
+             var endPage = Math.min(startPage + pagesPerPageSet - 1, totalPages); 
 
-             $('.pagination').empty(); // Clear existing pagination buttons
-
+             //console.log('End Page:', endPage);
+             
+             
+             $('.pagination').empty(); 
              // Display << button
-             if (startPage > 1) {
+             if (currentSet > 1) {
+             // console.log('Displaying << button');
                  $('.pagination').append('<button class="btn btn-secondary pages" data-page="1"><<</button>');
-                 $('.pagination').append('<button class="btn btn-secondary pages" data-page="' + (startPage - 1) + '"><</button>');
+                 $('.pagination').append('<button class="btn btn-secondary pages"  data-page="' + Math.floor(startPage - pagesPerPageSet, 1) + '"><</button>');
              }
 
              // Display page links
              for (var i = startPage; i <= endPage; i++) {
-                 $('.pagination').append('<button class="btn btn-secondary keyword-button pages" data-page="' + i + '">' + i + '</button>');
+            	  // console.log('Displaying page link:', i);
+                 $('.pagination').append('<button class="btn btn-secondary keyword-button pages"  data-page="' + i + '">' + i + '</button>');
              }
 
              // Display >> button
-             if (endPage < totalPages) {
-                 $('.pagination').append('<button class="btn btn-secondary keyword-button pages" data-page="' + (startPage + 1) + '" >></button>');
-                 $('.pagination').append('<button class="btn btn-secondary keyword-button pages" id="lastPageBtn" data-page="' + totalPages + '">>></button>');
+             if (currentSet < totalSets) {
+            	// console.log('Displaying >> button');
+                 $('.pagination').append('<button class="btn btn-secondary keyword-button pages"  data-page="' + (endPage + 1) + '" >></button>');
+                 $('.pagination').append('<button class="btn btn-secondary keyword-button pages"  data-page="' + totalPages + '">>></button>');
              }
+             
          }
 
          $(document).on('click', '.pagination .pages', function() {
-        	    var pageNumber = $(this).data('page');
-        	    currentPage = pageNumber; // Update current page
-        	    updatePageLinks(); // Update pagination links
+             var pageNumber = $(this).data('page');
+             
+             //console.log('Page button clicked:', pageNumber);
+             currentPage = pageNumber;
+             updatePageLinks();
 
-        	    // Remove active class from all page links
-        	    $('.pagination .pages').removeClass('active');
+             $('.pagination .pages').removeClass('active');
+             $(`.pagination .pages[data-page="${currentPage}"]`).addClass('active');
 
-        	    // Add active class to the clicked page link
-        	    $(this).addClass('active');
-
-        	    loadPage(pageNumber); // 페이지 번호에 해당하는 데이터를 불러와서 표시
-        	});
-
-         $(document).on('click', '#nextPageSetBtn', function() {
-             currentPage += 10; // Move to the next set of pages
-             updatePageLinks(); // Update pagination links
-             loadPage(currentPage); // 페이지 번호에 해당하는 데이터를 불러와서 표시
+             loadPage(pageNumber); // 페이지 번호에 해당하는 데이터를 불러와서 표시
+             
+            // console.log('Page button clicked:', pageNumber);
          });
 
-         $(document).on('click', '#prevPageSetBtn', function() {
-             currentPage -= 10; // Move to the previous set of pages
-             updatePageLinks(); // Update pagination links
-             loadPage(currentPage); // 페이지 번호에 해당하는 데이터를 불러와서 표시
-         });
-
-         function loadPage(pageNumber) {
-             $.ajax({
-                 url: "showlist2", // 페이지 데이터를 가져올 URL 설정
-                 data: {
-                     page: pageNumber
-                 },
-                 success: function(result) {
-                     $('.row2').html(result); // 검색 결과를 표시할 영역에 결과 업데이트
-                 },
-                 error: function() {
-                     alert('페이지 로딩에 실패했습니다.');
-                 }
-             });
-         }
-
-         // Initial call to update pagination links
-         updatePageLinks();
-     })
-		  // 페이지 링크 클릭 이벤트 처리
-/*  $('.pagination .pages').click(function() {
-    var pageNumber = $(this).data('page');
-    search(pageNumber);
-}); */
-		 // 검색 버튼 클릭 이벤트 처리
-        /*  $(document).on('click', '#nextPageSetBtn', function() {
-        	    currentPage += 1; // Move to the next page
-        	    if (currentPage > totalPages) {
-        	        currentPage = totalPages; // Ensure currentPage doesn't exceed totalPages
-        	    }
-        	    updatePageLinks(); // Update pagination links
-        	    $('.pagination .pages').removeClass('active'); // Remove active class from all page links
-        	    $('[data-page="' + currentPage + '"]').addClass('active'); // Add active class to the current page link
-        	    loadPage(currentPage); // Load data for the next page
-        	}); */
-
-        	/* $(document).on('click', '#prevPageSetBtn', function() {
-        	    currentPage -= 1; // Move to the previous page
-        	    if (currentPage < 1) {
-        	        currentPage = 1; // Ensure currentPage doesn't go below 1
-        	    }
-        	    updatePageLinks(); // Update pagination links
-        	    $('.pagination .pages').removeClass('active'); // Remove active class from all page links
-        	    $('[data-page="' + currentPage + '"]').addClass('active'); // Add active class to the current page link
-        	    loadPage(currentPage); // Load data for the previous page
-        	});
- */
-
-         // Click event for next set of pages
-/* $(document).on('click', '#nextPageSetBtn', function() {
-    currentPage += 10; // Move to the next set of pages
-    updatePageLinks();
-    loadPage(currentPage); // 페이지 번호에 해당하는 데이터를 불러와서 표시
-});
- */
-/* $(document).on('click', '#prevPageSetBtn', function() {
-    currentPage -= 10; // Move to the previous set of pages
-    updatePageLinks();
-    loadPage(currentPage); // 페이지 번호에 해당하는 데이터를 불러와서 표시
-}); */
-
-// Function to load page content
         
-     /*  // loadPage 함수 정의
          function loadPage(pageNumber) {
-             $.ajax({
-                 url: "loadPage",
-                 data: {
-                     page: pageNumber
-                 },
-                 success: function(result) {
-                     $('.row2').html(result); // 검색 결과를 표시할 영역에 결과 업데이트
-                 },
-                 error: function() {
-                     alert('페이지 로딩에 실패했습니다.');
-                 }
-             });
-         }
-         $('#nextPageBtn').click(function() {
-             var nextPage = $(this).data('page');
-             updatePageLinks(nextPage);
-         });
+        	    $.ajax({
+        	        url: "showlist2", 
+        	        data: {
+        	            page: pageNumber
+        	        },
+        	        success: function(result) {
+        	            $('.row2').html(result);
 
-        	$('#lastPageBtn').click(function() {
-        	    var pageNumber = $(this).data('page');
-        	    search(pageNumber);
-        	});
-        	$('#prevPageBtn').click(function() {
-        	    var pageNumber = $(this).data('page');
-        	    search(pageNumber);
-        	});
-
-        	$('#firstPageBtn').click(function() {
-        	    var pageNumber = $(this).data('page');
-        	    search(pageNumber);
-        	});
-        	
-        	
-        	 function updatePageLinks(nextPage) {
-        	        var startPage, endPage;
-
-        	        // Calculate the range of page links to display
-        	        if (nextPage <= 7) {
-        	            startPage = 1;
-        	            endPage = Math.min(pages, 10);
-        	        } else if (nextPage > pages - 3) {
-        	            startPage = pages - 9;
-        	            endPage = pages;
-        	        } else {
-        	            startPage = nextPage - 6;
-        	            endPage = nextPage + 3;
+        	            // Apply truncation logic to newly loaded content
+        	            $('.card-title.truncate').each(function() {
+        	                var originalText = $(this).text();
+        	                if (originalText.length > 24) {
+        	                    var truncatedText = originalText.substring(0, 24) + '...';
+        	                    $(this).text(truncatedText);
+        	                }
+        	            });
+        	        },
+        	        error: function() {
+        	            alert('페이지 로딩에 실패했습니다.');
         	        }
+        	    });
+        	}
 
-        	        // Update the page links
-        	        var pageLinks = '';
-        	        for (var i = startPage; i <= endPage; i++) {
-        	            pageLinks += `<button class="btn btn-secondary keyword-button pages" data-page="${i}">${i}</button>`;
-        	        }
-        	        $('.pagination').html(pageLinks);
 
-        	        // Update the "Next Page" button's data-page attribute
-        	        $('#nextPageBtn').data('page', nextPage + 1);
-        	    }
-         */
+        	    updatePageLinks();
+        	    
+        	   $(document).ready(function() {
+        	        $('.card-title.truncate').each(function() {
+        	            var originalText = $(this).text();
+        	            if (originalText.length > 24) {
+        	                var truncatedText = originalText.substring(0, 24) + '...';
+        	                $(this).text(truncatedText);
+        	            }
+        	        });
+        	    }); 
+        	    
+        	    
+        	});
+
+		 
         	 
 </script>
 <meta charset="UTF-8">
@@ -245,72 +163,106 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
   <style>
+.body {
+    margin-bottom: 40px; /* Add margin at the bottom of the entire page */
+}
+.mb-3 {
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
 .card {
-	width: 250px;
-	height: 380px; /* 이미지와 내용을 함께 고려한 높이 조절 */
-	margin-bottom: 20px; /* 카드 사이 간격 설정 */
+    width: 250px;
+    height: 380px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 더 부드러운 그림자 효과 */
+    border: none; /* 기본 테두리 제거 */
+    transition: transform 0.3s, box-shadow 0.3s; /* 호버 효과에 애니메이션 적용 */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* 마우스 호버 시 약간 위로 올라가는 효과 */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 강화 */
 }
 
 .card-img-top {
-	height: 250px; /* 이미지 높이 조절 */
-	object-fit: cover; /* 이미지를 카드에 맞추어 보이도록 설정 */
+    height: 250px;
+    object-fit: cover;
 }
 
 .image-container {
-	height: 250px; /* 이미지 컨테이너 높이 조절 */
-	overflow: hidden; /* 이미지가 컨테이너를 넘어가지 않도록 설정 */
+    height: 250px;
+    overflow: hidden;
 }
 
 .card-body {
-	height: 130px; /* 내용 영역 높이 조절 */
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.bold-text {
+      font-size: 1.1rem; /* Adjust the value as needed */
+    font-weight: bold; 
 }
 
-.card-body {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center; /* 가로 정렬을 위해 추가 */
-	text-align: center; /* 텍스트 가운데 정렬 */
+.smaller-text {
+    font-size: 0.9rem; /* Adjust the value as needed */
+}
+
+.card-title {
+    font-size: 1rem;
+    margin-top: 10px;
+    color: #333;
+}
+.card a {
+    text-decoration: none; /* 링크의 밑줄 제거 */
 }
 
 .row2 {
-	display: flex;
-	flex-wrap: wrap;
-	margin: -10px; /* Adjust margin for row gutter */
+    display: flex;
+    flex-wrap: wrap;
+    margin: -10px; /* Adjust margin for row gutter */
+    justify-content: flex-start; /* 카드 간격을 유지하면서 최대한 평균 분배 */
+    margin-bottom: 40px; /* 하단에 여백 주기  */
+    margin-top: 40px; /* 상단에 여백 주기  */
 }
 
 .row2 .col-md-3 {
-	padding: 10px; /* Adjust padding for column gutter */
+    flex: 0 0 calc(25% - 20px); /* 4개의 카드가 한 줄에 나오도록 함 */
+    padding: 10px; /* Adjust padding for column gutter */
 }
 
 .pagination {
-        display: flex;
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
+	display: flex;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
 
-    .pagination .page-item {
-        margin: 0 5px;
-    }
+.pagination .page-item {
+	margin: 0 5px;
+}
 
-    .pagination .active {
-        background-color: #0511f7; /* 원하는 강조 색상으로 변경 */
-        color: white;
-        border-radius: 4px;
-        padding: 5px 10px;
-    }
+.pagination .page-link {
+    text-decoration: none;
+    color: #333; /* Change the color to your desired value */
+}
 
-    .pagination .page-link {
-        text-decoration: none;
-    }
+.pagination .active {
+    background-color: #0511f7; /* Your chosen active page background color */
+    color: white;
+    border-radius: 4px;
+    padding: 5px 10px;
+}
 </style>
 </head>
 <body>
  <jsp:include page="/header.jsp" />
 <div class="mb-3">
 	<div class="container">
-		<!-- <div class="row">
+		 <div class="row" style="display:none">
 			<div class="col-md-12">
 				검색 창
 				<div class="input-group mt-3">
@@ -322,9 +274,22 @@
 					</div>
 				</div>
 			</div>
-		</div> -->
+		</div> 
 	
 <br>
+
+<!-- <form id="filterForm">
+    <select name="genre">
+        <option value="">모든 장르</option>
+        <option value="서양음악(클래식)">서양음악(클래식)</option>
+        <option value="한국음악(국악)">한국음악(국악)</option>
+        <option value="대중음악">대중음악</option>
+        <option value="뮤지컬">뮤지컬</option>
+        <option value="기타">기타</option>
+    </select>
+    <button type="submit">필터 적용</button>
+</form> -->
+
 		<h3>공연 목록 : ${count}</h3>
 
 		
@@ -341,7 +306,9 @@
 									alt="${show.show_name}" class="card-img-top">
 							</div>
 							<div class="card-body">
-								<h5 class="card-title">${show.show_name}</h5>
+								<h5 class="card-title truncate bold-text">${show.show_name}</h5>
+								<h5 class="card-title smaller-text">${show.show_start} ~ ${show.show_end}</h5>
+								
 							</div>
 						</a>
 					</div>
@@ -349,35 +316,17 @@
 			</c:forEach>
 		</div>
 		<hr color="white">
-		<div class="pagination mt-3 d-flex justify-content-center">
-			<button class="btn btn-secondary pages" data-page="1"><<</button>
-			<button class="btn btn-secondary pages" data-page="${pages - 1}"
-				id="prevPageSetBtn"><</button>
-			<c:choose>
-				<c:when test="${pages <= 10}">
-					<!-- Display all page links when total pages are 10 or less -->
-					<c:forEach begin="1" end="${pages}" var="pageNumber">
-						<button
-							class="btn btn-secondary keyword-button pages page-item ${pageNumber == currentPage ? 'active' : ''}"
-							data-page="${pageNumber}">${pageNumber}</button>
-					</c:forEach>
-				</c:when>
-				<c:otherwise>
-					<!-- Display the first 10 pages -->
-					<c:forEach begin="1" end="10" var="pageNumber">
-						<button
-							class="btn btn-secondary keyword-button pages page-item ${pageNumber == currentPage ? 'active' : ''}"
-							data-page="${pageNumber}">${pageNumber}</button>
-					</c:forEach>
-					<!-- Add the navigation buttons for the next set of pages -->
-					<button class="btn btn-secondary keyword-button pages page-item"
-						data-page="${pages + 1}" id="nextPageSetBtn">></button>
-					<button class="btn btn-secondary keyword-button pages page-item"
-						id="lastPageBtn" data-page="${pages}">>></button>
-				</c:otherwise>
-			</c:choose>
-		</div>
+	<div class="pagination mt-3 d-flex justify-content-center">
+    <button class="btn btn-secondary pages" data-page="1"><<</button>
+    <button class="btn btn-secondary pages" id="prevPageSetBtn"><</button>
+   <button class="btn btn-secondary page-item pages" data-page="1"><<</button>
+    <!-- The rest of your page buttons will be generated by JavaScript -->
+    <button class="btn btn-secondary keyword-button pages page-item" id="nextPageSetBtn">></button>
+    <button class="btn btn-secondary keyword-button pages page-item" id="lastPageBtn">>></button>
+    
+</div>
 	</div>
 </div>
 </body>
+<!-- <div style="margin-bottom: 60px;"></div> -->
 </html>
