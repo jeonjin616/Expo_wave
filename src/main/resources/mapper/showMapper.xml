@@ -29,7 +29,7 @@
 		select * from
 		(
 		select ROW_NUMBER() OVER(ORDER BY show_id DESC) AS show_no, show_id,
-		show_name, show_poster
+		show_name, show_start, show_end, show_poster
 		FROM `show` s2
 		) AS show2
 		WHERE show2.show_no BETWEEN ${start} AND ${end}
@@ -40,7 +40,7 @@
 		select *
 		from (
 		select ROW_NUMBER() OVER(ORDER BY show_id DESC) AS show_no,
-		show_id, show_name, show_poster
+		show_id, show_name, show_start, show_end, show_poster
 		FROM `show` s2
 		) AS show2
 		WHERE show2.show_no BETWEEN #{start} AND #{end}
@@ -51,20 +51,21 @@
 	</select>
 
 
-   <select id="search" resultType="showVO" parameterType="String">
-    SELECT * FROM `show` WHERE show_name LIKE CONCAT('%', #{query}, '%')
-</select>
+	<select id="search" resultType="showVO" parameterType="String">
+		SELECT * FROM `show` WHERE show_name LIKE CONCAT('%', #{query}, '%')
+	</select>
 
-	<select id="searchlist" resultType="showVO" parameterType="page1VO">
-    select *
-    from (
-        select ROW_NUMBER() OVER(ORDER BY show_id DESC) AS show_no,
-        show_id, show_name, show_poster
-        FROM `show` s2
-        WHERE show_name LIKE CONCAT('%', #{query}, '%')
-    ) AS show2
-    WHERE show2.show_no BETWEEN #{start} AND #{end}
-</select>
+	<select id="searchlist" resultType="showVO"
+		parameterType="page1VO">
+		select *
+		from (
+		select ROW_NUMBER() OVER(ORDER BY show_id DESC) AS show_no,
+		show_id, show_name, show_poster
+		FROM `show` s2
+		WHERE show_name LIKE CONCAT('%', #{query}, '%')
+		) AS show2
+		WHERE show2.show_no BETWEEN #{start} AND #{end}
+	</select>
 
 
 </mapper>
