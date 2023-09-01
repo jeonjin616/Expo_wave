@@ -108,6 +108,7 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 더 부드러운 그림자 효과 */
     border: none; /* 기본 테두리 제거 */
     transition: transform 0.3s, box-shadow 0.3s; /* 호버 효과에 애니메이션 적용 */
+     margin-left: 50px;
 }
 
 .card:hover {

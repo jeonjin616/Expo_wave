@@ -31,6 +31,7 @@
 }
 
 .btn-1 {
+margin-left: 20px;
 	background: rgb(6, 14, 131);
 	background: linear-gradient(0deg, rgba(6, 14, 131, 1) 0%,
 		rgba(12, 25, 180, 1) 100%);
@@ -47,17 +48,24 @@
   width: 450px; 
   height: 650px; 
   object-fit: cover;
+  margin-right: -100px;
 }
 
 .display-4 {
   font-size: 2rem; 
   word-wrap: break-word; 
+   margin-left: 5px;
 }
 
 .form-container {
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
+}
+
+.col-md-6 strong {
+  font-size: 1.2rem;
+  margin-left: 20px;
 }
 
 .form-button {
