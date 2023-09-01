@@ -20,6 +20,10 @@
 		<typeAlias type="com.multi.wave.notice.InquiryVO" alias="InquiryVO" />
 		<typeAlias type="com.multi.wave.notice.ReplyVO" alias="ReplyVO" />
 		<typeAlias type="com.multi.wave.my.MyVO" alias="MyVO"></typeAlias>
+		<typeAlias type="com.multi.wave.review.ReviewVO" alias="ReviewVO"></typeAlias>
+		<typeAlias type="com.multi.wave.MainShowVO" alias="MainShowVO"></typeAlias>
+		<typeAlias type="com.multi.wave.MainFestivalVO" alias="MainFestivalVO"></typeAlias>
+		
 		</typeAliases>
 	<mappers>
 		<!-- SQL문 정의하는 파일들의 목록을 지정. 테이블당 한개 사용 -->
@@ -37,6 +41,8 @@
 		<mapper resource="mapper/inquiryMapper.xml" />
 		<mapper resource="mapper/replyMapper.xml" />
 		<mapper resource="mapper/myMapper.xml" />
+		<mapper resource="mapper/reviewMapper.xml" />
+		<mapper resource="mapper/mainMapper.xml" />
 		
 	</mappers>
 </configuration>

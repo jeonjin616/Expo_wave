@@ -111,7 +111,7 @@
     <div class="header-inner">
       <div class="top-row">
         <div class="logo">
-          <a href="mainpage.jsp">
+          <a href="/wave/index.jsp">
           	<img src="http://localhost:8080/wave/resources/img/logo_white.jpg" width="76" height="70">
           </a>
         </div>
@@ -132,12 +132,12 @@
       </div>
       <div class="bottom-row">
         <ul class="menu-bar">
-          <li class="margin1"><a href="list/festivalAll?page=1">축제</a></li>
-          <li class="marginleft"><a href="list/showAll?page=1">공연</a></li>
+          <li class="margin1"><a href="/wave/list/festivalAll?page=1">축제</a></li>
+          <li class="marginleft"><a href="/wave/list/showAll?page=1">공연</a></li>
           <li class="marginleft"><a href="#">Instagram</a></li>
-          <li class="marginleft"><a href="md/MDAll">MD's Pick</a></li>
-          <li class="marginleft"><a href="WEB-INF/views/review/list.jsp">Review</a></li>
-          <li class="marginleft"><a href="notice/notice">고객센터</a></li>
+          <li class="marginleft"><a href="/wave/md/MDAll">MD's Pick</a></li>
+          <li class="marginleft"><a href="/wave/review/list">Review</a></li>
+          <li class="marginleft"><a href="/wave/notice/notice">고객센터</a></li>
           <li class="marginleft"><a href="#">내게 맞는 행사</a></li>
         </ul>
         <div class="search-bar">

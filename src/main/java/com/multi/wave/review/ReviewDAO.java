@@ -24,10 +24,16 @@ public class ReviewDAO {
 		List<ReviewVO> list = my.selectList("review.list");
 		return list;
 	}
+	
 	public ReviewVO one(int review_id) {
 		System.out.println("2>> " + review_id);
 		ReviewVO one = my.selectOne("review.one", review_id);
 		return one;
+	}
+	
+	public void delete(int review_id) {
+		System.out.println("delte >> " + review_id);
+		my.delete("review.delete", review_id);
 	}
 	
 }

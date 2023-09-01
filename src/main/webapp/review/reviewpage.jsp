@@ -8,7 +8,7 @@
 <!--     <link rel="stylesheet" href="header.css"> -->
 </head>
 <body>
-  <jsp:include page="header.jsp" />
+  <jsp:include page="../header.jsp" />
     <div class="box">
         <div class="main" style="padding-top:170px; padding-left: 30px;">
           <a href="review/list">리뷰 전체 보기</a>
