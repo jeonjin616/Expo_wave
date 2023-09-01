@@ -146,9 +146,7 @@
 	width: 100%;
 }
 
-다음은 이미지와 간격을 일정하게 조정하여 동일한 크기로 표시하는 CSS 예시입니다:
-
-.container {
+.inner-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -244,6 +242,7 @@ a {
 
 	<div class="container">
 		<h3>다가오는 축제</h3>
+		<div class="inner-container">
 		<div class="row">
 			<c:forEach var="recommended" items="${recommendedFestival}">
 				<div class="col-md-4">
@@ -256,6 +255,7 @@ a {
 					</a>
 				</div>
 			</c:forEach>
+		</div>
 		</div>
 	</div>
 
