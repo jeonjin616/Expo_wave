@@ -1,6 +1,6 @@
 package com.multi.wave.md;
 
-public class MDImgDTO {
+public class MDImgVO {
 
 	private int MD_img_id;
 	private String MD_img;

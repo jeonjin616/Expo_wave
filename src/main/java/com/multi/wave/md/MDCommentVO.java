@@ -1,6 +1,6 @@
 package com.multi.wave.md;
 
-public class MDCommentDTO {
+public class MDCommentVO {
 
 	private int MD_comment_id;
 	private String MD_comment;

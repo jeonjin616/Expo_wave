@@ -21,22 +21,43 @@
 	</select>
 
 	<select id="all" resultType="festivalVO" parameterType="pageVO">
-		select * from (
-		select ROW_NUMBER() over(order by fsv_id desc) as fsv_no, fsv_id, fsv_name, fsv_orgimg
+		select *
+		from (
+		select ROW_NUMBER() over(order by fsv_id desc) as fsv_no,
+		fsv_id, fsv_name, fsv_start, fsv_end, fsv_orgimg
 		from festival f) festival2
-		where festival2.fsv_no between ${start} and ${end}
+		where
+		festival2.fsv_no between ${start} and ${end}
 
 	</select>
 
-	<select id="list2" resultType="festivalVO" parameterType="pageVO">
+	<select id="list2" resultType="festivalVO"
+		parameterType="pageVO">
 		select * from (
-		select ROW_NUMBER() over(order by fsv_id desc) as fsv_no, fsv_id, fsv_name, fsv_orgimg
-		from festival f) festival2
+		select ROW_NUMBER() over(order by fsv_id
+		desc) as fsv_no, fsv_id, fsv_name, fsv_start, fsv_end, fsv_orgimg
+		from festival f)
+		festival2
 		where festival2.fsv_no between #{start} and #{end}
 	</select>
 
 	<select id="count" resultType="Integer">
 		select count(*) from festival
+	</select>
+
+	<select id="search" resultType="festivalVO"
+		parameterType="String">
+		SELECT * FROM `festival` WHERE fsv_name LIKE CONCAT('%', #{query}, '%')
+	</select>
+
+	<select id="searchlist" resultType="festivalVO"
+		parameterType="pageVO">
+		select * from (
+		select ROW_NUMBER() over(order by fsv_id desc) as fsv_no,
+		fsv_id, fsv_name, fsv_orgimg
+		from festival f
+		WHERE fsv_name LIKE CONCAT('%', #{query}, '%')) AS festival2
+		where festival2.fsv_no between #{start} and #{end}
 	</select>
 </mapper>
 

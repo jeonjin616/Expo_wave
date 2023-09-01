@@ -50,5 +50,8 @@ public class FaqDAO {
 		  return my.selectList("faq.all");
 		}
 
+	public List<FaqVO> searchFaq(String keyword) {
+	    return my.selectList("faq.searchFaq", keyword);
+	  }
 	
 }

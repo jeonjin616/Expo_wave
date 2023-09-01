@@ -1,6 +1,6 @@
 package com.multi.wave.md;
 
-public class MDPostDTO {
+public class MDPostVO {
 
 	private int MD_id;
 	private String MD_title;

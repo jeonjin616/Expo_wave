@@ -8,15 +8,15 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class ReplyDAO {
+    
     @Autowired
     private SqlSession sqlSession;
-
- // ReplyDAO.java 파일 수정 부분
-    public void create(ReplyVO vo) {
-        sqlSession.insert("replyMapper.create", vo);
+    
+    public List<ReplyVO> getRepliesByPostId(int postId) {
+        return sqlSession.selectList("reply.getRepliesByPostId", postId);
     }
-
-    public List<ReplyVO> list(int post_id) {
-        return sqlSession.selectList("replyMapper.list", post_id);
+    
+    public void insertReply(ReplyVO reply) {
+        sqlSession.insert("reply.insertReply", reply);
     }
 }

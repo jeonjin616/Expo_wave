@@ -20,8 +20,8 @@ public class MDImgDAO {
 //	}
 //이게 과연 맞는건지?..
 	@RequestMapping("MDPostMake")
-	public int MDPostinsert(MDImgDTO mdimgDTO) {
-		return mdImgSST.insert("MD.ImgMake", mdimgDTO);
+	public int MDPostinsert(MDImgVO mdimgDTO) {
+		return mdImgSST.insert("MD.imgMake", mdimgDTO);
 	}
 	
 }

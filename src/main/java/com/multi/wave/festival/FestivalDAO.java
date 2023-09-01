@@ -6,6 +6,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.multi.wave.show.Page1VO;
+import com.multi.wave.show.ShowVO;
+
 @Repository
 public class FestivalDAO {
 
@@ -35,6 +38,14 @@ public class FestivalDAO {
 	public int count() {
 		return my.selectOne("festival.count");
 	} 
+	
+
+	public List<FestivalVO> search(String query) {
+	    return my.selectList("festival.search", "%" + query + "%");
+	}
+	public List<FestivalVO> searchlist(PageVO vo) {
+		return my.selectList("festival.searchlist", vo);
+	}
     
 }
 

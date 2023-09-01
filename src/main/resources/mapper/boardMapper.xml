@@ -34,6 +34,9 @@
 		select * from board
 	</select>
 	
+	<select id="searchBoard" parameterType="String" resultType="BoardVO">
+    	SELECT * FROM board WHERE board_title LIKE CONCAT('%', #{query}, '%')
+	</select>
 
 	
 </mapper>
