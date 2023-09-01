@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -47,7 +48,7 @@ public class InquiryController {
 		dto.setImg(savedName);
 
 		dao.insert(dto);
-		redirectAttributes.addFlashAttribute("message", "추가가 완료되었습니다.");
+		redirectAttributes.addFlashAttribute("message", "異붽�媛� �셿猷뚮릺�뿀�뒿�땲�떎.");
 		return "redirect:inqu";
 	}
 
@@ -92,7 +93,7 @@ public class InquiryController {
 		}
 
 		dao.update(dto);
-		redirectAttributes.addFlashAttribute("message", "수정이 완료되었습니다.");
+		redirectAttributes.addFlashAttribute("message", "�닔�젙�씠 �셿猷뚮릺�뿀�뒿�땲�떎.");
 
 		return "redirect:inqu";
 	}
@@ -111,14 +112,14 @@ public class InquiryController {
 	public String one(int id, String title, Model model) {
 		InquiryVO dto = dao.one(id, title);
 		model.addAttribute("dto", dto);
-		return "notice/inqu_one"; // �뜝�룞�삕�쉶 �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕 �뜝�떛紐뚯삕
+		return "notice/inqu_one"; // 占쎈쐻占쎈짗占쎌굲占쎌돳 占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈짗占쎌굲占쎈쐻�뜝占� 占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈짗占쎌굲 占쎈쐻占쎈짗占쎌굲 占쎈쐻占쎈뼓筌뤿슣�굲
 	}
 
 	@RequestMapping("notice/inqu_one2")
 	public String one2(@RequestParam("id") int id, Model model) {
-		InquiryVO dto = dao.oneById(id); // ID�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�눥�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�쉶
+		InquiryVO dto = dao.oneById(id); // ID占쎈쐻占쎈짗占쎌굲 占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈짗占쎌굲占쎈닪占쎈쐻�뜝占� 占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈짗占쎌굲 占쎈쐻占쎈짗占쎌굲占쎌돳
 		model.addAttribute("dto", dto);
-		return "notice/faq_one"; // �뜝�룞�삕�쉶 �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕 �뜝�떛紐뚯삕
+		return "notice/faq_one"; // 占쎈쐻占쎈짗占쎌굲占쎌돳 占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈짗占쎌굲占쎈쐻�뜝占� 占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈짗占쎌굲 占쎈쐻占쎈짗占쎌굲 占쎈쐻占쎈뼓筌뤿슣�굲
 	}
 
 	@RequestMapping("notice/inqu")
@@ -127,5 +128,12 @@ public class InquiryController {
 		model.addAttribute("list", list);
 		return "notice/inqu";
 	}
+	
+	
+	@GetMapping(value = "notice/inqu_ajaxSearch")
+    @ResponseBody
+    public List<InquiryVO> ajaxSearch(@RequestParam("query") String query) {
+        return dao.searchInqu(query);
+    }
 
 }

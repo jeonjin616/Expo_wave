@@ -41,6 +41,7 @@
 		<mapper resource="mapper/inquiryMapper.xml" />
 		<mapper resource="mapper/replyMapper.xml" />
 		<mapper resource="mapper/myMapper.xml" />
+		<mapper resource="mapper/chatBotMapper.xml" />
 		
 	</mappers>
 </configuration>

@@ -6,29 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/replies")
 public class ReplyController {
-    @Autowired
-    private ReplyDAO dao;
 
-    // "/{post_id}" 경로를 추가해줍니다.
-    @PostMapping("/{post_id}")
-    public void create(@PathVariable int post_id, @RequestParam String content) {
-        ReplyVO replyVO = new ReplyVO();
-        replyVO.setPostId(post_id);
-        replyVO.setContent(content);
-        
-        System.out.println(replyVO);
-        dao.create(replyVO); // DB에 추가
+    @Autowired
+    private ReplyDAO replyDAO;
+
+    @GetMapping("notice/replies/{post_id}")
+    public List<ReplyVO> getRepliesByPostId(@PathVariable("post_id") int postId) {
+        return replyDAO.getRepliesByPostId(postId);
     }
 
-    @GetMapping("/{post_id}")
-    public List<ReplyVO> list(@PathVariable int post_id) {
-        return dao.list(post_id);
+    @PostMapping("notice/replies")
+    public void insertReply(@RequestBody ReplyVO reply) {
+        replyDAO.insertReply(reply);
     }
 }

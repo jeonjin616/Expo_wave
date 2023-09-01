@@ -34,6 +34,9 @@
 		select * from inqu
 	</select>
     
+    <select id="searchInqu" parameterType="String" resultType="InquiryVO">
+    	SELECT * FROM inqu WHERE inqu_title LIKE CONCAT('%', #{query}, '%')
+	</select>
     
     
 </mapper>

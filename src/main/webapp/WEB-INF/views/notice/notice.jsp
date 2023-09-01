@@ -1,5 +1,6 @@
 <%@page import="com.multi.wave.notice.BoardDAO"%>
 <%@page import="java.util.List"%>
+<%@ include file="/header.jsp" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -8,6 +9,9 @@
 <head>
   
   <title>고객센터</title>
+  
+
+  
 <style>
 
 body {
@@ -28,7 +32,7 @@ body {
     }
 
     nav {
-      background-color: #f0f0f0; /* 메뉴 선택바 배경색 */
+      background-color: #ffffff; /* 메뉴 선택바 배경색 */
       padding: 1rem;
     }
 
@@ -180,18 +184,48 @@ body {
             margin-bottom: 10px;
         }
 
-        ul li a {
+        /* ul li a {
             text-decoration: none;
             color: #333;
             font-weight: bold;
             font-size: 18px;
-        }
+        } */
 </style>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+	    $("#search-button").click(function(event) {
+	        event.preventDefault();
+	        let query = $("#search-input").val();
+	        $.ajax({
+	          url: '../notice/ajaxSearch',
+	          type: 'GET',
+	          dataType: 'json',  // 추가된 부분
+	          data: { query: query },
+	          success: function(data) {
+	            $('tbody').empty();
+
+	            var tbodyContents = ''; // tbodyContents 변수 초기화
+
+	            data.forEach(function(board) {
+	              tbodyContents += '<tr>';
+	              tbodyContents += '<td class="board_id">' + board.board_id + '</td>';
+	              tbodyContents += '<td class="board_title"><a href="one?id=' + board.board_id + '&title=' + board.board_title + '">' + board.board_title + '</a></td>';
+	              tbodyContents += '<td class="board_create_date">' + board.board_create_date + '</td>';
+	              tbodyContents += '</tr>';
+	            });
+
+	            $('tbody').html(tbodyContents); // tbody의 내용을 변경
+	          }
+	        });
+	      });
+	  });
+</script>
 </head>
 <body>
-    <img src="resources/img/banner1.png"  alt="고객센터" />
-  </header>
+    
+
 
 <header>
   <nav>
@@ -208,6 +242,7 @@ body {
 			<form action="search_result.jsp" method="get">
 				<input type="text" id="search-input" name="query"
 					placeholder="검색어를 입력하세요" autocomplete="off">
+				<input type="hidden" name="from" value="board">
 				<button type="submit" id="search-button">
 				<svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#000000}</style><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
 				</button>
@@ -216,28 +251,9 @@ body {
 
 	
 
-		<script>
-        const searchInput = document.getElementById('search-input');
-        const searchSuggestions = document.getElementById('search-suggestions');
-
-        searchInput.addEventListener('input', async () => {
-            const query = searchInput.value;
-
-            // 서버에 검색어를 보내서 관련된 검색 완성 결과를 가져옴
-            const suggestions = await fetch(`/get_suggestions?query=${query}`);
-            const suggestionsJson = await suggestions.json();
-
-            // 검색 완성 결과를 표시
-            searchSuggestions.innerHTML = '';
-            suggestionsJson.forEach(suggestion => {
-                const suggestionItem = document.createElement('div');
-                suggestionItem.textContent = suggestion;
-                suggestionItem.classList.add('suggestion');
-                searchSuggestions.appendChild(suggestionItem);
-            });
-        });
-    </script>
+		
 </header>
+
 
   <footer>
 	<h1>공지사항</h1>

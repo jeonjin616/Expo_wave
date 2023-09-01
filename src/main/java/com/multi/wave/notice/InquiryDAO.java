@@ -47,5 +47,7 @@ public class InquiryDAO {
 		return my.selectList("inquiry.all");
 	}
 	
-	
+	public List<InquiryVO> searchInqu(String keyword) {
+	    return my.selectList("inquiry.searchInqu", keyword);
+	  }
 }
