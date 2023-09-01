@@ -145,8 +145,8 @@ body {
 						href="<c:url value='/list/festivalAll?page=1'/>">축제</a></li>
 					<li class="marginleft"><a
 						href="<c:url value='/list/showAll?page=1'/>">공연</a></li>
-					<li class="marginleft"><a href="#">Instagram</a></li>
-					<li class="marginleft"><a href="<c:url value='/md/MDAll'/>">MD's
+					<li class="marginleft"><a href="/wave/instar/instarpage?page=1">Instagram</a></li>
+					<li class="marginleft"><a href="<c:url value='/md/MDAll?page=1'/>">MD's
 							Pick</a></li>
 					<li class="marginleft"><a
 						href="<c:url value='/WEB-INF/views/review/list.jsp'/>">Review</a></li>
