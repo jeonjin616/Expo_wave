@@ -14,7 +14,7 @@ public class MDCommentDAO {
 	@Autowired
 	SqlSessionTemplate mdCommentSST;
 
-	//전체 가져오기
+	//댓글 전체 가져오기
 	public List<MDCommentVO> getMDCommentById(int id) {
 		List<MDCommentVO> commentList = mdCommentSST.selectList("MD.getCommentById", id);
 		return commentList;

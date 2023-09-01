@@ -17,7 +17,7 @@
 	</select>
 	
 	<!-- 비밀번호 체크(로그인 시 사용) -->
-	<select id="pwCheck" parameterType="memberVO" resultType="String">
+	<select id="memberLogin" parameterType="memberVO" resultType="String">
 		SELECT mem_pw FROM member WHERE mem_id =#{mem_id}
 	</select>	
 	
