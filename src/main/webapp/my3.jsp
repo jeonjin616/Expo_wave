@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" name="referrer" content="no-referrer-when-downgrade"/>
+<meta charset="utf-8" />
 <link rel="stylesheet" href="resources/css/my/my.css">
-<title>내게 맞는 행사</title>
+<title>내게 맞는 문화전시</title>
 </head>
 <body>
 	<div class="map_wrap">

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="utf-8" name="referrer" content="no-referrer-when-downgrade"/>
-<link rel="stylesheet" href="resources/css/my/my.css">
+<!-- <link rel="stylesheet" href="resources/css/my/my.css"> -->
 <title>내게 맞는 행사</title>
 </head>
 <body>
@@ -27,7 +27,7 @@
 	</div>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4a3357499d511c6afc57df688db86e7f&libraries=services,clusterer"></script>
-	<script type="text/javascript" src="resources/js/jquery-3.6.1.js"></script>
+	<script type="text/javascript" src="/resources/js/jquery-3.6.1.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			$.ajax({

@@ -152,7 +152,9 @@ body {
 						href="<c:url value='/WEB-INF/views/review/list.jsp'/>">Review</a></li>
 					<li class="marginleft"><a
 						href="<c:url value='/notice/notice'/>">고객센터</a></li>
-					<li class="marginleft"><a href="#">내게 맞는 행사</a></li>
+					<li class="marginleft"><a
+						href="my/my2.jsp">내게 맞는 행사</a></li>
+						
 				</ul>
 				<div class="search-bar">
 					<select class="header__searchSelect" id="searchSelect">

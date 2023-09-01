@@ -14,4 +14,8 @@ public class MyService {
     public List<MyVO> list() {
         return myDAO.list();
     }
+    
+    public List<MyVO> list(String find) {
+        return myDAO.list(find);
+    }
 }

@@ -17,5 +17,9 @@ public class MyDAO {
     public List<MyVO> list() {
         return my.selectList("my.list");
     }
-	
+    
+    public List<MyVO> list(String find) {
+        return my.selectList("my.list2", find);
+    }
+    
 }
