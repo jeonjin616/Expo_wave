@@ -51,7 +51,7 @@ public class InstarService {
 		
 		Environment env = ctx.getEnvironment();
 		String key = env.getProperty("instar.accessToken");
-		//https://graph.instagram.com/6503268109710415/media?fields=id,media_type,media_url,permalink,thumbnail_url,username,caption&access_token=IGQWROYnBxODdxb1l4a0JWbTl0UGdkZAGtBRXcweURpYVBLZA3FWZAm43U1JIVl9fd0JFLUs0QzRxUXBUQl8yWEhZASmZAFTjN4TjE3VERabl9Hcmw0dEhKNWdLSVdNTTl6OUY2aW1FVVZAmUVlBUQZDZD
+//		https://graph.instagram.com/6503268109710415/media?fields=id,media_type,media_url,permalink,thumbnail_url,username,caption&access_token=IGQWROYnBxODdxb1l4a0JWbTl0UGdkZAGtBRXcweURpYVBLZA3FWZAm43U1JIVl9fd0JFLUs0QzRxUXBUQl8yWEhZASmZAFTjN4TjE3VERabl9Hcmw0dEhKNWdLSVdNTTl6OUY2aW1FVVZAmUVlBUQZDZD
 		StringBuilder urlBuilder = new StringBuilder("https://graph.instagram.com/6503268109710415/media");
 		urlBuilder.append("?" + URLEncoder.encode("fields", "UTF-8") + "="
 				+ URLEncoder.encode("id,media_type,media_url,permalink,thumbnail_url,username,caption", "UTF-8"));

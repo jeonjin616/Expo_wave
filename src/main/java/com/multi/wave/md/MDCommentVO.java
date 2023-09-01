@@ -7,13 +7,23 @@ public class MDCommentVO {
 	private String MD_comment_create;
 	private String MD_comment_modifi;
 	private int MD_id;
+	private String MD_comment_writer;
+	
 	
 	
 	
 	@Override
 	public String toString() {
-		return "MDContentDTO [MD_comment_id=" + MD_comment_id + ", MD_comment=" + MD_comment + ", MD_comment_create="
-				+ MD_comment_create + ", MD_comment_modifi=" + MD_comment_modifi + ", MD_id=" + MD_id + "]";
+		return "MDCommentVO [MD_comment_id=" + MD_comment_id + ", MD_comment=" + MD_comment + ", MD_comment_create="
+				+ MD_comment_create + ", MD_comment_modifi=" + MD_comment_modifi + ", MD_id=" + MD_id
+				+ ", MD_comment_writer=" + MD_comment_writer + "]";
+	}
+	
+	public String getMD_comment_writer() {
+		return MD_comment_writer;
+	}
+	public void setMD_comment_writer(String mD_comment_writer) {
+		MD_comment_writer = mD_comment_writer;
 	}
 	public int getMD_comment_id() {
 		return MD_comment_id;

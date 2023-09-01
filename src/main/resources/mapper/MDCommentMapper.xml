@@ -10,8 +10,8 @@
 
 	<insert id="commentMake" parameterType="MDCommentVO">
 		insert into md_comment
-		(MD_comment,MD_id)
-		values (#{MD_comment},#{MD_id})
+		(MD_comment,MD_id,MD_comment_writer)
+		values (#{MD_comment},#{MD_id},#{MD_comment_writer})
 	</insert>
 
 	<!-- 사용여부 모름 일단 작성만 해둠 -->
