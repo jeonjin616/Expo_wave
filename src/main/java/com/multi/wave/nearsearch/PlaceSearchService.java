@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 public class PlaceSearchService {
 
     // 구글 플레이스 API 키
-    private static final String apiKey = "";
+    private static final String apiKey = "AIzaSyDpveBLaMS1soWpg_3N-GgxLl5VM73Z--4";
 
     // 카페 검색을 위한 메서드
     public List<Map<String, String>> searchCafes(String address) {

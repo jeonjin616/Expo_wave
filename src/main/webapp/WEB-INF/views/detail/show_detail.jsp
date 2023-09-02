@@ -32,16 +32,16 @@
 
 .btn-1 {
 margin-left: 20px;
-	background: rgb(6, 14, 131);
-	background: linear-gradient(0deg, rgba(6, 14, 131, 1) 0%,
-		rgba(12, 25, 180, 1) 100%);
+	background: #8AAAE5;
+	background: linear-gradient(0deg, #8AAAE5 0%,
+		#8AAAE5 100%);
 	border: none;
 }
 
 .btn-1:hover {
-	background: rgb(0, 3, 255);
-	background: linear-gradient(0deg, rgba(0, 3, 255, 1) 0%,
-		rgba(2, 126, 251, 1) 100%);
+	background: #8AAAE5;
+	background: linear-gradient(0deg, #8AAAE5 0%,
+		#8a8de5 100%);
 }
 
 .custom-img {
@@ -76,9 +76,8 @@ margin-left: 20px;
 	padding: 0;
 	border: none;
 	border-radius: 5px;
-	background: rgb(0, 172, 238);
-	background: linear-gradient(0deg, rgba(0, 172, 238, 1) 0%,
-		rgba(2, 126, 251, 1) 100%);
+	background: #8AAAE5;
+	background: #8AAAE5;
 	position: relative;
 	overflow: hidden;
 	cursor: pointer;
@@ -96,7 +95,7 @@ margin-left: 20px;
 	content: "";
 	right: 0;
 	top: 0;
-	background: rgba(2, 126, 251, 1);
+	background: #8AAAE5;
 	transition: all 0.3s ease;
 }
 
@@ -124,7 +123,7 @@ margin-left: 20px;
 }
 
 .form-button span:hover {
-	color: rgba(2, 126, 251, 1);
+	color: #8AAAE5;
 }
 
 .form-button span:before, .form-button span:after {
@@ -132,7 +131,7 @@ margin-left: 20px;
 	content: "";
 	left: 0;
 	bottom: 0;
-	background: rgba(2, 126, 251, 1);
+	background: #8AAAE5;
 	transition: all 0.3s ease;
 }
 
