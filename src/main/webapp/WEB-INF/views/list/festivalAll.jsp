@@ -218,7 +218,7 @@
     padding: 10px; /* Adjust padding for column gutter */
 }
 
-/* .pagination {
+ .pagination {
     display: flex;
     list-style: none;
     padding: 0;
@@ -240,7 +240,7 @@
     border-radius: 4px;
     padding: 5px 10px;
 }
-*/
+
 .colored-hr {
     border-color: #8AAAE5; 
     border-width: 4px; 

@@ -30,7 +30,10 @@
 							var id = festival.querySelector("fsv_id").textContent;
 							var name = festival.querySelector("fsv_name").textContent;
 							var imgSrc = festival.querySelector("fsv_thumb").textContent;
-
+							if (!imgSrc) {
+							    imgSrc = defaultImageSrc; // Use the default image if no image data is available.
+							}
+							var defaultImageSrc = 'resources/img/thumb_ing.gif';
 							// 이미지를 클릭할 때 이동할 동적 URL 설정
 							var linkUrl = 'festivaldetail/' + id; // 동적 URL 생성
 
@@ -47,12 +50,11 @@
 
 							var festivalInfo = document.createElement("div");
 							festivalInfo.className = "festival-info";
-							festivalInfo.innerHTML = "<div class='festival-name'>"
-									+ name + "</div>";
+							festivalInfo.innerHTML = "<div class='festival-name'>" + name + "</div>";
 
-							linkElement.appendChild(imgElement); 
-							festivalItem.appendChild(imgElement);
-							festivalItem.appendChild(festivalInfo);
+							linkElement.appendChild(imgElement); // <a> 태그 내에 이미지 추가
+							festivalItem.appendChild(linkElement); // 링크된 이미지를 festivalItem에 추가
+							festivalItem.appendChild(festivalInfo); // 페스티벌 정보를 festivalItem에 추가
 
 							festivalContainer.appendChild(festivalItem);
 						}
@@ -80,6 +82,10 @@
 					var id = show.querySelector("show_id").textContent;
 					var name = show.querySelector("show_name").textContent;
 					var imgSrc = show.querySelector("show_poster").textContent;
+					if (!imgSrc) {
+					    imgSrc = defaultImageSrc; // Use the default image if no image data is available.
+					}
+					var defaultImageSrc = 'resources/img/thumb_ing.gif';
 
 					// 이미지를 클릭할 때 이동할 동적 URL 설정
 					var linkUrl = 'showdetail/' + id; // 동적 URL 생성
@@ -116,6 +122,7 @@
 	});
 </script>
 <style>
+
 .banner {
 	position: relative;
 	margin-top: 25px;

@@ -5,155 +5,136 @@
 <head>
 <meta charset="UTF-8">
 <title>Main Page Banner</title>
-<style>
-	* {margin:0; padding:0; box-sizing:border-box;}
-	ul, li {list-style: none;}
-	
-	[name="slide"] {display:none;}
-	
-	.slidebox {
-		max-width: 1550px;
-		width: 100%;
-		margin: 0 auto;
-	}
-	
-	.slidebox img {
-		max-width: 100%;
-	}
-	
-	.slidebox .slidelist {
-		white-space: nowrap;
-		font-size: 0;
-		overflow: hidden;
-	}
-	
-	.slidebox .slideitem {
-		position: relative;
-		display: inline-block;
-		vertical-align: middle;
-		width: 100%;
-		translation: all .15s;
-	}
-	
-	.slidebox .slideitem label {
-		position: absolute;
-		z-index: 1;
-		top: 50%;
-		transform: translateY(-50%);
-		padding: 20px;
-		border-radius: 50%;
-		cursor: pointer;
-	}
-	
-	label.left {
-		left: 50px;
-		background-color: #e9e9e9;
-		background-image: url('resources/img/right.png');
-		background-position: center center;
-		background-size: 50%;
-		background-repeat: no-repeat;
-	}
-	
-	label.right {
-		right: 50px;
-		background-color: #e9e9e9;
-		background-image: url('resources/img/left.png');
-		background-position: center center;
-		background-size: 50%;
-		background-repeat: no-repeat;
-	}
-	
-	[id="slide01"]:checked ~ .slidelist .slideitem {transform:translateX(0); animation: slide01 15s infinite;}
-	[id="slide02"]:checked ~ .slidelist .slideitem {transform:translateX(-100%); animation: slide01 15s infinite;}
-	[id="slide03"]:checked ~ .slidelist .slideitem {transform:translateX(-200%); animation: slide01 15s infinite;}
-	[id="slide04"]:checked ~ .slidelist .slideitem {transform:translateX(-300%); animation: slide01 15s infinite;}
-	
-	@keyframes slide01 {
-		0% {left: 0%;}
-		23% {left: 0%;}
-		25% {left: -100%;}
-		48% {left: -100%;}
-		50% {left: -200%;}
-		73% {left: -200%;}
-		75% {left: -300%;}
-		98% {left: -300%;}
-		100% {left: 0%;}
-	}
-	
-	@keyframes slide02 {
-		0% {left: 0%;}
-		23% {left: 0%;}
-		25% {left: -100%;}
-		48% {left: -100%;}
-		50% {left: -200%;}
-		73% {left: -200%;}
-		75% {left: -100%;}
-		98% {left: -100%;}
-		100% {left: 0%;}
-	}
-	
-	@keyframes slide03 {
-		0% {left: 0%;}
-		23% {left: 0%;}
-		25% {left: -100%;}
-		48% {left: -100%;}
-		50% {left: -200%;}
-		73% {left: -200%;}
-		75% {left: -100%;}
-		98% {left: -100%;}
-		100% {left: 0%;}
-	}
-	
-	@keyframes slide04 {
-		0% {left: 0%;}
-		23% {left: 0%;}
-		25% {left: -100%;}
-		48% {left: -100%;}
-		50% {left: -200%;}
-		73% {left: -200%;}
-		75% {left: -100%;}
-		98% {left: -100%;}
-		100% {left: 0%;}
-	}
-	
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <script type="text/javascript" src="resources/js/jquery-3.6.1.js"></script>
+<script type="text/javascript">
+var shows = [];
+var currentIndex = 0;
+
+function loadBanner() {
+    var showContainer = document.getElementById("showbanner");
+    showContainer.innerHTML = '';
+
+    if (shows.length > 0) {
+        var show = shows[currentIndex];
+        var imgSrc = show.imgSrc;
+        var name = show.name;
+        var linkUrl = show.linkUrl;
+
+        var imgElement = document.createElement("img");
+        imgElement.src = imgSrc;
+        imgElement.alt = name + " 이미지";
+
+        var linkElement = document.createElement("a");
+        linkElement.href = linkUrl;
+        linkElement.appendChild(imgElement);
+
+        showContainer.appendChild(linkElement);
+    }
+}
+
+$(function() {
+    $.ajax({
+        url: "list_show",
+        success: function(data) {
+            console.log("Ajax 요청 성공:", data);
+            var showsData = data.getElementsByTagName("item");
+
+            for (var i = 0; i < showsData.length; i++) {
+                var show = showsData[i];
+                var id = show.querySelector("show_id").textContent;
+                var name = show.querySelector("show_name").textContent;
+                var imgSrc = show.querySelector("show_poster").textContent;
+                var linkUrl = 'showdetail/' + id;
+
+                shows.push({ imgSrc: imgSrc, name: name, linkUrl: linkUrl });
+            }
+
+            loadBanner();
+
+           
+            setInterval(function() {
+                if (shows.length > 0) {
+                    currentIndex = (currentIndex + 1) % shows.length;
+                    loadBanner();
+                }
+            }, 3000); 
+        },
+        error: function(error) {
+            console.error("Ajax 요청 실패:", error);
+        }
+    });
+
+    $("#prevButton").click(function() {
+        if (shows.length > 0) {
+            currentIndex = (currentIndex - 1 + shows.length) % shows.length;
+            loadBanner();
+        }
+    });
+
+    $("#nextButton").click(function() {
+        if (shows.length > 0) {
+            currentIndex = (currentIndex + 1) % shows.length;
+            loadBanner();
+        }
+    });
+});
+    </script>
+    <style>
+   body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #bannerContainer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #showbanner {
+            width: 1000px; 
+            max-height: 100%;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        #showbanner img {
+            width: 100%; 
+            height: 200px; 
+            object-fit: cover; 
+        }
+
+        #prevButton,
+        #nextButton {
+            margin-top: 20px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        #prevButton {
+            margin-right: 20px; 
+        }
+
+        #nextButton {
+            margin-left: 20px; 
+        }
+    </style>
 </style>
-</head>
 <body>
-	<div class="slidebox">
-		<input type="radio" name="slide" id="slide01" checked>
-		<input type="radio" name="slide" id="slide02">
-		<input type="radio" name="slide" id="slide03">
-		<input type="radio" name="slide" id="slide04">
-		<ul class="slidelist">
-			<li class="slideitem">
-				<div>
-					<label for="slide04" class="left"></label>
-					<label for="slide02" class="right"></label>
-					<a><img src="resources/img/banner3.jpg"></a>
-				</div>
-			</li>
-			<li class="slideitem">
-				<div>
-					<label for="slide01" class="left"></label>
-					<label for="slide03" class="right"></label>
-					<a><img src="resources/img/banner2.jpg"></a>
-				</div>
-			</li>
-			<li class="slideitem">
-				<div>
-					<label for="slide02" class="left"></label>
-					<label for="slide04" class="right"></label>
-					<a><img src="resources/img/banner1.png"></a>
-				</div>
-			</li>
-			<li class="slideitem">
-				<div>
-					<label for="slide03" class="left"></label>
-					<label for="slide01" class="right"></label>
-					<a><img src="resources/img/banner4.jpg"></a>
-				</div>
-			</li>
-		</ul>
-	</div>
+    <div id="bannerContainer">
+        <button id="prevButton"><i class="fas fa-chevron-left"></i></button>
+        <div id="showbanner">
+            <!-- The banner content will be loaded here -->
+        </div>
+        <button id="nextButton"><i class="fas fa-chevron-right"></i></button>
+    </div>
 </body>
 </html>
