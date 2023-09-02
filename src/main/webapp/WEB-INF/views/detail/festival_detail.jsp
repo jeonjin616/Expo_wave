@@ -45,10 +45,10 @@ margin-left: 20px;
 }
 
 .custom-img {
-  width: 400px; 
-  height: 300px; 
+  width: 450px; 
+  height: 375px; 
   object-fit: cover;
-  margin-right: -100px;
+  margin-right: -150px;
 }
 
 .display-4 {
@@ -173,7 +173,7 @@ margin-left: 5px;
 }
 
 .col-md-4 img {
-  width: 100%;
+  width: 400px;
   height: 200px;
   object-fit: cover;
 }
