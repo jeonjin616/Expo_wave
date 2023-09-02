@@ -173,7 +173,7 @@ margin-left: 20px;
 }
 
 .col-md-4 img {
-  width: 100%;
+  width: 400px;
   height: 200px;
   object-fit: cover;
 }
