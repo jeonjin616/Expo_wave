@@ -261,8 +261,8 @@ h3 {
 			</div>
 		</div>
 	<br>
-		<h3>'${query}' 에 대한 축제 검색 결과 : ${count}</h3>
-
+		<h3>'${query}' 에 대한 축제 검색 결과 </h3>
+<%-- : ${count} --%>
 
 
 		<hr class="colored-hr">
