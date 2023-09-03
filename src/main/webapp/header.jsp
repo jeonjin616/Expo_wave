@@ -155,7 +155,7 @@ body {
 					<li class="marginleft"><a href="<c:url value='/md/MDAll?page=1'/>">MD's
 							Pick</a></li>
 					<li class="marginleft"><a
-						href="<c:url value='/WEB-INF/views/review/list.jsp'/>">Review</a></li>
+						href="<c:url value='/review/list'/>">Review</a></li>
 					<li class="marginleft"><a
 						href="<c:url value='/notice/notice'/>">고객센터</a></li>
 					<li class="marginleft"><a

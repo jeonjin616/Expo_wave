@@ -7,12 +7,12 @@
 <title>MainPage</title>
 <script type="text/javascript" src="resources/js/jquery-3.6.1.js"></script>
 <script type="text/javascript">
-	$(function() {
-		// 문서가 준비되면 이 코드 블록이 실행됩니다.
 
 		// Ajax 요청을 보냅니다.
-		$
-				.ajax({
+		$(function() {
+			// 문서가 준비되면 이 코드 블록이 실행됩니다.
+
+			$.ajax({
 					url : "list_festival",
 					success : function(data) {
 						// Ajax 요청이 성공하면 이 코드 블록이 실행됩니다.
@@ -177,6 +177,19 @@ p {
 </style>
 </head>
 <body>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 	<%@ include file="header.jsp"%>
 	<div class="banner"></div>
 	<%@ include file="banner.jsp"%>
