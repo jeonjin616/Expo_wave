@@ -31,6 +31,18 @@
 		SELECT mem_id FROM member WHERE mem_name = #{mem_name} and mem_email = #{mem_email}
 	</select>
 	
+	<!-- 네이버 소셜로그인 이메일을 통한 아이디 유무 체크 -->
+	<select id="naverEmailChk" parameterType="String" resultType="String">
+		SELECT mem_id FROM member WHERE mem_email = #{mem_email}
+	</select>
+	
+	<!-- 네이버 소셜 로그인 회원가입 -->
+	<insert id="naverInsert" parameterType="memberVO"> <!-- resultType="int" 가 생략되어있음. int가 기본값 -->
+		INSERT INTO member VALUES(#{mem_num}, #{mem_id}, #{mem_name}, #{mem_pw},
+								  #{mem_nickname},#{mem_email},#{mem_birth},#{mem_zipcode},
+								  #{mem_addr1},#{mem_addr2},#{mem_phone1},#{mem_phone2},#{mem_phone3},
+								  #{mem_joy1},#{mem_joy2},#{mem_img})
+	</insert>
 </mapper>
 
 

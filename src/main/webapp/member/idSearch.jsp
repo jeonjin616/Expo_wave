@@ -13,12 +13,12 @@
 	<h1>아이디 찾기</h1>
 	<div >
 			<input type="button" value="아이디 찾기"></button>
-			<input type="button" onclick="location.href='비밀번호찾기'" value="비밀번호 찾기"></button>
+			<input type="hidden" onclick="location.href='비밀번호찾기'" value="비밀번호 찾기"></button>
 	</div>
 	<div class="content">
-		<div class="radioSelectBox">
+		<div class="radioSelectBox" >
 			<div class="radioPhoenBox">
-				<div id="radioPhoneWrap">
+				<!-- <div id="radioPhoneWrap">
 					<input type="radio" name="select" checked><span class="AuthSelectText">휴대전화</span>
 				</div>
 				<div>
@@ -31,7 +31,7 @@
 					</div>
 					<input type="text" id="" placeholder="인증번호" >
 				</div>
-			<hr>
+			<hr> -->
 			<div class="radioEmailBox">
 				<div id="radioEmailWrap">
 					<input type="radio" name="select" checked><span class="AuthSelectText">이메일</span>
