@@ -257,6 +257,21 @@
     border-radius: 4px;
     padding: 5px 10px;
 }
+
+.colored-hr {
+    border-color: #8AAAE5; /* 원하는 색상을 여기에 지정하세요. */
+    border-width: 4px; /* 원하는 두께를 여기에 지정하세요. */
+}
+
+.keyword-button.pages {
+    color: #FEFEFE; 
+}
+
+
+.btn.pages {
+    background-color: #8AAAE5; 
+     border: none;
+}
 </style>
 </head>
 <body>
@@ -291,10 +306,10 @@
     <button type="submit">필터 적용</button>
 </form> -->
 
-		<h3>공연 목록 : ${count}</h3>
+		<%-- <h3>공연 목록 : ${count}</h3> --%>
 
 		
-		<hr color="white">
+		<hr class="colored-hr">
 		<div class="row2">
 			<c:forEach items="${list2}" var="show" varStatus="status">
 				<div class="col-md-3">
@@ -316,7 +331,7 @@
 				</div>
 			</c:forEach>
 		</div>
-		<hr color="white">
+		<hr class="colored-hr">
 	<div class="pagination mt-3 d-flex justify-content-center">
     <button class="btn btn-secondary pages" data-page="1"><<</button>
     <button class="btn btn-secondary pages" id="prevPageSetBtn"><</button>

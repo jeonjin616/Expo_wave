@@ -64,7 +64,7 @@ body {
 
 /* Search Bar */
 .search-bar {
-	background-color: #f1f1f1;
+	background-color: #8AAAE5;
 	border-radius: 20px;
 	display: flex;
 	align-items: center;
@@ -74,7 +74,7 @@ body {
 
 .search-bar input {
 	border: none;
-	background-color: #f1f1f1;
+	background-color: #8AAAE5;
 	padding: 6px 15px;
 	width: 100%;
 }
@@ -85,11 +85,17 @@ body {
 
 .header__searchSelect{
 	border: none;
-	background-color: #f1f1f1;
+	background-color: #8AAAE5;
 	padding: 6px 8px;
 	width: 100%;
 }
-
+#searchSelect,
+#searchInput {
+    color: #FEFEFE;
+}
+#searchInput::placeholder {
+    color: #FEFEFE; 
+}
 /* Menu Bar */
 .menu-bar {
 	list-style: none;
@@ -149,7 +155,7 @@ body {
 					<li class="marginleft"><a href="<c:url value='/md/MDAll?page=1'/>">MD's
 							Pick</a></li>
 					<li class="marginleft"><a
-						href="<c:url value='/WEB-INF/views/review/list.jsp'/>">Review</a></li>
+						href="<c:url value='/review/list'/>">Review</a></li>
 					<li class="marginleft"><a
 						href="<c:url value='/notice/notice'/>">고객센터</a></li>
 					<li class="marginleft"><a
