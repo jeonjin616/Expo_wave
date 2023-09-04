@@ -47,4 +47,14 @@ public class MemberDAO {
 	public String knowId(MemberVO vo) {
 		return my.selectOne("member.knowId", vo);
 	}
+	
+	// 네이버 소셜 로그인 이메일 체크
+	public String naverEmailChk(String mem_email) {
+		return my.selectOne("member.naverEmailChk", mem_email);
+	}
+	
+	// 네이버 소셜 로그인 회원가입
+	public int naverInsert(MemberVO vo) {
+		return my.insert("member.naverInsert", vo);
+	}
 }
