@@ -27,12 +27,22 @@
 	margin-top: 10px;
 }
 
+.custom-button {
+  background-color: #8AAAE5 !important; /* 버튼 배경 색 */
+  color: #FEFEFE !important; /* 버튼 내부 텍스트 색 */
+  border: none !important; /* 테두리 없애기 */
+}
+
 #newProfileImage {
 	display: none;
 }
 
-#changeImageBtn, #saveImageBtn {
+#changeImageBtn {
 	margin-top: 5px;
+}
+
+#changePasswordBtn {
+	margin-top: 10px;
 }
 </style>
 
@@ -51,9 +61,9 @@
 							alt="프로필 사진" class="profile-image">
 					</div>
 					<div class="new-profile-image-container">
-						<label for="newProfileImage" class="btn btn-secondary">이미지
-							변경</label> <input type="file" name="newProfileImage" id="newProfileImage">
-						<button type="button" class="btn btn-success" id="saveImageBtn">저장</button>
+						<label for="newProfileImage" class="btn btn-secondary custom-button">이미지 변경</label>
+						<input type="file" name="newProfileImage" id="newProfileImage">
+						<button type="button" class="btn btn-success custom-button" id="saveImageBtn">저장</button>
 					</div>
 					<div class="form-group">
 						<label for="memberId">아이디:</label> <input type="text"
@@ -73,7 +83,7 @@
 
 					<div class="form-group">
 						<label>비밀번호:</label>
-						<button type="button" class="btn btn-primary"
+						<button type="button" class="btn btn-primary custom-button"
 							id="changePasswordBtn">비밀번호 변경</button>
 					</div>
 					<input type="hidden" name="oldPassword" id="oldPassword"> <input
@@ -82,7 +92,7 @@
 
 				<div class="text-center mt-3">
 					<a href="http://localhost:8989/wave/notice/notice"
-						class="btn btn-info">고객센터</a>
+						class="btn btn-info custom-button">고객센터</a>
 				</div>
 				<br>
 				<div id="notification" class="mt-3" style="display: none;"></div>
@@ -96,7 +106,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="passwordPopupLabel">비밀번호 변경</h5>
-					<button type="button" class="close" data-dismiss="modal"
+					<button type="button" class="close custom-button" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -108,9 +118,9 @@
 						type="password" class="form-control" id="inputNewPassword">
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
+					<button type="button" class="btn btn-secondary custom-button"
 						data-dismiss="modal">취소</button>
-					<button type="button" class="btn btn-primary" id="confirmChange">확인</button>
+					<button type="button" class="btn btn-primary custom-button" id="confirmChange">확인</button>
 				</div>
 			</div>
 		</div>
