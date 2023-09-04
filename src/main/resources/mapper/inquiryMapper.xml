@@ -3,12 +3,11 @@
 <mapper namespace="inquiry">
 
 
-    <insert id="insert" parameterType="InquiryVO"
-		useGeneratedKeys="true" keyProperty="inqu_id">
-		insert into inqu values
-		(null,#{inqu_title},#{inqu_question},null,NOW(),#{img})
+    <insert id="insert" parameterType="InquiryVO" useGeneratedKeys="true" keyProperty="inqu_id">
+    	insert into inqu (inqu_title, inqu_question, inqu_create_date, img, writer)
+    	values (#{inqu_title}, #{inqu_question}, NOW(), #{img}, #{writer})
 	</insert>
-
+	
 	<delete id="delete" parameterType="InquiryVO">
 		delete from inqu where inqu_id = #{inqu_id}
 	</delete>
@@ -30,8 +29,8 @@
 		select * from inqu where inqu_id=#{inqu_id}
 	</select>
 
-	<select id="all" resultType="InquiryVO">
-		select * from inqu
+	<select id="listByWriter" resultType="InquiryVO" parameterType="string">
+    	SELECT * FROM inqu WHERE writer = #{writer}
 	</select>
     
     <select id="searchInqu" parameterType="String" resultType="InquiryVO">
