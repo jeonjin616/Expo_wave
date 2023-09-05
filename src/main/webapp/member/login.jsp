@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ include file="/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,8 +30,8 @@
 			<br><br><br>
 			<div class="option" style="text-align: center;">
 				<a href="idSearch.jsp"><span>아이디 찾기</span></a>
-				<span>/</span>
-				<a href=""><span>비밀번호 찾기</span></a>
+				<!-- <span>/</span>
+				<a href=""><span>비밀번호 찾기</span></a> -->
 			</div>
 			<div style="text-align: center;">
 				<br>
