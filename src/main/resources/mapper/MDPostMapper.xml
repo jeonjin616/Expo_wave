@@ -6,8 +6,7 @@
 	<select id="postsAll" resultType="mdPostVO" parameterType="PagingVO">
 		select * from
 		(select ROW_NUMBER() over(order by MD_id desc) as MD_row_number, b.*
-		from md_posts b)
-		md_posts2
+		from md_posts b) md_posts2
 		where md_posts2.MD_row_number between #{start} and #{end}
 	</select>
 
@@ -35,7 +34,8 @@
 		set
 		MD_title = #{MD_title},
 		MD_content = #{MD_content},
-		MD_modifi = now()
+		MD_modifi = now(),
+		MD_post_Thumbnail = #{MD_post_Thumbnail}
 		where MD_id = #{MD_id}
 	</update>
 

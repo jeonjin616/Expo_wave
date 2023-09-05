@@ -1,11 +1,44 @@
 /* MD/mdDetailstyle.css */
+form {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.MDTitle input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+#MD_post_Thumbnail {
+    display: inline-block;
+    margin-bottom: 10px;
+    max-width: 100%; /* 이미지 가로 크기 최대 값 */
+    height: auto;
+}
 
+/* 이미지 업로드 미리보기 이미지 스타일 */
+
+/* common.css */
+.MDContent input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
 /* 전체 페이지 스타일 */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #ffffff;
+  background-color: #f8f9fa;
 }
 
 /* 제목 스타일 */
@@ -21,51 +54,13 @@ img {
 
 /* 버튼 스타일 */
 button {
-  background-color: #8AAAE5;
+  background-color: #007bff;
   border: none;
   color: white;
   padding: 10px 20px;
   cursor: pointer;
   border-radius: 5px;
   font-size: 16px;
-  border-radius: 3px; /* 완만한 꼭지점을 위해 더 큰 값으로 조절 */
-}
-
-.custom-button {
-    background-color: #8AAAE5;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 3px; /* 완만한 꼭지점을 위해 더 큰 값으로 조절 */
-}
-.cancelUpdateButton{
-	background-color: #8AAAE5;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 3px; /* 완만한 꼭지점을 위해 더 큰 값으로 조절 */
-}
-.cancelUpdateButton:hover{
-	    background-color: #0056b3;
-	
-}
-
-.custom-button:hover {
-    background-color: #0056b3;
-}
-.showUpdateCommentButton{
-	background-color: #8AAAE5;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 3px; /* 완만한 꼭지점을 위해 더 큰 값으로 조절 */
-}
-
-.showUpdateCommentButton:hover {
-    background-color: #0056b3;
 }
 
 button:hover {

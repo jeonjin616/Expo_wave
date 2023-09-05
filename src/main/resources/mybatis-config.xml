@@ -22,6 +22,7 @@
 		<typeAlias type="com.multi.wave.notice.ReplyVO" alias="ReplyVO" />
 		<typeAlias type="com.multi.wave.my.MyVO" alias="MyVO"></typeAlias>
 		<typeAlias type="com.multi.wave.md.PagingVO" alias="PagingVO"></typeAlias>
+		<typeAlias type="com.multi.wave.review.ReviewVO" alias="ReviewVO"></typeAlias>
 	</typeAliases>
 
 	<mappers>
@@ -41,6 +42,7 @@
 		<mapper resource="mapper/inquiryMapper.xml" />
 		<mapper resource="mapper/replyMapper.xml" />
 		<mapper resource="mapper/myMapper.xml" />
+		<mapper resource="mapper/reviewMapper.xml" />
 		
 	</mappers>
 </configuration>

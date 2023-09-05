@@ -97,7 +97,6 @@
     		<p class="date">작성일 ${dto.board_create_date}</p>
     		<p class="link"><a href="javascript:void(0);" onclick="deleteConfirmation(${dto.board_id})">삭제</a> &nbsp; &nbsp; <a href="edit?board_id=${dto.board_id}">수정</a></p>
 			<hr color="grey">
-			
 			<br>
 			<img src="<c:url value='/resources/upload/${dto.img}' />" alt="이미지를 불러오는데 실패하였습니다."> <br> <br> 
 			${dto.board_content}<br> <br> 
