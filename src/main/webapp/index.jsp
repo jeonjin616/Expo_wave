@@ -47,16 +47,18 @@
 							var imgElement = document.createElement("img");
 							imgElement.src = imgSrc;
 							imgElement.alt = name + " 이미지";
-
+							
 							var festivalInfo = document.createElement("div");
 							festivalInfo.className = "festival-info";
 							festivalInfo.innerHTML = "<div class='festival-name'>" + name + "</div>";
 
+							var breakElement = document.createElement("br");
 							linkElement.appendChild(imgElement); // <a> 태그 내에 이미지 추가
 							festivalItem.appendChild(linkElement); // 링크된 이미지를 festivalItem에 추가
+							festivalItem.appendChild(breakElement); // 이미지 다음에 <br> 추가
 							festivalItem.appendChild(festivalInfo); // 페스티벌 정보를 festivalItem에 추가
-
-							festivalContainer.appendChild(festivalItem);
+							
+							festivalContainer.appendChild(festivalItem); // festivalItem을 festivalContainer에 추가
 						}
 
 					},
@@ -65,7 +67,7 @@
 						console.error("Ajax 요청 실패:", error);
 					}
 				});
-
+			
 		$.ajax({
 			url : "list_show",
 			success : function(data) {
@@ -100,12 +102,13 @@
 					var imgElement = document.createElement("img");
 					imgElement.src = imgSrc;
 					imgElement.alt = name + " 이미지";
-
+					
 					var showInfo = document.createElement("div");
 					showInfo.className = "show-info";
 					showInfo.innerHTML = "<div class='show-name'>" + name
 							+ "</div>";
 
+					var breakElement = document.createElement("br");
 					linkElement.appendChild(imgElement); // <a> 태그 내에 이미지 추가
 					showItem.appendChild(linkElement); // 링크된 이미지를 showItem에 추가
 					showItem.appendChild(showInfo); // 페스티벌 정보를 showItem에 추가
@@ -122,82 +125,90 @@
 	});
 </script>
 <style>
-
-.banner {
-	position: relative;
-	margin-top: 25px;
-}
-
-.banner img {
-	width: 100%; /* 이미지 너비 조정 */
-	height: auto; /* 이미지 높이 자동 조정 */
-}
-
-p {
-	font-size: 18px;
-	font-weight: bold;
-	color: #393939;
-	padding-top: 30px;
-	padding-left: 180px;
-	/* margin: auto;
-		transition: padding-left 0.5s ease; */
-}
-
-@media ( max-width : 1200px) {
-	p {
-		padding-left: 27px;
+	.banner {
+		position: relative;
+		margin-top: 25px;
 	}
-}
-
-.recommend {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	margin: 0;
-}
-
-.festival-item, .show-item {
-	width: calc(20% - 10px);
-	height: 200px;
-	margin: 5px;
-	text-align: center;
-	padding: 0 10px;
-}
-
-.festival-item img, .show-item img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
-
-p {
-	margin-bottom: 20px;
-	margin-top: 20px;
-}
+	
+	.banner img {
+		width: 100%; /* 이미지 너비 조정 */
+		height: auto; /* 이미지 높이 자동 조정 */
+	}
+	
+	p {
+		font-size: 18px;
+		font-weight: bold;
+		color: #393939;
+		padding-top: 30px;
+		padding-left: 180px;
+		/* margin: auto;
+			transition: padding-left 0.5s ease; */
+	}
+	
+	@media ( max-width : 1200px) {
+		p {
+			padding-left: 27px;
+		}
+	}
+	
+	.recommend {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		margin: 0;
+	}
+	
+	.festival-item, .show-item {
+		width: calc(20% - 10px);
+		height: 200px;
+		margin: 5px;
+		text-align: center;
+		padding: 0 10px;
+	}
+	
+	.festival-item img, .show-item img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		border: 1px solid #ccc; /* 얇은 회색 테두리 */
+    border-radius: 10px; /* 둥근 모서리 반경 */
+    padding: 5px; /* 이미지 주위의 공백 (선택사항) */
+	}
+	
+	p {
+		font-family: Arial, sans-serif;
+		margin-bottom: 20px;
+		padding-left: 100px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #393939;
+    /* margin: auto;
+        transition: padding-left 0.5s ease; */
+	}
+	
+	.recommend fsv {
+		margin-top: 20px;
+	}
+	
+	.recommend show {
+		margin-top: 70px;
+		margin-bottom: 70px;
+	}
+	
 </style>
 </head>
-<body>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<%@ include file="header.jsp"%>
-	<div class="banner"></div>
-	<%@ include file="banner.jsp"%>
-	<section>
-		<p>추천하는 Hot한 축제</p>
-		<div class="recommend fsv" id="festivalContainer"></div>
-		<p>추천하는 Hot한 공연</p>
-		<div class="recommend show" id="showContainer"></div>
-	</section>
-</body>
+	<body>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		<%@ include file="header.jsp"%>
+		<div class="banner"></div>
+		<%@ include file="banner.jsp"%>
+		<section>
+			<p>추천하는 Hot한 축제</p>
+			<div class="recommend fsv" id="festivalContainer"></div>
+			<br>
+			<p>추천하는 Hot한 공연</p>
+			<div class="recommend show" id="showContainer"></div>
+			<br>
+		</section>
+	</body>
 </html>
