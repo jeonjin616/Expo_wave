@@ -177,19 +177,6 @@ p {
 </style>
 </head>
 <body>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
 	<%@ include file="header.jsp"%>
 	<div class="banner"></div>
 	<%@ include file="banner.jsp"%>
