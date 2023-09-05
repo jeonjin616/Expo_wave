@@ -101,7 +101,6 @@
     		</c:if>
     		</p>
 			<hr color="grey">
-			
 			<br>
 			<img src="<c:url value='../resources/upload/${dto.img}' />" alt="이미지를 불러오는데 실패하였습니다."> <br> <br> 
 			${dto.board_content}<br> <br> 
