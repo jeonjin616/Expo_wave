@@ -2,6 +2,7 @@
 <%@page import="com.multi.wave.notice.FaqDAO"%>
 <%@page import="java.util.List"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="/header.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -26,7 +27,7 @@ header img {
 }
 
 nav {
-	background-color: #f0f0f0; /* 메뉴 선택바 배경색 */
+	
 	padding: 1rem;
 }
 
@@ -51,7 +52,7 @@ nav a {
 }
 
 nav a:hover {
-	color: #000; /* 마우스 오버 시 글자색 변경 */
+	color: #8AAAE5; /* 마우스 오버 시 글자색 변경 */
 	border-bottom-color: #000; /* 마우스 오버 시 밑줄 생김 */
 }
 
@@ -67,12 +68,9 @@ footer {
 
 h1 {
 	text-align: left;
+	padding-left: 45px;  /* 왼쪽 간격 20px 추가 */
 }
 
-hr {
-	border: 1px solid black;
-	box-shadow: none;
-}
 
 table {
 	width: 70%;
@@ -80,14 +78,21 @@ table {
 	border-collapse: collapse;
 }
 
-th, td {
-	border: 2px solid black;
-	padding: 8px;
-	text-align: left;
-}
-
+/* 헤더 부분의 선 두꺼움 */
 th {
 	background-color: transparent;
+	border-bottom: 2px solid black; /* 선 두꺼움 */
+}
+
+td {
+	border-bottom: 0.1px solid black; /* 실선 */
+}
+/* 나머지 테이블 셀의 선 설정 */
+th, td {
+	padding: 8px;
+	text-align: left;
+	border-left: none;  /* 세로 선 없앰 */
+	border-right: none; /* 세로 선 없앰 */
 }
 
 .faq_id {
@@ -111,7 +116,7 @@ th {
 	right: 20px;
 	padding: 10px 20px;
 	font-size: 16px;
-	background-color: #007bff;
+	background-color: #8AAAE5;
 	color: #fff;
 	border: none;
 	cursor: pointer;
@@ -120,10 +125,10 @@ th {
 }
 
 .post-button:hover {
-	background-color: #0056b3;
+	transform: translateY(-5px); /* 마우스 호버 시 약간 위로 올라가는 효과 */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 강화 */
 }
 
-/* 검색창 스타일 */
 .search-container {
 	text-align: center;
 	margin: 50px auto;
@@ -165,7 +170,8 @@ th {
 .search-results {
 	text-align: center;
 	margin: 50px auto;
-}
+}  
+
 
 ul {
 	list-style-type: none;
@@ -176,19 +182,48 @@ ul li {
 	margin-bottom: 10px;
 }
 
-ul li a {
+/*  ul li a {
 	text-decoration: none;
 	color: #333;
 	font-weight: bold;
 	font-size: 18px;
-}
+}  */
 </style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+	    $("#search-button").click(function(event) {
+	        event.preventDefault();
+	        let query = $("#search-input").val();
+	        $.ajax({
+	          url: '../notice/faq_ajaxSearch',
+	          type: 'GET',
+	          dataType: 'json',  // 추가된 부분
+	          data: { query: query },
+	          success: function(data) {
+	            $('tbody').empty();
+	            
+	            let tbodyContents = '';
+
+	            data.forEach(function(faq) {
+	              tbodyContents += '<tr>';
+	              tbodyContents += '<td class="faq_id">' + faq.faq_id + '</td>';
+	              tbodyContents += '<td class="faq_title"><a href="faq_one?id=' + faq.faq_id + '&title=' + faq.faq_title + '">' + faq.faq_title + '</a></td>';
+	              tbodyContents += '<td class="faq_create_date">' + faq.faq_create_date + '</td>';
+	              tbodyContents += '</tr>';
+	            });
+
+	            $('tbody').html(tbodyContents);
+	          }
+	        });
+	      });
+	  });
+</script>
 </head>
 <body>
-	<header>
-		<!-- 이미지 배너에 고객센터 글씨를 포함한 예제 이미지를 사용합니다. -->
-		<img src="resources/img/banner1.png" alt="고객센터" />
-	</header>
+
+	
 
 	<header>
 		<nav>
@@ -205,73 +240,49 @@ ul li a {
 				<input type="text" id="search-input" name="query"
 					placeholder="검색어를 입력하세요" autocomplete="off">
 				<button type="submit" id="search-button">
-					<svg xmlns="http://www.w3.org/2000/svg" height="1.5em"
-						viewBox="0 0 512 512">
-						<!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-						<style>
-svg {
-	fill: #000000
-}
-</style>
-						<path
-							d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" /></svg>
+				<svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#000000}</style><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
 				</button>
 			</form>
 		</div>
 
-	</header>
+	
 
-	<!-- <script>
-        const searchInput = document.getElementById('search-input');
-        const searchSuggestions = document.getElementById('search-suggestions');
-
-        searchInput.addEventListener('input', async () => {
-            const query = searchInput.value;
-
-            // 서버에 검색어를 보내서 관련된 검색 완성 결과를 가져옴
-            const suggestions = await fetch(`/get_suggestions?query=${query}`);
-            const suggestionsJson = await suggestions.json();
-
-            // 검색 완성 결과를 표시
-            searchSuggestions.innerHTML = '';
-            suggestionsJson.forEach(suggestion => {
-                const suggestionItem = document.createElement('div');
-                suggestionItem.textContent = suggestion;
-                suggestionItem.classList.add('suggestion');
-                searchSuggestions.appendChild(suggestionItem);
-            });
-        });
-    </script> -->
+		
+</header>
 
 	<footer>
 		<h1>자주하는 질문</h1>
-		<hr>
-		<br>
+		<br><br>
 		<table>
-			<tr>
-				<th class="faq_id">번호</th>
-				<!-- 클래스 적용 -->
-				<th class="faq_title">제목</th>
-				<!-- 클래스 적용 -->
-				<th class="faq_create_date">작성일자</th>
-				<!-- 클래스 적용 -->
-			</tr>
-			<c:forEach var="faq" items="${list}">
+			<thead>
 				<tr>
-					<td class="faq_id">${faq.faq_id}</td>
+					<th class="faq_id">번호</th>
 					<!-- 클래스 적용 -->
-					<td class="faq_title"><a
-						href="faq_one?id=${faq.faq_id}&title=${faq.faq_title}">${faq.faq_title}</a></td>
+					<th class="faq_title">제목</th>
 					<!-- 클래스 적용 -->
-					<td class="faq_create_date">${faq.faq_create_date}</td>
+					<th class="faq_create_date">작성일자</th>
 					<!-- 클래스 적용 -->
-
 				</tr>
-			</c:forEach>
+			</thead>
+			
+			<tbody>
+				<c:forEach var="faq" items="${list}">
+					<tr>
+						<td class="faq_id">${faq.faq_id}</td>
+						<!-- 클래스 적용 -->
+						<td class="faq_title"><a href="faq_one?id=${faq.faq_id}&title=${faq.faq_title}">${faq.faq_title}</a></td>
+						<!-- 클래스 적용 -->
+						<td class="faq_create_date">${faq.faq_create_date}</td>
+						<!-- 클래스 적용 -->
+
+					</tr>
+				</c:forEach>
+			</tbody>
 
 		</table>
-
+	<c:if test="${loginMember eq 'admin'}">
 		<a href="faq_write_post.jsp" class="post-button">게시글 작성하기</a>
+	</c:if>
 	</footer>
 </body>
 </html>

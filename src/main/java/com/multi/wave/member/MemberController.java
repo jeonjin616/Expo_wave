@@ -36,7 +36,7 @@ public class MemberController {
 	// 회원 가입 
 	@RequestMapping("member/insert")
 	public String insert(MemberVO vo){
-		vo.setMem_email(vo.getMemEmail()+vo.getDomainList());
+		vo.setMem_email(vo.getMemEmail() + '@' + vo.getDomainList());
 		System.out.println(vo); 	// 암호화 전 vo 출력
 		service.join(vo);
 		System.out.println(vo);		// 암호화 후 vo 출력
@@ -85,7 +85,7 @@ public class MemberController {
 	// PathVariable : URI에 있는 변수의 값을 가져옴
 	@RequestMapping("member/idSearchRes/{mem_email}/{mem_name}")
 	public String idSearchRes(@PathVariable("mem_email") String mem_email,
-			@PathVariable("mem_name") String mem_name, Model model) {
+							  @PathVariable("mem_name") String mem_name, Model model) {
 	// RequestParam 버전
 //	@RequestMapping("member/idSearchRes")
 //	public String idSearchRes(@RequestParam("mem_name") String mem_name,
@@ -97,5 +97,29 @@ public class MemberController {
 		model.addAttribute("memInfo", memInfo);
 		return "member/idSearchResult";
 	}
+	
+	// 네이버 소셜 로그인 가입 유무 체크
+	@RequestMapping("member/naverEmailChk")
+	@ResponseBody
+	public String naverEmailChk(@RequestParam("mem_email") String mem_email,
+			HttpSession session) {
+		System.out.println(mem_email);
+		String mem_id = service.naverEmailChk(mem_email);
+		String result = "not exist";
+		if(mem_id != null) {
+			result = "exist";
+			session.setAttribute("loginMember", mem_id);
+		}
+		return result;
+	}
+	
+	// 네이버 소셜 로그인을 통한 회원가입(추가정보 기입)
+	@RequestMapping("member/naverInsert")
+	public String naverInsert(MemberVO vo){
+		service.naverJoin(vo);
+		return "redirect:../index.jsp";
+	}
+	
+	
 	
 }

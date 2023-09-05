@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="/header.jsp"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <html>
 <head>
@@ -148,7 +149,9 @@
 .mb-3 {
     margin-top: 20px;
     margin-bottom: 60px;
+    
 }
+
 .card {
     width: 250px;
     height: 380px;
@@ -156,6 +159,7 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 더 부드러운 그림자 효과 */
     border: none; /* 기본 테두리 제거 */
     transition: transform 0.3s, box-shadow 0.3s; /* 호버 효과에 애니메이션 적용 */
+    margin-left: 50px;
 }
 
 .card:hover {
@@ -214,32 +218,47 @@
     padding: 10px; /* Adjust padding for column gutter */
 }
 
-.pagination {
-	display: flex;
-	list-style: none;
-	padding: 0;
-	margin: 0;
+ .pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .pagination .page-item {
-	margin: 0 5px;
+    margin: 0 5px;
 }
 
 .pagination .page-link {
     text-decoration: none;
-    color: #333; /* Change the color to your desired value */
-}
+    color: #8AAAE5;
+} 
 
 .pagination .active {
-    background-color: #0511f7; /* Your chosen active page background color */
-    color: white;
+    background-color: #8AAAE5; 
+    color: #FEFEFE;
     border-radius: 4px;
     padding: 5px 10px;
 }
+
+.colored-hr {
+    border-color: #8AAAE5; 
+    border-width: 4px; 
+}
+
+.keyword-button.pages {
+    color: #FEFEFE; 
+}
+
+
+.btn.pages {
+    background-color: #8AAAE5; 
+     border: none;
+}
 </style>
 </head>
+	
 <body>
-	<jsp:include page="/header.jsp" />
 	<!-- <div style="margin-bottom: 20px;"></div> -->
 	<div class="mb-3">
 		<div class="container">
@@ -256,8 +275,8 @@
 			</div>
 		</div> 
 			<br>
-			<h3>축제 목록 : ${count}</h3>
-			<hr color="white">
+			<%-- <h3>축제 목록 : ${count}</h3> --%>
+			 <hr class="colored-hr">
 			<div class="row2">
 				<c:forEach items="${list2}" var="festival" varStatus="status">
 					<div class="col-md-3">
@@ -278,7 +297,7 @@
 					</div>
 				</c:forEach>
 			</div>
-			<hr color="white">
+			<hr class="colored-hr">
 			<div class="pagination mt-3 d-flex justify-content-center">
 				<!-- Previous 10 pages button -->
 				<button class="btn btn-secondary pages" data-page="1"><<</button>

@@ -8,11 +8,11 @@
 		<typeAlias type="com.multi.wave.member.MemberVO" alias="memberVO"></typeAlias>
 		<typeAlias type="com.multi.wave.showdetail.ShowDetailVO" alias="ShowDetailVO"></typeAlias>
 		<typeAlias type="com.multi.wave.festivaldetail.FestivalDetailVO" alias="FestivalDetailVO"></typeAlias>
-      	<typeAlias type="com.multi.wave.md.MDPostVO" alias="mdPostVO"></typeAlias>
-      	<typeAlias type="com.multi.wave.md.MDImgVO" alias="mdImgVO"></typeAlias>      	
-      	<typeAlias type="com.multi.wave.md.MDCommentVO" alias="mdCommentVO"></typeAlias>
-      	<typeAlias type="com.multi.wave.instar.InstarVO" alias="instarVO"></typeAlias>
-      	<typeAlias type="com.multi.wave.festival.FestivalVO" alias="festivalVO"></typeAlias>
+    <typeAlias type="com.multi.wave.md.MDPostVO" alias="mdPostVO"></typeAlias>
+    <typeAlias type="com.multi.wave.md.MDImgVO" alias="mdImgVO"></typeAlias>      	
+    <typeAlias type="com.multi.wave.md.MDCommentVO" alias="mdCommentVO"></typeAlias>
+    <typeAlias type="com.multi.wave.instar.InstarVO" alias="instarVO"></typeAlias>
+    <typeAlias type="com.multi.wave.festival.FestivalVO" alias="festivalVO"></typeAlias>
 		<typeAlias type="com.multi.wave.show.ShowVO" alias="showVO"></typeAlias>
 		<typeAlias type="com.multi.wave.festival.PageVO" alias="pageVO"></typeAlias>
 		<typeAlias type="com.multi.wave.show.Page1VO" alias="page1VO"></typeAlias>
@@ -21,6 +21,9 @@
 		<typeAlias type="com.multi.wave.notice.InquiryVO" alias="InquiryVO" />
 		<typeAlias type="com.multi.wave.notice.ReplyVO" alias="ReplyVO" />
 		<typeAlias type="com.multi.wave.my.MyVO" alias="MyVO"></typeAlias>
+		<typeAlias type="com.multi.wave.review.ReviewVO" alias="ReviewVO"></typeAlias>
+		<typeAlias type="com.multi.wave.MainShowVO" alias="MainShowVO"></typeAlias>
+		<typeAlias type="com.multi.wave.MainFestivalVO" alias="MainFestivalVO"></typeAlias>
 		<typeAlias type="com.multi.wave.md.PagingVO" alias="PagingVO"></typeAlias>
 		<typeAlias type="com.multi.wave.review.ReviewVO" alias="ReviewVO"></typeAlias>
 	</typeAliases>
@@ -32,10 +35,10 @@
 		<mapper resource="mapper/showDetailMapper.xml" />
 		<mapper resource="mapper/festivalDetailMapper.xml" />
 		<mapper resource="mapper/MDPostMapper.xml" />
-      	<mapper resource="mapper/MDImgMapper.xml"/>
-      	<mapper resource="mapper/MDCommentMapper.xml"/>
-      	<mapper resource="mapper/InstarMapper.xml"/>
-      	<mapper resource="mapper/festivalMapper.xml" />
+    <mapper resource="mapper/MDImgMapper.xml"/>
+    <mapper resource="mapper/MDCommentMapper.xml"/>
+    <mapper resource="mapper/InstarMapper.xml"/>
+    <mapper resource="mapper/festivalMapper.xml" />
 		<mapper resource="mapper/showMapper.xml" />
 		<mapper resource="mapper/boardMapper.xml" />
 		<mapper resource="mapper/faqMapper.xml" />
@@ -43,6 +46,7 @@
 		<mapper resource="mapper/replyMapper.xml" />
 		<mapper resource="mapper/myMapper.xml" />
 		<mapper resource="mapper/reviewMapper.xml" />
-		
+		<mapper resource="mapper/mainMapper.xml" />
+	  <mapper resource="mapper/chatBotMapper.xml" />
 	</mappers>
 </configuration>

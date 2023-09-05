@@ -26,6 +26,7 @@
 }
 
 #center {
+	width: 100%; /* 혹은 다른 값을 설정 */
 	position: relative;
 }
 
@@ -69,8 +70,81 @@ a:hover {
 #center .back:hover {
 	color: red;
 }
+.reply-item {
+  border-top: 1px solid #ccc; /* 위쪽에 실선 추가 */
+  padding: 10px;
+  background-color: #ffffff;
+  width: 100%;  /* 너비를 300픽셀로 설정 */
+  text-align: left;
+}
+
+.reply-item:first-child {
+  border-top: none; /* 첫 번째 댓글의 위쪽 경계 제거 */
+}
+
+.reply-item:last-child {
+  border-bottom: 1px solid #ccc; /* 아래쪽에 실선 추가 */
+}
+
+#reply-write-section, #reply-list {
+	margin-top: 50px; /* 원하는 간격으로 조절 가능 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#reply-content, #reply-btn {
+    margin-bottom: 10px;
+}
+
+#reply-write-section {
+    margin-top: 130px; /* 원하는 간격으로 조절 가능 */
+    /* 기존 스타일들 */
+}
+.reply-item .writer, .reply-item .reg_date {
+  font-size: 0.7em; /* 원하는 크기로 설정 */
+}
+.reply-item .content {
+  font-size: 1.0em; /* 원하는 크기로 설정 */
+}
+#reply-write-section {
+  display: flex;
+  flex-direction: row; /* 가로로 나열 */
+  align-items: center;
+  justify-content: space-between;
+}
+
+#reply-write-section textarea {
+  flex: 6; /* 4의 비율로 차지 */
+}
+
+#reply-write-section button {
+  flex: 0.4; /* 1의 비율로 차지 */
+}
+#reply-write-section textarea, #reply-write-section button {
+  height: 100px; /* 세로 크기도 동일하게 설정 */
+}
+
+.reply-item .edit {
+    font-size: 0.6em;  /* 글자 크기 */
+    
+}
+
+.reply-item .delete {
+    font-size: 0.6em;  /* 글자 크기 */
+    margin-left: 15px; /* 간격 */
+}
 </style>
 <script>
+
+var mem_id = "${member.mem_id}";
+
+function formatDate(timestamp) {
+    const date = new Date(timestamp);
+    return date.toLocaleDateString('ko-KR') + ' ' + date.toLocaleTimeString('ko-KR', { hour12: false });
+}
+
     function deleteConfirmation(inquId) {
         var confirmDelete = confirm("삭제하시겠습니까?");
         if (confirmDelete) {
@@ -78,39 +152,119 @@ a:hover {
         }
     }
     $(document).ready(function(){
+        var postId = ${dto.inqu_id}; // 게시물 번호를 가져옴
+
         function loadReplies(){
-          $.ajax({
-            url: "/replies/" + ${inqu.inqu_id}, 
-            method: "GET",
-            success: function(data) {
-              $("#reply-list").empty();
-              data.forEach(function(reply) {
-                var replyHtml = '<div class="reply-item">' +
-                                  '<div class="writer">' + reply.writer + '</div>' +
-                                  '<div class="content">' + reply.content + '</div>' +
-                                '</div>';
-                $("#reply-list").append(replyHtml);
-              });
-            }
-          });
+            $.ajax({
+                url: '../notice/replies/' + postId, // 게시물 번호를 URL에 포함
+                method: "GET",
+                dataType: "json", 
+                success: function(replyData) {
+                    $("#reply-list").empty();
+                    console.log(replyData)
+                    
+                     for(let i=0; i<replyData.length; i++){
+                    	 			$('#reply-list').append(
+                     
+									'<div class="reply-item">'+
+									'<div class="writer">' + replyData[i].writer + '</div>' +
+                                      '<div class="content">' + replyData[i].content + '</div>' +
+                                      '<div class="writer reg_date">' + formatDate(replyData[i].reg_date) + '</div>'+
+                                      '<a class="edit" href="javascript:editReply(' + replyData[i].reply_id + ', \'' + replyData[i].content + '\')">수정</a>' +
+                                      '<a class="delete" href="javascript:deleteReply(' + replyData[i].reply_id + ')">삭제</a>' +
+                                    '</div>'
+                    	 			)
+                     }
+                }
+            
+            });
         }
 
         $("#reply-btn").click(function(){
-          var content = $("#reply-content").val();
-          $.ajax({
-            url: "/replies",
-            method: "POST",
-            contentType: "application/json",
-            data: JSON.stringify({ post_id: ${inqu.inqu_id}, content: content }),
-            success: function() {
-              $("#reply-content").val('');
-              loadReplies();
-            }
-          });
+            var content = $("#reply-content").val();
+            
+            var dataToSend = {
+                post_id: ${dto.inqu_id}, // 게시물 번호를 가져옴
+                content: content,
+                writer: '${mem_id}'
+            };
+
+            $.ajax({
+                url: '../notice/replies',
+                method: "POST",
+                dataType: 'text',
+                data:(dataToSend),
+                success: function() {
+                    console.log("Successfully posted.");
+                    $("#reply-content").val(''); // textarea 내용 지우기
+                    location.reload()
+                    /* loadReplies(); */
+                },
+                error: function(xhr, status, error) {
+                    console.log("Error: " + error);
+                    console.log("Status: " + status);
+                    console.log(xhr);
+                }
+            });
         });
 
         loadReplies();
     });
+    
+    function editReply(replyId, currentContent) {
+        var $replyItem = $(`#reply-item-${replyId}`);
+        var newContentHtml = `
+            <textarea id="edit-content-${replyId}">${currentContent}</textarea>
+            <button onclick="updateReply(${replyId})">저장</button>
+        `;
+
+        $replyItem.find('.content').html(newContentHtml);
+    }
+
+    
+    function updateReply(replyId) {
+        var newContent = $(`#edit-content-${replyId}`).val();
+
+        $.ajax({
+            url: '/updateReply', // 서버로 전송할 URL, 실제 URL에 맞게 수정해주세요.
+            type: 'POST', // HTTP 메서드
+            data: {
+                replyId: replyId,
+                content: newContent
+            },
+            success: function(response) {
+                // 업데이트 성공 시 로직 (예: 페이지 새로고침 또는 댓글 리스트 다시 불러오기)
+                location.reload();
+            },
+            error: function(error) {
+                // 업데이트 실패 시 로직
+                console.error('댓글 업데이트 실패', error);
+            }
+        });
+    }
+    
+    function deleteReply(replyId) {
+        var confirmDelete = confirm("댓글을 삭제하시겠습니까?");
+        if (confirmDelete) {
+            $.ajax({
+                url: '../notice/deleteReply/' + replyId, // 서버의 URL과 일치
+                method: "DELETE",
+                dataType: 'text',
+                contentType: 'application/json; charset=utf-8',
+                success: function() {
+                    console.log("Successfully deleted.");
+                    location.reload();
+                },
+                error: function(xhr, status, error) {
+                    console.log("Error: " + error);
+                    console.log("Status: " + status);
+                    console.log(xhr);
+                }
+            });
+        }
+    }
+
+    
 </script>
 
 </head>
@@ -121,26 +275,30 @@ a:hover {
 			<p class="title">${dto.inqu_title}</p>
 			<p class="date">작성일 ${dto.inqu_create_date}</p>
 			<p class="link">
+			
 				<a href="javascript:void(0);"
 					onclick="deleteConfirmation(${dto.inqu_id})">삭제</a> &nbsp; &nbsp; <a
 					href="inqu_edit?inqu_id=${dto.inqu_id}">수정</a>
+			
 			</p>
 			<hr color="grey">
-			<br> <img src="<c:url value='/resources/upload/${dto.img}' />"
+			<br> <img src="<c:url value='../resources/upload/${dto.img}' />"
 				alt="이미지를 불러오는데 실패하였습니다."> <br> <br>
 			${dto.inqu_question}<br> <br>
 			<p class="back">
 				<a href="inqu">이전페이지</a>
 			</p>
+			
+
+			<div id="reply-write-section">
+    			<textarea id="reply-content" placeholder="댓글을 작성해주세요."></textarea>
+    			<button id="reply-btn">등록</button>
+			</div>
+			<div id="reply-list"></div>
 
 		</div>
 	</div>
 
-	<div id="reply-write-section">
-    	<textarea id="reply-content" placeholder="댓글을 작성해주세요."></textarea>
-    	<button id="reply-btn">댓글 작성</button>
-	</div>
-	<div id="reply-list"></div>
 
 </body>
 </html>

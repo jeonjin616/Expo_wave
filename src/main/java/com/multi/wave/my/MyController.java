@@ -17,4 +17,13 @@ public class MyController {
 	public List<MyVO> my() {
 		return myService.list();
 	}
+	
+	@RequestMapping("my2")
+	@ResponseBody
+	public List<MyVO> my2(String find) {
+		System.out.println(find);
+		List<MyVO> list = myService.list(find);
+		System.out.println(list.size());
+		return list; 
+	}
 }

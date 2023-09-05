@@ -65,7 +65,7 @@
 							${vo.review_content} <br>
 						</c:forEach> --%>
 			</table> <br>
-			<a href="review/review_insert.jsp">리뷰 등록하기</a> <br>
+			<a href="../review/review_insert.jsp">리뷰 등록하기</a> <br>
 		</div>
 	</body>
 </html>

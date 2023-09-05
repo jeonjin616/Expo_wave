@@ -26,4 +26,10 @@ public class ReviewService {
 	public ReviewVO one(int review_id) {
 		return reviewDAO.one(review_id);
 	}
+	
+	public void delete(int review_id) {
+		reviewDAO.delete(review_id);
+	}
+	
+	
 }

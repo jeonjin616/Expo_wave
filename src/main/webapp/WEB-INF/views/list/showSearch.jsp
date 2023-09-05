@@ -96,7 +96,6 @@
 .body {
     margin-bottom: 40px; /* Add margin at the bottom of the entire page */
 }
-
 .mb-3 {
     margin-top: 20px;
     margin-bottom: 60px;
@@ -108,6 +107,7 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 더 부드러운 그림자 효과 */
     border: none; /* 기본 테두리 제거 */
     transition: transform 0.3s, box-shadow 0.3s; /* 호버 효과에 애니메이션 적용 */
+     margin-left: 50px;
 }
 
 .card:hover {
@@ -133,6 +133,14 @@
     align-items: center;
     text-align: center;
 }
+.bold-text {
+      font-size: 1.1rem; /* Adjust the value as needed */
+    font-weight: bold; 
+}
+
+.smaller-text {
+    font-size: 0.9rem; /* Adjust the value as needed */
+}
 
 .card-title {
     font-size: 1rem;
@@ -147,7 +155,7 @@
     display: flex;
     flex-wrap: wrap;
     margin: -10px; /* Adjust margin for row gutter */
-    justify-content: flex-start; /* 카드 간격을 고정으로 */
+    justify-content: flex-start; /* 카드 간격을 유지하면서 최대한 평균 분배 */
     margin-bottom: 40px; /* 하단에 여백 주기  */
     margin-top: 40px; /* 상단에 여백 주기  */
 }
@@ -179,6 +187,22 @@
     border-radius: 4px;
     padding: 5px 10px;
 }
+.colored-hr {
+    border-color: #8AAAE5; /* 원하는 색상을 여기에 지정하세요. */
+    border-width: 4px; /* 원하는 두께를 여기에 지정하세요. */
+}
+h3 {
+    color: #8AAAE5; /* 원하는 색상을 여기에 지정하세요. */
+}
+.keyword-button.pages {
+    color: #FEFEFE; 
+}
+
+
+.btn.pages {
+    background-color: #8AAAE5; 
+     border: none;
+}
 </style>
 </head>
 <body>
@@ -199,9 +223,9 @@
 			</div>
 		</div>
 		<br>
-		<h3>'${query}' 에 대한 공연 검색 결과 : ${count}</h3>
+		<h3>'${query}' 에 대한 공연 검색 결과 </h3>
 
-		<hr color="white">
+		<hr class="colored-hr">
 		<div class="row2">
 			<c:forEach items="${showSearch}" var="show" varStatus="status">
 				<div class="col-md-3">
@@ -213,15 +237,15 @@
 									alt="${show.show_name}" class="card-img-top">
 							</div>
 							<div class="card-body">
-								<h5 class="card-title truncate">${show.show_name}</h5>
-								<h5 class="card-title">${show.show_start} ~ ${show.show_end}</h5>
+								<h5 class="card-title truncate bold-text">${show.show_name}</h5>
+								<h5 class="card-title smaller-text">${show.show_start} ~ ${show.show_end}</h5>
 							</div>
 						</a>
 					</div>
 				</div>
 			</c:forEach>
 		</div>
-		<hr color="white">
+		<hr class="colored-hr">
 		
    <div class="pagination mt-3 d-flex justify-content-center">
 	 <c:choose>

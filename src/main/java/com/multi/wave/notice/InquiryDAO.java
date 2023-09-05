@@ -43,9 +43,11 @@ public class InquiryDAO {
 	    return my.selectOne("inquiry.oneById", inqu_id);
 	}
 
-	public List<InquiryVO> list() {
-		return my.selectList("inquiry.all");
+	public List<InquiryVO> listByWriter(String writer) {
+	    return my.selectList("inquiry.listByWriter", writer);
 	}
 	
-	
+	public List<InquiryVO> searchInqu(String keyword) {
+	    return my.selectList("inquiry.searchInqu", keyword);
+	  }
 }

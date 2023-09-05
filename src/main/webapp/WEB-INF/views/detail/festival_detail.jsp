@@ -31,33 +31,41 @@
 }
 
 .btn-1 {
-	background: rgb(6, 14, 131);
-	background: linear-gradient(0deg, rgba(6, 14, 131, 1) 0%,
-		rgba(12, 25, 180, 1) 100%);
+margin-left: 20px;
+	background: #8AAAE5;
+	background: linear-gradient(0deg, #8AAAE5 0%,
+		#8AAAE5 100%);
 	border: none;
 }
 
 .btn-1:hover {
-	background: rgb(0, 3, 255);
-	background: linear-gradient(0deg, rgba(0, 3, 255, 1) 0%,
-		rgba(2, 126, 251, 1) 100%);
+	background: #8AAAE5;
+	background: linear-gradient(0deg, #8AAAE5 0%,
+		#8a8de5 100%);
 }
 
 .custom-img {
-  width: 400px; 
-  height: 300px; 
+  width: 450px; 
+  height: 650px; 
   object-fit: cover;
+  margin-right: -100px;
 }
 
 .display-4 {
   font-size: 2rem; 
   word-wrap: break-word; 
+   margin-left: 5px;
 }
 
 .form-container {
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
+}
+
+.col-md-6 strong {
+  font-size: 1.2rem;
+  margin-left: 20px;
 }
 
 .form-button {
@@ -68,9 +76,8 @@
 	padding: 0;
 	border: none;
 	border-radius: 5px;
-	background: rgb(0, 172, 238);
-	background: linear-gradient(0deg, rgba(0, 172, 238, 1) 0%,
-		rgba(2, 126, 251, 1) 100%);
+	background: #8AAAE5;
+	background: #8AAAE5;
 	position: relative;
 	overflow: hidden;
 	cursor: pointer;
@@ -88,7 +95,7 @@
 	content: "";
 	right: 0;
 	top: 0;
-	background: rgba(2, 126, 251, 1);
+	background: #8AAAE5;
 	transition: all 0.3s ease;
 }
 
@@ -116,7 +123,7 @@
 }
 
 .form-button span:hover {
-	color: rgba(2, 126, 251, 1);
+	color: #8AAAE5;
 }
 
 .form-button span:before, .form-button span:after {
@@ -124,7 +131,7 @@
 	content: "";
 	left: 0;
 	bottom: 0;
-	background: rgba(2, 126, 251, 1);
+	background: #8AAAE5;
 	transition: all 0.3s ease;
 }
 
@@ -146,6 +153,61 @@
 	width: 100%;
 }
 
+.form-button:before {
+  height: 0%;
+  width: 2px;
+}
+
+.form-button:after {
+  width: 0%;
+  height: 2px;
+}
+
+.form-button:hover {
+  background: transparent;
+  box-shadow: none;
+}
+
+.form-button:hover:before {
+  height: 100%;
+}
+
+.form-button:hover:after {
+  width: 100%;
+}
+
+.form-button span:hover {
+  color: rgba(2, 126, 251, 1);
+}
+
+.form-button span:before,
+.form-button span:after {
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: 0;
+  background: rgba(2, 126, 251, 1);
+  transition: all 0.3s ease;
+}
+
+.form-button span:before {
+  width: 2px;
+  height: 0%;
+}
+
+.form-button span:after {
+  width: 0%;
+  height: 2px;
+}
+
+.form-button span:hover:before {
+  height: 100%;
+}
+
+.form-button span:hover:after {
+  width: 100%;
+}
+
 .inner-container {
   display: flex;
   flex-wrap: wrap;
@@ -165,7 +227,7 @@
 }
 
 .col-md-4 img {
-  width: 100%;
+  width: 400px;
   height: 200px;
   object-fit: cover;
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class ReviewController {
@@ -14,8 +15,9 @@ public class ReviewController {
 	ReviewService reviewService;
 	
 	@RequestMapping("review/insert")
-	public void insert(ReviewVO reviewVO) {
+	public String insert(ReviewVO reviewVO) {
 		reviewService.insert(reviewVO);
+		return "redirect:/review/list";
 	}
 	
 	
@@ -34,10 +36,17 @@ public class ReviewController {
 		
 	}
 	
-	
-	
 	@RequestMapping("review/update")
-	public void update(ReviewVO reviewVO) {
+	public String update(ReviewVO reviewVO) {
 		reviewService.update(reviewVO);
+		return "redirect:/review/one?review_id=" + reviewVO.getReview_id();
+	}
+	
+	@RequestMapping("review/delete")
+	@ResponseBody
+	public String delete(int review_id) {
+		reviewService.delete(review_id);
+		return "delete okay";
+		//return "redirect:/review/list";
 	}
 }

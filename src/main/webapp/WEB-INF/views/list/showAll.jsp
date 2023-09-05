@@ -177,6 +177,7 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 더 부드러운 그림자 효과 */
     border: none; /* 기본 테두리 제거 */
     transition: transform 0.3s, box-shadow 0.3s; /* 호버 효과에 애니메이션 적용 */
+     margin-left: 50px;
 }
 
 .card:hover {
@@ -256,6 +257,21 @@
     border-radius: 4px;
     padding: 5px 10px;
 }
+
+.colored-hr {
+    border-color: #8AAAE5; /* 원하는 색상을 여기에 지정하세요. */
+    border-width: 4px; /* 원하는 두께를 여기에 지정하세요. */
+}
+
+.keyword-button.pages {
+    color: #FEFEFE; 
+}
+
+
+.btn.pages {
+    background-color: #8AAAE5; 
+     border: none;
+}
 </style>
 </head>
 <body>
@@ -290,10 +306,10 @@
     <button type="submit">필터 적용</button>
 </form> -->
 
-		<h3>공연 목록 : ${count}</h3>
+		<%-- <h3>공연 목록 : ${count}</h3> --%>
 
 		
-		<hr color="white">
+		<hr class="colored-hr">
 		<div class="row2">
 			<c:forEach items="${list2}" var="show" varStatus="status">
 				<div class="col-md-3">
@@ -315,7 +331,7 @@
 				</div>
 			</c:forEach>
 		</div>
-		<hr color="white">
+		<hr class="colored-hr">
 	<div class="pagination mt-3 d-flex justify-content-center">
     <button class="btn btn-secondary pages" data-page="1"><<</button>
     <button class="btn btn-secondary pages" id="prevPageSetBtn"><</button>

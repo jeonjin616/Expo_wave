@@ -16,14 +16,18 @@ input {
 
 .login {
 	width: 400px;
-	height: 500px;
+	/* height: 440px; */
+	height: 375px;
 	margin: 0 auto;
 	margin-top: 100px;
 	margin-bottom: 100px;
+	text-align: center;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+	border-radius: 21px;
 }
 
 .loginHeader {
-	background-color: #0093AF;
+	background-color: #8AAAE5;
 	border-top-left-radius: 1.25em;
 	border-top-right-radius: 1.25em;
 	color: #fff;
@@ -47,7 +51,21 @@ input {
 
 .option a {
 	font-size: 12px;
-	color: #4F97A3;
+	color: #8AAAE5;
 	cursor: pointer;
 	text-decoration: none;
+}
+
+.btn-1 {
+margin-left: 5px;
+	background: #8AAAE5;
+	background: linear-gradient(0deg, #8AAAE5 0%,
+		#8AAAE5 100%);
+	border: none;
+}
+
+.btn-1:hover {
+	background: #8AAAE5;
+	background: linear-gradient(0deg, #8AAAE5 0%,
+		#8a8de5 100%);
 }
