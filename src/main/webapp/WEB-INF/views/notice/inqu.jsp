@@ -84,7 +84,7 @@ nav a {
 }
 
 nav a:hover {
-	color: #000; /* 마우스 오버 시 글자색 변경 */
+	color: #8AAAE5; /* 마우스 오버 시 글자색 변경 */
 	border-bottom-color: #000; /* 마우스 오버 시 밑줄 생김 */
 }
 
@@ -100,28 +100,32 @@ footer {
 
 h1 {
 	text-align: left;
+	padding-left: 45px;  /* 왼쪽 간격 20px 추가 */
 }
 
-hr {
-	border: 1px solid black;
-	box-shadow: none;
-}
+
 
 table {
 	width: 70%;
 	margin: 0 auto;
 	border-collapse: collapse;
-	text-align: center; /* 이 부분을 추가 */
 }
 
-th, td {
-	border: 2px solid black;
-	padding: 8px;
-	text-align: left;
-}
-
+/* 헤더 부분의 선 두꺼움 */
 th {
 	background-color: transparent;
+	border-bottom: 2px solid black; /* 선 두꺼움 */
+}
+
+td {
+	border-bottom: 0.1px solid black; /* 실선 */
+}
+/* 나머지 테이블 셀의 선 설정 */
+th, td {
+	padding: 8px;
+	text-align: left;
+	border-left: none;  /* 세로 선 없앰 */
+	border-right: none; /* 세로 선 없앰 */
 }
 
 .inqu_id {
@@ -145,7 +149,7 @@ th {
 	right: 20px;
 	padding: 10px 20px;
 	font-size: 16px;
-	background-color: #007bff;
+	background-color: #8AAAE5;
 	color: #fff;
 	border: none;
 	cursor: pointer;
@@ -154,7 +158,8 @@ th {
 }
 
 .post-button:hover {
-	background-color: #0056b3;
+	transform: translateY(-5px); /* 마우스 호버 시 약간 위로 올라가는 효과 */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 강화 */
 }
 
 /* 검색창 스타일 */
@@ -243,12 +248,13 @@ ul li {
 			</form>
 		</div>
 
+
+
 </header>
 
 	<footer>
 		<h1>회원 1:1 문의</h1>
-		<hr>
-		<br>
+		<br><br>
 		<table>
 			<thead>
 				<tr>
@@ -262,17 +268,31 @@ ul li {
 			</thead>
 			
 			<tbody>
-				<c:forEach var="inqu" items="${list}">
-					<tr>
-						<td class="inqu_id">${inqu.inqu_id}</td>
-						<td class="inqu_title"><a href="inqu_one?id=${inqu.inqu_id}&title=${inqu.inqu_title}">${inqu.inqu_title}</a></td>
-						<td class="inqu_create_date">${inqu.inqu_create_date}</td>
-					</tr>
-				</c:forEach>
+    			<c:forEach var="inqu" items="${list}">
+        			<c:set var="currentWriter" value="${inqu.writer}" />
+        			<c:choose>
+            			<c:when test="${loginMember eq 'admin'}">
+                			<tr>
+                    			<td class="inqu_id">${inqu.inqu_id}</td>
+                    			<td class="inqu_title"><a href="inqu_one?id=${inqu.inqu_id}&title=${inqu.inqu_title}">${inqu.inqu_title}</a></td>
+                    			<td class="inqu_create_date">${inqu.inqu_create_date}</td>
+                			</tr>
+            			</c:when>
+            			<c:when test="${loginMember eq currentWriter}">
+                			<tr>
+                    			<td class="inqu_id">${inqu.inqu_id}</td>
+                    			<td class="inqu_title"><a href="inqu_one?id=${inqu.inqu_id}&title=${inqu.inqu_title}">${inqu.inqu_title}</a></td>
+                    			<td class="inqu_create_date">${inqu.inqu_create_date}</td>
+                			</tr>
+            			</c:when>
+        			</c:choose>
+    			</c:forEach>
 			</tbody>
+		
 		</table>
-
+	<c:if test="${not empty loginMember and loginMember ne 'admin'}">
 		<a href="inquiry_write_post.jsp" class="post-button">게시글 작성하기</a>
+	</c:if>
 	</footer>
 </body>
 </html>

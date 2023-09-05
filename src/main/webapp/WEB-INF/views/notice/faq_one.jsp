@@ -94,12 +94,16 @@
 			
 		    <p class="title">${dto.faq_title}</p>
     		<p class="date">작성일 ${dto.faq_create_date}</p>
-    		<p class="link"> <a href="javascript:void(0);" onclick="deleteConfirmation(${dto.faq_id})">삭제</a> &nbsp; &nbsp; <a href="faq_edit?faq_id=${dto.faq_id}">수정</a></p>
+    		<p class="link"> 
+    		<c:if test="${loginMember eq 'admin'}">
+    		<a href="javascript:void(0);" onclick="deleteConfirmation(${dto.faq_id})">삭제</a> &nbsp; &nbsp; <a href="faq_edit?faq_id=${dto.faq_id}">수정</a>
+    		</c:if>
+    		</p>
 
 			<hr color="grey">
 				
 				<br>
-					<img src="<c:url value='/resources/upload/${dto.img}' />" alt="이미지를 불러오는데 실패하였습니다."> <br> <br>
+					<img src="<c:url value='../resources/upload/${dto.img}' />" alt="이미지를 불러오는데 실패하였습니다."> <br> <br>
 					${dto.faq_content}<br> <br>
 					
 						<p class="back"><a href="faq" >이전페이지</a></p>

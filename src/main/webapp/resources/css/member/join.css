@@ -1,0 +1,105 @@
+@charset "UTF-8";
+
+body {
+	line-height: 1.5;
+	margin: 0;
+	min-block-size: 100vh;
+	padding: 5vmin;
+}
+
+h1 {
+	color: #8AAAE5;
+	font-size: 2em;
+	margin-left: 200px;
+}
+
+input[type="text"], input[type="password"], select, input[type="date"] {
+	border: none;
+	margin: 0;
+	padding: 0.5em;
+	border-radius: 0.1875em;
+	width: 100%;
+}
+
+input[type="button"] {
+	border: none;
+	background-color: #8AAAE5;
+	color: white;
+	padding: 0.5em 1em;
+	cursor: pointer;
+	border-radius: 0.1875em;
+}
+
+.phone{
+	text-align:center;
+}
+table {
+	width: 80%;
+	margin: 0 auto;
+	border-collapse: collapse;
+}
+
+th, td {
+	border: 1px solid #ccc;
+	padding: 0.5em;
+	text-align: left;
+	white-space: nowrap;
+}
+
+#pwChk {
+	color: red;
+	white-space: nowrap;
+}
+
+#memZipcode {
+	width: 70%;
+	margin-right: 5px;
+}
+
+#addressSrchBtn {
+	background-color: #8AAAE5;
+	color: white;
+	border: none;
+	border-radius: 0.1875em;
+	cursor: pointer;
+}
+
+#inserBtn {
+	background-color: #8AAAE5;
+	color: white;
+	border: none;
+	border-radius: 0.1875em;
+	cursor: pointer;
+	padding: 0.5em 1em;
+}
+
+#cancel {
+	background-color: #ccc;
+	color: white;
+	border: none;
+	border-radius: 0.1875em;
+	cursor: pointer;
+	padding: 0.5em 1em;
+}
+
+th {
+	text-align:center;
+}
+
+td {
+	display: flex;
+	align-items: center;
+}
+
+#mem_idChkBtn {
+	margin-left: 10px;
+}
+
+.button-container {
+	text-align: center;
+}
+
+.button-container input[type="button"], .button-container button {
+	width: 150px;
+	padding: 10px;
+}

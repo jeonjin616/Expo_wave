@@ -1,20 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
-<%@ include file="/header.jsp"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입</title>
+<title>네이버 소셜 로그인 회원가입</title>
 <link rel="stylesheet" type="text/css" href="../resources/css/member/join.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="../resources/js/member/memberJoin.js"></script>
 </head>
 <body>
 	<h1>회원가입</h1>
-	<%-- 회원가입 폼 시작 --%>
-	<form method="post" action="insert">
+	<form action="naverInsert" method="post">
+		<!-- 네이버 소셜 로그인 api를 통해 가져오는 값은 hidden으로 처리 -->
+		<input type="hidden" name="mem_name" value="${param.name}">
+		<input type="hidden" name="mem_nickname" value="${param.nickname}">
+		<input type="hidden" name="mem_email" value="${param.email}">
+		<input type="hidden" name="mem_profile_img" value="${param.profile_img}">
 		<table border="1">
 			<tr>
 				<th>아이디</th>
@@ -25,33 +28,12 @@
 			</tr>
 			<tr>
 				<th rowspan="2">비밀번호</th>
-				<td><input type="password" class="pw" id="mem_pw" name="mem_pw" placeholder="비밀번호를 입력해주세요" value="1234"></td>
+				<td><input type="password" id="mem_pw" name="mem_pw" placeholder="비밀번호를 입력해주세요" value="1234"></td>
 			</tr>
 			<tr>
 				<td>
-					<input type="password" class="pw" id="mem_pw2" placeholder="비밀번호를 다시 입력해주세요" value="1234">
-				</td>
-			</tr>
-			<tr>
-				<th>이름</th>
-				<td><input type="text" name="mem_name" placeholder="이름을 입력해주세요" value="가가가"></td>
-			</tr>
-			<tr>
-				<th>별명</th>
-				<td><input type="text" name="mem_nickname" placeholder="별명을 입력해주세요" value="nick"></td>
-			</tr>
-			<tr>
-				<th>이메일</th>
-				<td>
-					<input type="text" name="memEmail" value="" >
-					&nbsp;<span class="hyphen">@</span>&nbsp;
-					<input type="text" id="domainText">
-						<select name="domainList" id="domainList" class="insertMemInfo">
-							<option value="directInput" selected>직접입력</option>
-							<option value="naver.com">naver.com</option>
-							<option value="gmail.com">gmail.com</option>
-							<option value="daum.net">daum.net</option>
-						</select>
+					<input type="password" id="mem_pw2" placeholder="비밀번호를 다시 입력해주세요" value="1234">
+					<span id="pwChk">비밀번호 비교 문구 출력</span>
 				</td>
 			</tr>
 			<tr>
@@ -103,10 +85,8 @@
 		</table>
 		<c:import url="addressSearchAPI.jsp"/>
 		<div class="button-container">
-			<input type="button" id="cancel" value="취소">
 			<button id="inserBtn">가입</button>
 		</div>
 	</form>
-	<%-- 회원가입 폼 종료 --%>
 </body>
 </html>

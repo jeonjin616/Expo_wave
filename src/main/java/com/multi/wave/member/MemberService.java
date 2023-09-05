@@ -104,6 +104,17 @@ public class MemberService {
 		}
 	}
 	
+	// 네이버 소셜 로그인 가입 유무 체크
+	public String naverEmailChk(String mem_email) {
+		String mem_id = dao.naverEmailChk(mem_email);
+		return mem_id;
+	}
 	
+	// 네이서 소셜 로그인 회원가입
+	public void naverJoin(MemberVO vo) {
+		// 입력받은 pw(get)를 암호화(encode)하여 pw를 설정(set)한다.
+		vo.setMem_pw(pwEncoder.encode(vo.getMem_pw()));
+		dao.naverInsert(vo);
+	}
 	
 }

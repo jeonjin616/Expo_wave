@@ -15,10 +15,12 @@ $(document).ready(function() {
 			// 선택값을 텍스트에 넣고 텍스트창 막음
 			$("#domainText").val(event.target.value);
 			$("#domainText").attr("readonly", true);
+			$("#domainText").css("background-color", "#D3D3D3");
 		} else {
 			// 공백을 넣고 텍스트창 오픈
 			$("#domainText").val('');
 			$("#domainText").attr("readonly", false);
+			$("#domainText").css("background-color", "white");
 		}
 	});
 	

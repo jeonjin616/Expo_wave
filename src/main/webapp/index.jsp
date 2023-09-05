@@ -197,6 +197,7 @@
 	
 </style>
 </head>
+<<<<<<< HEAD
 	<body>
 		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 		<%@ include file="header.jsp"%>
@@ -211,4 +212,17 @@
 			<br>
 		</section>
 	</body>
+=======
+<body>
+	<%@ include file="header.jsp"%>
+	<div class="banner"></div>
+	<%@ include file="banner.jsp"%>
+	<section>
+		<p>추천하는 Hot한 축제</p>
+		<div class="recommend fsv" id="festivalContainer"></div>
+		<p>추천하는 Hot한 공연</p>
+		<div class="recommend show" id="showContainer"></div>
+	</section>
+</body>
+>>>>>>> 9338c7bc022a69db6cfc18cc04147cf1e6fa3534
 </html>

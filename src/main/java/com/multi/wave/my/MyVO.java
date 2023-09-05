@@ -3,7 +3,7 @@ package com.multi.wave.my;
 import java.math.BigDecimal;
 
 public class MyVO {
-	
+
 	private String fsv_name;
 	private String fsv_tel;
 	private String fsv_start;
@@ -13,8 +13,21 @@ public class MyVO {
 	private String fsv_add;
 	private BigDecimal fsv_lat;
 	private BigDecimal fsv_lon;
-	
-	
+
+
+
+
+
+	/*
+	 * private String show_name; private String show_start; private String show_end;
+	 * private String show_place; private String show_actor; private String
+	 * show_crew; private String show_runtime; private String show_age; private
+	 * String show_company; private String show_charge; private String show_poster;
+	 * private String show_story; private String show_genge; private String
+	 * show_when; private BigDecimal show_lat; private BigDecimal show_lon;
+	 */
+
+
 	public String getFsv_name() {
 		return fsv_name;
 	}
@@ -71,13 +84,14 @@ public class MyVO {
 	}
 	@Override
 	public String toString() {
-		return "Test3VO [fsv_name=" + fsv_name + ", fsv_tel=" + fsv_tel + ", fsv_start=" + fsv_start + ", fsv_end="
+		return "MyVO [fsv_name=" + fsv_name + ", fsv_tel=" + fsv_tel + ", fsv_start=" + fsv_start + ", fsv_end="
 				+ fsv_end + ", fsv_orgimg=" + fsv_orgimg + ", fsv_thumb=" + fsv_thumb + ", fsv_add=" + fsv_add
 				+ ", fsv_lat=" + fsv_lat + ", fsv_lon=" + fsv_lon + "]";
 	}
-	
-	
-	
+
+
+
+
 }
 
 
