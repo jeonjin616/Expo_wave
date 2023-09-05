@@ -1,7 +1,7 @@
 @charset "UTF-8";
 body {
     font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
+    background-color: #fffff;
     margin: 0;
     padding: 0;
 }
@@ -75,14 +75,14 @@ hr {
 .post-title {
     font-size: 20px;
     font-weight: bold;
-    color: #007bff;
+    color: #000000;
     margin: 0;
     margin-bottom: 10px;
 }
 
 .post-content {
     color: #333;
-    margin: 0;
+/*     margin: 0; */
     margin-bottom: 10px;
 }
 
@@ -94,11 +94,12 @@ hr {
 
 .add-button {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 20px;   
+    
 }
 
-.add-button button {
-    background-color: #007bff;
+.add-button {
+    background-color: #8AAAE5; /* 배경색을 강제로 변경 */
     border: none;
     color: #fff;
     padding: 10px 20px;
@@ -107,6 +108,34 @@ hr {
     cursor: pointer;
 }
 
-.add-button button:hover {
-    background-color: #0056b3;
+.add-button:hover {
+  background-color: #0056b3;
+}
+.button-class {
+  background-color: #8AAAE5;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 10%;
+  font-size: 16px;
+}
+.button-class:hover {
+  background-color: #0056b3;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+.button-class {
+  background-color: #8AAAE5; !important;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 10%;
+  font-size: 16px;
+}
+.button-class:hover {
+  background-color: #0056b3;
 }

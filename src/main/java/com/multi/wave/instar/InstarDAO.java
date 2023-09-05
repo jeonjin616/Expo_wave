@@ -26,4 +26,16 @@ public class InstarDAO {
 		instarSST.delete("Instar.deleteAll");
 	}
 
+	public int instarcount() {
+		return instarSST.selectOne("Instar.InstarCount");
+	}
+	
+	
+	public int count() {
+		return instarSST.selectOne("Instar.count");
+	}
+	
+	public List<InstarVO> instarUpdate2(PagingVO vo) {
+		return instarSST.selectList("Instar.InstarAll2", vo);
+	}
 }
