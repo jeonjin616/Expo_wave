@@ -5,7 +5,7 @@ public class InquiryVO {
 	private int inqu_id;
     private String inqu_title;
     private String inqu_question;
-    private String inqu_answer; 
+    private String writer; 
     private String inqu_create_date;
     private String img;
     
@@ -30,12 +30,7 @@ public class InquiryVO {
 		this.inqu_question = inqu_question;
 	}
 	
-	public String getInqu_answer() {
-		return inqu_answer;
-	}
-	public void setInqu_answer(String inqu_answer) {
-		this.inqu_answer = inqu_answer;
-	}
+	
 	public String getInqu_create_date() {
 		return inqu_create_date;
 	}
@@ -47,6 +42,12 @@ public class InquiryVO {
 	}
 	public void setImg(String img) {
 		this.img = img;
+	}
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
 	} 
 	
     

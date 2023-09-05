@@ -1,6 +1,7 @@
 package com.multi.wave.notice;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +19,13 @@ public class ReplyDAO {
     
     public void insertReply(ReplyVO reply) {
         sqlSession.insert("reply.insertReply", reply);
+    }
+    
+    public int updateReply(Map<String, Object> params) {
+        return sqlSession.update("replyMapper.updateReply", params);
+    }
+    
+    public int deleteReply(int replyId) {
+        return sqlSession.delete("deleteReply", replyId);
     }
 }
