@@ -50,4 +50,16 @@ public class InquiryDAO {
 	public List<InquiryVO> searchInqu(String keyword) {
 	    return my.selectList("inquiry.searchInqu", keyword);
 	  }
+	
+	public List<InquiryVO> listAll() {
+	    return my.selectList("inquiry.listAll");
+	}
+	
+	public List<InquiryVO> getPagedInqu(PagingVO2 vo) {
+		return my.selectList("inquiry.getPagedInqu",vo);
+	}
+	
+	public int pageCount() {
+		return my.selectOne("inquiry.count");
+	}
 }

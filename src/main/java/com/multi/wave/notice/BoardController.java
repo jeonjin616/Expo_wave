@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.multi.wave.md.PagingVO;
+
 @Controller
 public class BoardController {
 
@@ -37,24 +39,26 @@ public class BoardController {
 	                      Model model,
 	                      HttpServletRequest request) throws Exception {
 
-	    String test = UUID.randomUUID().toString();
-	    String savedName = test + "_" + file.getOriginalFilename();
-
-	    // uploadPath 수정: 컨텍스트 경로 + /resources/upload
-	    String uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload");
-	    File target = new File(uploadPath + "/" + savedName);
-
-	    file.transferTo(target);
-
 	    BoardVO dto = new BoardVO();
 	    dto.setBoard_title(title);
 	    dto.setBoard_content(content);
-	    dto.setImg(savedName);
+
+	    String test = UUID.randomUUID().toString();
+	    String savedName = (!file.isEmpty()) ? test + "_" + file.getOriginalFilename() : null;
+
+	    if (savedName != null) {
+	        String uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload");
+	        File target = new File(uploadPath + "/" + savedName);
+	        file.transferTo(target);
+	        dto.setImg(savedName);
+	    }
 
 	    dao.insert(dto);
-	    redirectAttributes.addFlashAttribute("message", "추가가 완료되었습니다."); 
+	    redirectAttributes.addFlashAttribute("message", "추가가 완료되었습니다.");
+
 	    return "redirect:notice";
 	}
+
 	
 	@GetMapping("notice/edit")
 	public String edit(@RequestParam("board_id") int board_id, Model model) {
@@ -77,7 +81,7 @@ public class BoardController {
 
 	    BoardVO existingBoard = dao.oneById(boardId); // 파라미터로 받은 id를 사용
 
-	    if (existingBoard != null) {
+	    if (file != null && existingBoard != null) {
 	        String test = UUID.randomUUID().toString();
 	        String savedName = (file != null && !file.isEmpty()) ? test + "_" + file.getOriginalFilename() : "";
 	        if (!savedName.isEmpty()) {
@@ -129,12 +133,31 @@ public class BoardController {
 	}
 	
 	
-	@RequestMapping("notice/notice") 
-	public String list(Model model) {
-	  List<BoardVO> list = dao.list();
-	  model.addAttribute("list", list);
-	  return "notice/notice";
+	@RequestMapping("notice/notice")
+	public String list(Model model, @RequestParam(name = "page", defaultValue = "1") int currentPage, PagingVO2 vo) {
+	    vo.setStartEnd(currentPage);
+	    List<BoardVO> page = dao.getPagedBoards(vo);
+
+	    int count = dao.pageCount();
+	    int pages = (count + vo.getPerPageNum() - 1) / vo.getPerPageNum();
+
+	    int startPage = ((currentPage - 1) / 5) * 5 + 1;
+	    int endPage = startPage + 4;
+	    if (endPage > pages) {
+	        endPage = pages;
+	    }
+
+	    model.addAttribute("list", page);
+	    model.addAttribute("pages", pages);
+	    model.addAttribute("startPage", startPage);
+	    model.addAttribute("endPage", endPage);
+	    model.addAttribute("count", count);
+
+	    return "notice/notice";
 	}
+	
+	
+
 	
 	@GetMapping(value = "notice/ajaxSearch")
     @ResponseBody

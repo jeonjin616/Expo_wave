@@ -25,6 +25,7 @@
 		<typeAlias type="com.multi.wave.MainShowVO" alias="MainShowVO"></typeAlias>
 		<typeAlias type="com.multi.wave.MainFestivalVO" alias="MainFestivalVO"></typeAlias>
 		<typeAlias type="com.multi.wave.md.PagingVO" alias="PagingVO"></typeAlias>
+		<typeAlias type="com.multi.wave.notice.PagingVO2" alias="PagingVO2"></typeAlias>	
 	</typeAliases>
 
 	<mappers>

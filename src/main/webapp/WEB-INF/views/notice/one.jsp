@@ -3,6 +3,9 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<% pageContext.setAttribute("replaceChar", "\n"); %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -101,10 +104,16 @@
     		</c:if>
     		</p>
 			<hr color="grey">
-			
 			<br>
-			<img src="<c:url value='../resources/upload/${dto.img}' />" alt="이미지를 불러오는데 실패하였습니다."> <br> <br> 
-			${dto.board_content}<br> <br> 
+			<c:choose>
+    			<c:when test="${not empty dto.img}">
+        			<img src="<c:url value='../resources/upload/${dto.img}' />" alt="이미지를 불러오는데 실패하였습니다.">
+    			</c:when>
+    			<c:otherwise>
+        			
+    			</c:otherwise>
+			</c:choose> <br> <br> 
+			${fn:replace(dto.board_content,replaceChar,"<br/>")}<br> <br> 
 			<p class="back"><a href="notice" >이전페이지</a></p>
 
 		</div>

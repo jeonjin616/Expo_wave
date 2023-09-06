@@ -31,24 +31,25 @@ public class FaqController {
 	}
 
 	@RequestMapping("notice/faq_insert2")
-	public String insert2(@RequestParam("file") MultipartFile file, @RequestParam("faq_title") String title,
-	                      @RequestParam("faq_content") String content, RedirectAttributes redirectAttributes,
-	                      Model model, HttpServletRequest request) throws Exception {
-
-	    String test = UUID.randomUUID().toString();
-	    String savedName = test + "_" + file.getOriginalFilename();
-
-	    String uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload");
-	    File target = new File(uploadPath + "/" + savedName);
-
-	    file.transferTo(target);
-
-	    // model.addAttribute("savedName", savedName); // 이 부분은 필요 없음
+	public String insert2(@RequestParam("file") MultipartFile file,
+	                      @RequestParam("faq_title") String title,
+	                      @RequestParam("faq_content") String content,
+	                      RedirectAttributes redirectAttributes,
+	                      HttpServletRequest request) throws Exception {
 
 	    FaqVO dto = new FaqVO();
 	    dto.setFaq_title(title);
 	    dto.setFaq_content(content);
-	    dto.setImg(savedName);
+
+	    String test = UUID.randomUUID().toString();
+	    String savedName = (!file.isEmpty()) ? test + "_" + file.getOriginalFilename() : null;
+
+	    if (savedName != null) {
+	        String uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload");
+	        File target = new File(uploadPath + "/" + savedName);
+	        file.transferTo(target);
+	        dto.setImg(savedName);
+	    }
 
 	    dao.insert(dto);
 	    redirectAttributes.addFlashAttribute("message", "추가가 완료되었습니다.");
@@ -130,10 +131,26 @@ public class FaqController {
 	}
 
 	@RequestMapping("notice/faq")
-	public String list(Model model) {
-		List<FaqVO> list = dao.list();
-		model.addAttribute("list", list);
-		return "notice/faq";
+	public String list(Model model, @RequestParam(name = "page", defaultValue = "1") int currentPage, PagingVO2 vo) {
+	    vo.setStartEnd(currentPage);
+	    List<FaqVO> page = dao.getPagedFaq(vo);
+
+	    int count = dao.pageCount();
+	    int pages = (count + vo.getPerPageNum() - 1) / vo.getPerPageNum();
+
+	    int startPage = ((currentPage - 1) / 5) * 5 + 1;
+	    int endPage = startPage + 4;
+	    if (endPage > pages) {
+	        endPage = pages;
+	    }
+
+	    model.addAttribute("list", page);
+	    model.addAttribute("pages", pages);
+	    model.addAttribute("startPage", startPage);
+	    model.addAttribute("endPage", endPage);
+	    model.addAttribute("count", count);
+
+	    return "notice/faq";
 	}
 	
 	

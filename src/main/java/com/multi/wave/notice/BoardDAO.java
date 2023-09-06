@@ -8,6 +8,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.multi.wave.md.MDPostVO;
+import com.multi.wave.md.PagingVO;
+
 @Repository
 public class BoardDAO {
 
@@ -43,12 +46,20 @@ public class BoardDAO {
 	    return my.selectOne("board.oneById", board_id);
 	}
 
-	public List<BoardVO> list() {
-		return my.selectList("board.all");
-	}
+	/*
+	 * public List<BoardVO> list() { return my.selectList("board.all"); }
+	 */
 	
 	public List<BoardVO> searchBoard(String keyword) {
 	    return my.selectList("board.searchBoard", keyword);
 	  }
+	
+	public List<BoardVO> getPagedBoards(PagingVO2 vo) {
+		return my.selectList("board.getPagedBoards",vo);
+	}
+	
+	public int pageCount() {
+		return my.selectOne("board.count");
+	}
 	
 }

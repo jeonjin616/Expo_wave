@@ -1,8 +1,13 @@
 package com.multi.wave.notice;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +33,14 @@ public class ReplyController {
     }
 
     @PostMapping("notice/replies")
-    public ResponseEntity<String> insertReply(ReplyVO reply) {
+    public ResponseEntity<String> insertReply(ReplyVO reply, HttpServletRequest request) {
         try {
+            // 세션에서 loginMember 가져오기
+            String loginMember = (String) request.getSession().getAttribute("loginMember");
+            
+            // ReplyVO에 writer 설정
+            reply.setWriter(loginMember);
+            
             replyDAO.insertReply(reply);
             return ResponseEntity.ok("댓글 작성 완료");
         } catch (Exception e) {
@@ -37,15 +48,19 @@ public class ReplyController {
         }
     }
     
-    @RequestMapping(value = "/updateReply", method = RequestMethod.POST)
+    @RequestMapping(value = "notice/updateReply", method = RequestMethod.POST)
     @ResponseBody
-    public String updateReply(@RequestParam("replyId") int replyId, @RequestParam("content") String newContent) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("replyId", replyId);
-        params.put("newContent", newContent);
-        
-        int updateResult = replyDAO.updateReply(params);
-        return updateResult == 1 ? "success" : "fail";
+    public String updateReply(@RequestParam("replyId") int replyId, 
+            @RequestParam("content") String newContent,
+            @RequestParam("reg_date") String regDate) {
+    	
+    	Map<String, Object> params = new HashMap<>();
+    	params.put("replyId", replyId);
+    	params.put("newContent", newContent);
+    	params.put("regDate", regDate);  // 여기에 reg_date 추가
+
+    	int updateResult = replyDAO.updateReply(params);
+    	return updateResult == 1 ? "success" : "fail";
     }
     
     @DeleteMapping("notice/deleteReply/{reply_id}")

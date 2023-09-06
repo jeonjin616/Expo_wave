@@ -100,7 +100,7 @@ footer {
 
 h1 {
 	text-align: left;
-	padding-left: 45px;  /* 왼쪽 간격 20px 추가 */
+	padding-left: 285px;  /* 왼쪽 간격 20px 추가 */
 }
 
 
@@ -221,6 +221,26 @@ ul li {
 	font-weight: bold;
 	font-size: 18px;
 } */
+.pagination {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+.pagination a, .pagination .current-page {
+	display: inline-block;
+	margin: 0 5px;
+	padding: 10px 20px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	text-align: center;
+}
+
+.pagination .current-page {
+	background-color: #007bff;
+	color: white;
+	border-color: #007bff;
+}
 </style>
 
 </head>
@@ -268,28 +288,51 @@ ul li {
 			</thead>
 			
 			<tbody>
+				<c:forEach var="inqu" items="${list}">
+					<c:if test="${loginMember eq 'admin'}">
+					<tr>
+						<td class="inqu_id">${inqu.inqu_id}</td>
+                    	<td class="inqu_title"><a href="inqu_one?id=${inqu.inqu_id}&title=${inqu.inqu_title}">${inqu.inqu_title}</a></td>
+                    	<td class="inqu_create_date">${inqu.inqu_create_date}</td>
+                  	</tr>
+                  	</c:if>
+                </c:forEach>
     			<c:forEach var="inqu" items="${list}">
         			<c:set var="currentWriter" value="${inqu.writer}" />
-        			<c:choose>
-            			<c:when test="${loginMember eq 'admin'}">
+            			<c:if test="${loginMember eq currentWriter}">
                 			<tr>
                     			<td class="inqu_id">${inqu.inqu_id}</td>
                     			<td class="inqu_title"><a href="inqu_one?id=${inqu.inqu_id}&title=${inqu.inqu_title}">${inqu.inqu_title}</a></td>
                     			<td class="inqu_create_date">${inqu.inqu_create_date}</td>
                 			</tr>
-            			</c:when>
-            			<c:when test="${loginMember eq currentWriter}">
-                			<tr>
-                    			<td class="inqu_id">${inqu.inqu_id}</td>
-                    			<td class="inqu_title"><a href="inqu_one?id=${inqu.inqu_id}&title=${inqu.inqu_title}">${inqu.inqu_title}</a></td>
-                    			<td class="inqu_create_date">${inqu.inqu_create_date}</td>
-                			</tr>
-            			</c:when>
-        			</c:choose>
+            			</c:if>
     			</c:forEach>
 			</tbody>
 		
 		</table>
+		
+		<div class="pagination">
+    		<a href="../notice/inqu?page=1"><<</a>
+    		<c:if test="${currentPage > 5}">
+        		<a href="../notice/inqu?page=${startPage - 1}"><</a>
+    		</c:if>
+    		<c:forEach var="i" begin="${startPage}" end="${endPage}">
+        		<c:choose>
+            		<c:when test="${i eq currentPage}">
+                		<span class="current-page">${i}</span>
+            		</c:when>
+            		<c:otherwise>
+                		<a href="../notice/inqu?page=${i}">${i}</a>
+            		</c:otherwise>
+        		</c:choose>
+    		</c:forEach>
+    		<c:if test="${endPage < pages}">
+        		<a href="../notice/inqu?page=${endPage + 1}">></a>
+    		</c:if>
+    		<a href="../notice/inqu?page=${pages}">>></a>
+		</div>
+		
+		
 	<c:if test="${not empty loginMember and loginMember ne 'admin'}">
 		<a href="inquiry_write_post.jsp" class="post-button">게시글 작성하기</a>
 	</c:if>

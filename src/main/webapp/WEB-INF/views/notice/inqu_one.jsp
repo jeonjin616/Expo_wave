@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<% pageContext.setAttribute("replaceChar", "\n"); %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -138,7 +141,10 @@ a:hover {
 </style>
 <script>
 
-var mem_id = "${member.mem_id}";
+<c:forEach var="reply" items="${replies}">
+	var replyId = "${reply.reply_id}";
+</c:forEach>
+
 
 function formatDate(timestamp) {
     const date = new Date(timestamp);
@@ -153,7 +159,8 @@ function formatDate(timestamp) {
     }
     $(document).ready(function(){
         var postId = ${dto.inqu_id}; // 게시물 번호를 가져옴
-
+        var loginMember = "${sessionScope.loginMember}"; // 현재 로그인한 회원 ID 가져오기
+        
         function loadReplies(){
             $.ajax({
                 url: '../notice/replies/' + postId, // 게시물 번호를 URL에 포함
@@ -161,20 +168,26 @@ function formatDate(timestamp) {
                 dataType: "json", 
                 success: function(replyData) {
                     $("#reply-list").empty();
-                    console.log(replyData)
-                    
-                     for(let i=0; i<replyData.length; i++){
-                    	 			$('#reply-list').append(
-                     
-									'<div class="reply-item">'+
-									'<div class="writer">' + replyData[i].writer + '</div>' +
-                                      '<div class="content">' + replyData[i].content + '</div>' +
-                                      '<div class="writer reg_date">' + formatDate(replyData[i].reg_date) + '</div>'+
-                                      '<a class="edit" href="javascript:editReply(' + replyData[i].reply_id + ', \'' + replyData[i].content + '\')">수정</a>' +
-                                      '<a class="delete" href="javascript:deleteReply(' + replyData[i].reply_id + ')">삭제</a>' +
-                                    '</div>'
-                    	 			)
-                     }
+                    for(let i=0; i<replyData.length; i++){
+                        
+                        // 수정, 삭제 버튼 초기화
+                        var editDeleteHtml = '';
+                        
+                        // 작성자와 로그인한 회원 ID가 일치하는 경우에만 수정, 삭제 버튼 추가
+                        if(replyData[i].writer === loginMember) {
+                            editDeleteHtml = '<a class="edit" href="javascript:editReply(' + replyData[i].reply_id + ', \'' + replyData[i].content + '\')">수정</a>' +
+                                             '<a class="delete" href="javascript:deleteReply(' + replyData[i].reply_id + ')">삭제</a>';
+                        }
+
+                        $('#reply-list').append(
+                            '<div class="reply-item" id="reply-item-' + replyData[i].reply_id + '">' +
+                                '<div class="writer">' + replyData[i].writer + '</div>' +
+                                '<div class="content">' + replyData[i].content + '</div>' +
+                                '<div class="writer reg_date">' + formatDate(replyData[i].reg_date) + '</div>' +
+                                editDeleteHtml +
+                            '</div>'
+                        );
+                    }
                 }
             
             });
@@ -186,7 +199,7 @@ function formatDate(timestamp) {
             var dataToSend = {
                 post_id: ${dto.inqu_id}, // 게시물 번호를 가져옴
                 content: content,
-                writer: '${mem_id}'
+                writer: "${sessionScope.loginMember}"
             };
 
             $.ajax({
@@ -212,26 +225,30 @@ function formatDate(timestamp) {
     });
     
     function editReply(replyId, currentContent) {
-        var $replyItem = $(`#reply-item-${replyId}`);
+        var $replyItem = $('#reply-item-' + replyId);
         var newContentHtml = `
             <textarea id="edit-content-${replyId}">${currentContent}</textarea>
-            <button onclick="updateReply(${replyId})">저장</button>
+            <button onclick="updateReply(replyId)">저장</button>
         `;
-
         $replyItem.find('.content').html(newContentHtml);
     }
-
     
     function updateReply(replyId) {
-        var newContent = $(`#edit-content-${replyId}`).val();
-
+    	var newContent = $(`#edit-content-${replyId}`).val();
+    	var currentDate = new Date().toISOString();  // 현재 날짜와 시간을 ISO 문자열로 변환
+    	
+        console.log("새로운 내용: ", newContent);  // 콘솔로 출력
+        console.log("replyId 값: ", replyId);
+        console.log("reg_date 값: ", currentDate);
         $.ajax({
-            url: '/updateReply', // 서버로 전송할 URL, 실제 URL에 맞게 수정해주세요.
+            url: '../notice/updateReply', // 서버로 전송할 URL, 실제 URL에 맞게 수정해주세요.
             type: 'POST', // HTTP 메서드
             data: {
                 replyId: replyId,
-                content: newContent
+                content: newContent,
+                reg_date: currentDate  // reg_date를 data에 추가
             },
+
             success: function(response) {
                 // 업데이트 성공 시 로직 (예: 페이지 새로고침 또는 댓글 리스트 다시 불러오기)
                 location.reload();
@@ -276,15 +293,24 @@ function formatDate(timestamp) {
 			<p class="date">작성일 ${dto.inqu_create_date}</p>
 			<p class="link">
 			
-				<a href="javascript:void(0);"
-					onclick="deleteConfirmation(${dto.inqu_id})">삭제</a> &nbsp; &nbsp; <a
-					href="inqu_edit?inqu_id=${dto.inqu_id}">수정</a>
+				<c:if test="${replyWriter eq loginMember}">
+    				<a href="javascript:void(0);"
+						onclick="deleteConfirmation(${dto.inqu_id})">삭제</a> &nbsp; &nbsp; <a
+						href="inqu_edit?inqu_id=${dto.inqu_id}">수정</a>
+				</c:if>
 			
 			</p>
 			<hr color="grey">
-			<br> <img src="<c:url value='../resources/upload/${dto.img}' />"
-				alt="이미지를 불러오는데 실패하였습니다."> <br> <br>
-			${dto.inqu_question}<br> <br>
+			<br> 
+			<c:choose>
+    			<c:when test="${not empty dto.img}">
+        			<img src="<c:url value='../resources/upload/${dto.img}' />" alt="이미지를 불러오는데 실패하였습니다.">
+    			</c:when>
+    			<c:otherwise>
+        			
+    			</c:otherwise>
+			</c:choose> <br> <br>
+			${fn:replace(dto.inqu_question,replaceChar,"<br/>")}<br> <br>
 			<p class="back">
 				<a href="inqu">이전페이지</a>
 			</p>
