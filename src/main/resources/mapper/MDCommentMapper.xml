@@ -10,8 +10,8 @@
 
 	<insert id="commentMake" parameterType="MDCommentVO">
 		insert into md_comment
-		(MD_comment,MD_id,MD_comment_writer)
-		values (#{MD_comment},#{MD_id},#{MD_comment_writer})
+		(MD_comment,MD_id,MD_comment_create,MD_comment_writer)
+		values (#{MD_comment},#{MD_id},DATE_ADD(now(), interval 9 HOUR),#{MD_comment_writer})
 	</insert>
 
 	<!-- 사용여부 모름 일단 작성만 해둠 -->
@@ -27,7 +27,7 @@
 		set
 		MD_id = #{MD_id},
 		MD_comment = #{MD_comment},
-		MD_comment_modifi = now()
+		MD_comment_modifi = DATE_ADD(now(), interval 9 HOUR)
 		where MD_comment_id = #{MD_comment_id}
 	</update>
 
