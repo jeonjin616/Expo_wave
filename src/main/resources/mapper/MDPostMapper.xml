@@ -13,7 +13,7 @@
 	<insert id="postsMake" parameterType="mdPostVO">
 		insert into md_posts
 		(MD_title, MD_content,MD_create,MD_post_Thumbnail) values
-		(#{MD_title},#{MD_content},now(),#{MD_post_Thumbnail})
+		(#{MD_title},#{MD_content},DATE_ADD(now(), interval 9 HOUR),#{MD_post_Thumbnail})
 	</insert>
 
 	<select id="getPostsById" resultType="mdPostVO"
@@ -34,7 +34,7 @@
 		set
 		MD_title = #{MD_title},
 		MD_content = #{MD_content},
-		MD_modifi = now(),
+		MD_modifi = DATE_ADD(now(), interval 9 HOUR),
 		MD_post_Thumbnail = #{MD_post_Thumbnail}
 		where MD_id = #{MD_id}
 	</update>
