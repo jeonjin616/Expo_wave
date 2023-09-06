@@ -24,14 +24,21 @@ public class InstarController {
 	InstarService instarservice;
 	
 	@RequestMapping("instar/instarpage")
-	public void test1(InstarVO vo, Model model) {
+	public void test1(InstarVO vo, Model model,Model model2, PagingVO page) {
 		//삭제하기
 		instardao.instarDelete();
 		//값 넣기
 		instarservice.instarUpate();
+		System.out.println(page);
+		page.setStartEnd(page.getPage());
 		
-		List<InstarVO> card = instardao.instarUpdate(vo);
+		System.out.println();
+		System.out.println();
+		List<InstarVO> card = instardao.instarUpdate2(page);
+		int count = instardao.count();
+		int pages = count / 10+1;
 		System.out.println(card);
+		model2.addAttribute("pages", pages);
 		model.addAttribute("card",card);
 	}
 	

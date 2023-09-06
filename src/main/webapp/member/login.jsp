@@ -35,8 +35,8 @@
 			</div>
 			<div style="text-align: center;">
 				<br>
-				<button class="btn btn-primary" id="loginBtn">로그인</button>
-				<input class="btn btn-primary" type="button" value="회원가입" onClick="location.href='/wave/member/join.jsp'">
+				<button class="btn btn-primary btn-1" id="loginBtn">로그인</button>
+				<input class="btn btn-primary btn-1" type="button" value="회원가입" onClick="location.href='/wave/member/join.jsp'">
 			</div>
 			<br>
 			<!-- 네이버 로그인 버튼 노출 영역 -->

@@ -5,6 +5,7 @@ public class ReviewVO {
 	private int review_id;
 	private String mem_id;
 	private int fsv_id;
+	private String fsv_name;
 	private String show_id;
 	private String review_title;
 	private String review_content;
@@ -53,10 +54,18 @@ public class ReviewVO {
 		this.review_image = review_image;
 	}
 	
+	public String getFsv_name() {
+		return fsv_name;
+	}
+	public void setFsv_name(String fsv_name) {
+		this.fsv_name = fsv_name;
+	}
+	
+	
 	@Override
 	public String toString() {
-		return "ReviewVO [review_id=" + review_id + ", mem_id=" + mem_id + ", fsv_id=" + fsv_id + ", show_id=" + show_id
-				+ ", review_title=" + review_title + ", review_content=" + review_content + ", review_image="
-				+ review_image + "]";
+		return "ReviewVO [review_id=" + review_id + ", mem_id=" + mem_id + ", fsv_id=" + fsv_id + ", fsv_name="
+				+ fsv_name + ", show_id=" + show_id + ", review_title=" + review_title + ", review_content="
+				+ review_content + ", review_image=" + review_image + "]";
 	}
 }

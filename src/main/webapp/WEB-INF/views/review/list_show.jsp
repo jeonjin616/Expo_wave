@@ -59,10 +59,10 @@
 	
 	/* 테이블의 바깥 테두리를 추가 */
 	.board_list {
+	  border-left: 0;   /* 왼쪽 테두리 제거 */
+    border-right: 0;  /* 오른쪽 테두리 제거 */
 		border-collapse: collapse; /* 테이블 테두리를 하나로 만들어줌 */
-		border: 1px solid black !important; /* 얇은 테두리 설정 */
-		border: none;
-		table-layout: fixed;
+		border: 1px solid black; /* 얇은 테두리 설정 */
 	}
 	
 	/* 테이블의 각 셀의 테두리 제거 */
@@ -70,28 +70,30 @@
 		border: none;
 	}
 	
-	/* thead의 바깥쪽 테두리 추가 */
-	.board_list thead {
-		border-bottom: 1px solid black !important;
-	}
-	
-	/* 마지막 셀의 왼쪽, 오른쪽 테두리 제거 */
 	/* thead의 각 셀의 세로 크기를 5px 늘림 */
 	.board_list thead th {
 		padding-top: 15px; /* 위쪽 패딩 5px 추가 */
 		padding-bottom: 15px; /* 아래쪽 패딩 5px 추가 */
-    border-left: none;
-    border-right: none;
+	}
+	
+	/* thead의 바깥쪽 테두리 추가 */
+	.board_list thead {
+		border: 1px solid black;
 	}
 	
 	/* 마지막 셀의 왼쪽, 오른쪽 테두리 제거 */
+	.board_list thead th {
+	    border-right: 0;
+	    border-left: 0;
+	}
+	
 	/* tbody의 각 셀에 위아래 여백 3px 적용 */
 	.board_list tbody td {
 		padding-top: 10px;
 		padding-bottom: 10px;
-    border-top: 1px solid lightgray;
 	}
 	
+	/* 마지막 셀의 왼쪽, 오른쪽 테두리 제거 */
 	.board_list tbody td {
 	    border-right: 0;
 	    border-left: 0;
@@ -102,44 +104,9 @@
 	    border-top: 1px solid lightgray;
 	}
 	
-	/* 첫 번째와 마지막 셀의 테두리 설정 */
-	.board_list thead th:first-child, .board_list tbody td:first-child {
-	    border-left: none;
-	}
-	
-	.board_list thead th:last-child, .board_list tbody td:last-child {
-	    border-right: none;
-	}
-	
-	/* 테이블의 너비와 관련된 스타일 */
-	.board_list, .board_list td, .board_list th {
-	    width: 100% !important;
-	}
-
-	table, td, th {
-    width: 100%;
-	}
-	
-	.board_list {
-	    border-collapse: collapse;
-	    border: 1px solid black;
-	    table-layout: fixed; 
-	}
-	
-	.board_list col:nth-child(1) {
-	    width: 15% !important;
-	}
-	
-	.board_list col:nth-child(2) {
-	    width: 55% !important;
-	}
-	
-	.board_list col:nth-child(3) {
-	    width: 20% !important;
-	}
-	
-	.board_list col:nth-child(4) {
-	    width: 10% !important;
+	/* tbody의 첫 번째 행의 td에서 위쪽 경계선 제거 */
+	.board_list tbody tr:first-child td {
+	    border-top: none;
 	}
 	
 	a {
@@ -149,6 +116,16 @@
 	
 	a:hover {
 		text-decoration: underline; /* 마우스를 올렸을 때만 밑줄 표시 */
+	}
+	
+	table, td, th {
+    width: 100%;
+	}
+	
+	.board_list {
+	    border-collapse: collapse;
+	    border: 1px solid black;
+	    table-layout: fixed;  
 	}
 	
 </style>
@@ -164,11 +141,11 @@
 		<hr>
 		<div class="fsv_show">
 			<button>
-				<a href="../list.jsp">Festival</a>
+				<a href="list.jsp">Festival</a>
 			</button>
 			/
 			<button>
-				<a href="../list_show.jsp">Show</a>
+				<a href="list_show.jsp">Show</a>
 			</button>
 		</div>
 

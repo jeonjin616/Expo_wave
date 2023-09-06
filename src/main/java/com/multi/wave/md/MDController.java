@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -69,11 +70,12 @@ public class MDController {
 	
 	// 게시글 상세보기 -> 이미지,댓글,게시글 전부 가져옴 (content+img+posts)
 	@RequestMapping(value = "md/MDDetail", method = RequestMethod.GET)
-	public void MDDetail(@RequestParam("id") int id, Model model1, Model model2, Model model3) {
+	public void MDDetail(@RequestParam("id") int id, Model model1, Model model2, Model model3){
 		MDPostVO postvo = MDpostDAO.getMDPostById(id);
 		List<MDCommentVO> commentvo = MDcommentDAO.getMDCommentById(id);
 		
 		model1.addAttribute("postvo", postvo);
+		
 		model3.addAttribute("commentvo", commentvo);
 	}
 
@@ -88,21 +90,27 @@ public class MDController {
 
 	}
 
+	// 업데이트 페이지이동
+		@RequestMapping(value = "md/MDPostUpdatePage", method = RequestMethod.GET)
+		public String mdPostUpdatePage(@RequestParam("id") int id, Model model) {
+			MDPostVO mdPostvo = MDpostDAO.getMDPostById(id);
+			System.out.println(mdPostvo);
+			model.addAttribute("mdPostvo", mdPostvo);
+			return "MDPostUpdate";
+		}
+		
 	// 게시글 만들기 (img+posts)
 	@RequestMapping("md/MDPostMake")
 	public String MDPostMake(MDPostVO mdPostvo, HttpServletRequest request, MultipartFile file, Model model)
 			throws Exception {
-		//이클립스는 폴더 하단에 동기화해서 만들어놓고 이를 절대경로에서 확인이 가능하다(82q
-		//동일한 파일명으로 올리는경우 파일이 중복됮 ㅣ않도록 처리해얗나다 -> UUID활용방식
 		String test = UUID.randomUUID().toString();
 		String savedName =  test+"_"+file.getOriginalFilename();
-		//원본 파일명 보여주기위한 목적용 코드 OR split활용
 		String uploadPath2 = request.getSession().getServletContext().getRealPath("resources/img");
 		File target = new File(uploadPath2 + "/" + savedName);
-		System.out.println(target.getAbsolutePath());
 		file.transferTo(target);
 		model.addAttribute("savedName", savedName);
-		if(savedName.split("_")==null) {
+		mdPostvo.setMD_post_Thumbnail(savedName);
+		if(savedName.split("_").length==1) {
 		mdPostvo.setMD_post_Thumbnail(null);
 		}
 		MDpostDAO.MDPostinsert(mdPostvo);
@@ -110,17 +118,25 @@ public class MDController {
 	}
 	
 
-	// 업데이트 페이지이동
-	@RequestMapping(value = "md/MDPostUpdatePage", method = RequestMethod.GET)
-	public String mdPostUpdatePage(@RequestParam("id") int id, Model model) {
-		MDPostVO mdPostvo = MDpostDAO.getMDPostById(id);
-		model.addAttribute("mdPostvo", mdPostvo);
-		return "MDPostUpdate";
-	}
+	
 
 	// 게시글 업데이트
 	@RequestMapping(value = "md/MDPostUpdate", method = RequestMethod.POST)
-	public String mdPostUpdate(MDPostVO mdPostvo) {
+	public String mdPostUpdate(MDPostVO mdPostvo,HttpServletRequest request, @RequestParam("file") MultipartFile file, Model model) throws Exception {
+		String test = UUID.randomUUID().toString();
+		System.out.println(test);
+		System.out.println("");
+		System.out.println("");
+		String savedName =  test+"_"+file.getOriginalFilename();
+		System.out.println(savedName);
+		String uploadPath2 = request.getSession().getServletContext().getRealPath("resources/img");
+		File target = new File(uploadPath2 + "/" + savedName);
+		file.transferTo(target);
+		model.addAttribute("savedName", savedName);
+		mdPostvo.setMD_post_Thumbnail(savedName);
+		if(savedName.split("_").length==1) {
+		mdPostvo.setMD_post_Thumbnail(null);
+		}
 		MDpostDAO.MDPostUpdate(mdPostvo);
 		return "redirect:/md/MDDetail?id=" + mdPostvo.getMD_id();
 	}
@@ -132,7 +148,7 @@ public class MDController {
 		redirectAttributes.addFlashAttribute("message", "게시글이 삭제되었습니다.");
 		System.out.println("message실행?");
 		MDpostDAO.MDPostDelete(mdPostvo);
-		return "redirect:/md/MDAll";
+		return "redirect:/md/MDAll?page=1";
 	}
 	//////////// 댓글 /////////////
 
