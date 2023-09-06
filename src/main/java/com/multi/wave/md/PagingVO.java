@@ -7,11 +7,11 @@ public class PagingVO {
 
 	public void setStartEnd(int page) {
 		//page별로 start, end값만 구해주면 됨.
-		start = 1 + (page - 1) * 5; 
+		start = 1 + (page - 1) * 6; 
 		//무조건 1부터 시작
 		//1page: 1 + 0 * 10 => start 1
 		//2page: 1 + 1 * 10 => start 11  
-		end = page * 5+1;
+		end = page * 6;
 		//1page: 1 * 10 => end 10
 		//2page: 2 * 10 => end 20
 	}

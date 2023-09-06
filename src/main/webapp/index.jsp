@@ -123,6 +123,10 @@
 	});
 </script>
 <style>
+.header {
+	position: relative;
+	margin-top: 125px;
+}
 
 #header {
 	padding-top: 0px;
@@ -202,12 +206,9 @@ p {
 </style>
 </head>
 <body>
-<!-- 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>  -->
-	<div id="header">
-		<%@ include file="header.jsp"%>
-	</div>
-	<div class="banner">
+	<div class="header"></div>
+	<%@ include file="header.jsp"%>
+	<div class="banner"></div>
 	<%@ include file="banner.jsp"%>
 	</div>
 	<section>
