@@ -1,12 +1,19 @@
 package com.multi.wave.review;
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.multi.wave.festival.FestivalVO;
 import com.multi.wave.show.ShowVO;
@@ -18,8 +25,19 @@ public class ReviewController {
 	ReviewService reviewService;
 	
 	@RequestMapping("review/insert")
-	public String insert(ReviewVO reviewVO) {
-		System.out.println("insert test" + reviewVO);
+	public String insert(ReviewVO reviewVO, HttpServletRequest request,@RequestParam("file") MultipartFile file) throws Exception {
+		
+		
+		String test = UUID.randomUUID().toString();
+	    String savedName = test + "_" + file.getOriginalFilename();
+	    System.out.println("file test " + savedName);
+	    // uploadPath ����: ���ؽ�Ʈ ��� + /resources/upload
+	    String uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload");
+	    File target = new File(uploadPath + "/" + savedName);
+	    System.out.println("uploadPath === " + uploadPath);
+	    file.transferTo(target);
+	    reviewVO.setReview_image(savedName);
+	    System.out.println("insert test" + reviewVO);
 		reviewService.insert(reviewVO);
 		return "redirect:/review/list";
 	}
@@ -31,6 +49,21 @@ public class ReviewController {
 		model.addAttribute("list", list);
 		
 	}
+	
+	@RequestMapping("review/list_fsv")
+	public void list_fsv(Model model) {
+		List<ReviewVO> list = reviewService.list_fsv();
+		model.addAttribute("list", list);
+		
+	}
+	
+	@RequestMapping("review/list_show")
+	public void list_show(Model model) {
+		List<ReviewVO> list = reviewService.list_show();
+		model.addAttribute("list", list);
+		
+	}
+	
 	@RequestMapping("review/one")
 	public void one(int review_id, Model model) {
 		System.out.println(review_id);
@@ -57,9 +90,21 @@ public class ReviewController {
 		
 	}
 	
-	@RequestMapping("review/update")
-	public String update(ReviewVO reviewVO) {
+	@RequestMapping("review/updateReview")
+	public String update(ReviewVO reviewVO, HttpServletRequest request,@RequestParam("file") MultipartFile file) throws Exception {
+		
+		String test = UUID.randomUUID().toString();
+	    String savedName = test + "_" + file.getOriginalFilename();
+	    System.out.println("file test " + savedName);
+	    // uploadPath ����: ���ؽ�Ʈ ��� + /resources/upload
+	    String uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload");
+	    File target = new File(uploadPath + "/" + savedName);
+	    System.out.println("uploadPath === " + uploadPath);
+	    file.transferTo(target);
+	    reviewVO.setReview_image(savedName);
 		reviewService.update(reviewVO);
+		System.out.println("update test >>> " + reviewVO);
+		 
 		return "redirect:/review/one?review_id=" + reviewVO.getReview_id();
 	}
 	

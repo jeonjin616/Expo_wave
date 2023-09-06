@@ -20,11 +20,22 @@ public class ReviewDAO {
 	}
 	
 	public void update(ReviewVO reviewVO) {
+		System.out.println("3 >>>" + reviewVO);
 		my.update("review.update", reviewVO);
 	}
 	
 	public List<ReviewVO> list() {
 		List<ReviewVO> list = my.selectList("review.list");
+		return list;
+	}
+	
+	public List<ReviewVO> list_fsv() {
+		List<ReviewVO> list = my.selectList("review.list_fsv");
+		return list;
+	}
+	
+	public List<ReviewVO> list_show() {
+		List<ReviewVO> list = my.selectList("review.list_show");
 		return list;
 	}
 	

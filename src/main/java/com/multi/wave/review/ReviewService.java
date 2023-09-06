@@ -26,6 +26,14 @@ public class ReviewService {
 		return reviewDAO.list();
 	}
 	
+	public List<ReviewVO>  list_fsv() {
+		return reviewDAO.list_fsv();
+	}
+	
+	public List<ReviewVO>  list_show() {
+		return reviewDAO.list_show();
+	}
+	
 	public List<FestivalVO>  search_fsv(String q) {
 		return reviewDAO.search_fsv(q);
 	}

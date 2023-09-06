@@ -172,7 +172,7 @@ $(document).ready(function() {
       <div class="main">
       	<h2>리뷰 등록하기</h2>
       	<hr>
-      	<form action="insert">
+      	<form action="insert" method="post" enctype="multipart/form-data">
       	<input id="fsv_select" type="hidden" name="fsv_id" value=0>
       	<input type="hidden" name="mem_id" value="<%=session.getAttribute("loginMember")%>">
       	<input id="show_select" type="hidden" name="show_id" value=0>
@@ -187,7 +187,7 @@ $(document).ready(function() {
       					</select>
       			 </td>
       			 <td>
-      					<input id="searchText" type="text" placeholder="Search..." style="width: 1045px; display: inline-block;">
+      					<input id="searchText" type="text" name="event_name" placeholder="Search..." style="width: 1045px; display: inline-block;">
       			 <div id="autocomplete-results"></div>
       			 
       			 </td>
@@ -206,7 +206,7 @@ $(document).ready(function() {
 								<label>이미지 파일 첨부</label> 
 							</td>
 							<td style="width: 220px;">
-								<input type="file" name="review_image" onchange="readURL(this);" style="width: 100%;"/>
+								<input type="file" name="file" onchange="readURL(this);" style="width: 100%;"/>
 								<img id="preview" src="#" style="max-width: 200px; max-height: 200px; align-content: flex-end; ">
       				</td>
       			</tr>
