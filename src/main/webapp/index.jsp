@@ -128,6 +128,12 @@
 	margin-top: 125px;
 }
 
+#header {
+	padding-top: 0px;
+	padding-bottom: 0px;
+	width: 100%;
+}
+
 .banner {
 	position: relative;
 	margin-top: 25px;
@@ -179,6 +185,24 @@ p {
 	margin-bottom: 20px;
 	margin-top: 20px;
 }
+
+#festivalContainer {
+	margin-top: 20px;
+}
+
+#showContainer {
+	margin-top: 20px;
+	margin-bottom: 150px;
+}
+
+.festival-item img, .show-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px; /* 이미지 모서리 둥글게 만들기 */
+    border: 2px solid lightgray; /* 테두리 추가 */
+}
+
 </style>
 </head>
 <body>
@@ -186,9 +210,12 @@ p {
 	<%@ include file="header.jsp"%>
 	<div class="banner"></div>
 	<%@ include file="banner.jsp"%>
+	</div>
 	<section>
 		<p>추천하는 Hot한 축제</p>
 		<div class="recommend fsv" id="festivalContainer"></div>
+		<br><br><br><br>
+		<hr style="width: 1100px; background-color: #8AAAE5;">
 		<p>추천하는 Hot한 공연</p>
 		<div class="recommend show" id="showContainer"></div>
 	</section>

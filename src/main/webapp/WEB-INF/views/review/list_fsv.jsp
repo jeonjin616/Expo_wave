@@ -7,7 +7,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>List</title>
+<title>List Festival</title>
 <link rel="stylesheet" th:href="@{/css/style.css}" />
 <style>
 	#header {
@@ -111,27 +111,35 @@
 	    border-right: none;
 	}
 	
+	/* 테이블의 너비와 관련된 스타일 */
+	.board_list, .board_list td, .board_list th {
+	    width: 100% !important;
+	}
+
+	table, td, th {
+    width: 100%;
+	}
+	
 	.board_list {
 	    border-collapse: collapse;
 	    border: 1px solid black;
 	    table-layout: fixed; 
-	    width: 100% !important;
 	}
 	
 	.board_list col:nth-child(1) {
-	    width: 30% !important;
+	    width: 15% !important;
 	}
-		
+	
 	.board_list col:nth-child(2) {
-	    width: 25% !important;
+	    width: 55% !important;
 	}
-		
+	
 	.board_list col:nth-child(3) {
 	    width: 20% !important;
 	}
-		
+	
 	.board_list col:nth-child(4) {
-	    width: 15% !important;
+	    width: 10% !important;
 	}
 	
 	a {
@@ -174,14 +182,14 @@
 		</div>
 		<table class="board_list">
 			<colgroup>
-				<col width="30%" />
-				<col width="40%" />
-				<col width="10%" />
+				<col width="15%" />
+				<col width="55%" />
+				<col width="20%" />
 				<col width="10%" />
 			</colgroup>
 			<thead>
 				<tr>
-					<th scope="col">행사</th>
+					<th scope="col">축제</th>
 					<th scope="col">제목</th>
 					<th scope="col">본문</th>
 					<th scope="col">작성자</th>

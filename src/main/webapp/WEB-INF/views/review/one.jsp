@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="com.multi.wave.review.ReviewVO" %>
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -83,6 +84,18 @@
 	<div class="main">
 		<h2>게시글 상세보기</h2>
 		<hr>
+		<% ReviewVO one = (ReviewVO)request.getAttribute("one");
+		if(session.getAttribute("loginMember").equals("admin") || session.getAttribute("loginMember").equals(one.getMem_id())) { %>
+		<div class="button" style="margin-bottom: 10px;">
+			<button>
+				<a href="review_update.jsp?review_id=${one.review_id}
+				&review_title=${one.review_title}
+				&review_content=${one.review_content}&review_image=${one.review_image}">수정</a>
+			</button>
+			<input id="b1" type="button" value="삭제">
+		</div>
+		<% } %>
+		<br>
 		<table class="container">
 			<colgroup>
 				<col width="15%" />
@@ -93,7 +106,7 @@
 			<tbody>
 				<tr>
 					<th scope="row">행사</th>
-					<td>${one_fsv_id}</td>
+					<td>${one.event_name}</td>
 					<th scope="row">작성자</th>
 					<td>${one.mem_id}</td>
 				</tr>
@@ -106,20 +119,15 @@
 				</tr>
 				<tr>
 					<td colspan="4" style="height: 200px;">
-						<img id="preview" src="#" style="max-width: 200px; max-height: 200px; align-content: flex-end;">
-						${one.review_image}</td>
+						<img src="../resources/upload/${one.review_image}" id="preview" src="#" style="max-width: 200px; max-height: 200px; align-content: flex-end;">
+						</td>
 				</tr>
 			</tbody>
 		</table>
 		<br>
-		<div class="button">
-			<button>
-				<a href="review_update.jsp?review_id=${one.review_id}
-				&review_title=${one.review_title}
-				&review_content=${one.review_content}">수정</a>
-			</button>
-			<input id="b1" type="button" value="삭제">
-		</div>
+		<button style="float: right;">
+			<a href="list">목록으로 돌아가기</a>
+		</button>
 	</div>
 </body>
 </html>

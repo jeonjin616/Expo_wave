@@ -5,12 +5,11 @@ public class ReviewVO {
 	private int review_id;
 	private String mem_id;
 	private int fsv_id;
-	private String fsv_name;
+	private String event_name;
 	private String show_id;
 	private String review_title;
 	private String review_content;
 	private String review_image;
-
 	public int getReview_id() {
 		return review_id;
 	}
@@ -28,6 +27,12 @@ public class ReviewVO {
 	}
 	public void setFsv_id(int fsv_id) {
 		this.fsv_id = fsv_id;
+	}
+	public String getEvent_name() {
+		return event_name;
+	}
+	public void setEvent_name(String event_name) {
+		this.event_name = event_name;
 	}
 	public String getShow_id() {
 		return show_id;
@@ -54,18 +59,11 @@ public class ReviewVO {
 		this.review_image = review_image;
 	}
 	
-	public String getFsv_name() {
-		return fsv_name;
-	}
-	public void setFsv_name(String fsv_name) {
-		this.fsv_name = fsv_name;
-	}
-	
-	
 	@Override
 	public String toString() {
-		return "ReviewVO [review_id=" + review_id + ", mem_id=" + mem_id + ", fsv_id=" + fsv_id + ", fsv_name="
-				+ fsv_name + ", show_id=" + show_id + ", review_title=" + review_title + ", review_content="
+		return "ReviewVO [review_id=" + review_id + ", mem_id=" + mem_id + ", fsv_id=" + fsv_id + ", event_name="
+				+ event_name + ", show_id=" + show_id + ", review_title=" + review_title + ", review_content="
 				+ review_content + ", review_image=" + review_image + "]";
 	}
+
 }
