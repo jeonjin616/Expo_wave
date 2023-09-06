@@ -12,12 +12,13 @@
     </insert>
     
     <update id="updateReply">
-        UPDATE reply_table
-        SET content = #{newContent}
+        UPDATE reply
+        SET content = #{newContent}, reg_date = DATE_FORMAT(DATE_ADD(NOW(), INTERVAL 9 HOUR), '%Y-%m-%d %H:%i:%s')
         WHERE reply_id = #{replyId}
     </update>
 	
 	<delete id="deleteReply" parameterType="int">
         DELETE FROM reply WHERE reply_id = #{reply_id}
     </delete>
+    
 </mapper>

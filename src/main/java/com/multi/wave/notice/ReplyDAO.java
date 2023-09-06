@@ -22,7 +22,7 @@ public class ReplyDAO {
     }
     
     public int updateReply(Map<String, Object> params) {
-        return sqlSession.update("replyMapper.updateReply", params);
+        return sqlSession.update("reply.updateReply", params);
     }
     
     public int deleteReply(int replyId) {

@@ -2,7 +2,7 @@
 <%@page import="com.multi.wave.notice.FaqDAO"%>
 <%@page import="java.util.List"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/header.jsp" %>
+<%@ include file="/header.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -27,7 +27,6 @@ header img {
 }
 
 nav {
-	
 	padding: 1rem;
 }
 
@@ -68,9 +67,8 @@ footer {
 
 h1 {
 	text-align: left;
-	padding-left: 45px;  /* 왼쪽 간격 20px 추가 */
+	padding-left: 285px;  /* 왼쪽 간격 20px 추가 */
 }
-
 
 table {
 	width: 70%;
@@ -91,7 +89,7 @@ td {
 th, td {
 	padding: 8px;
 	text-align: left;
-	border-left: none;  /* 세로 선 없앰 */
+	border-left: none; /* 세로 선 없앰 */
 	border-right: none; /* 세로 선 없앰 */
 }
 
@@ -126,7 +124,7 @@ th, td {
 
 .post-button:hover {
 	transform: translateY(-5px); /* 마우스 호버 시 약간 위로 올라가는 효과 */
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 강화 */
+	box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 강화 */
 }
 
 .search-container {
@@ -170,8 +168,7 @@ th, td {
 .search-results {
 	text-align: center;
 	margin: 50px auto;
-}  
-
+}
 
 ul {
 	list-style-type: none;
@@ -188,42 +185,84 @@ ul li {
 	font-weight: bold;
 	font-size: 18px;
 }  */
+.pagination {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+.pagination a, .pagination .current-page {
+	display: inline-block;
+	margin: 0 5px;
+	padding: 10px 20px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	text-align: center;
+}
+
+.pagination .current-page {
+	background-color: #007bff;
+	color: white;
+	border-color: #007bff;
+}
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-  $(document).ready(function() {
-	    $("#search-button").click(function(event) {
-	        event.preventDefault();
-	        let query = $("#search-input").val();
-	        $.ajax({
-	          url: '../notice/faq_ajaxSearch',
-	          type: 'GET',
-	          dataType: 'json',  // 추가된 부분
-	          data: { query: query },
-	          success: function(data) {
-	            $('tbody').empty();
-	            
-	            let tbodyContents = '';
+	$(document)
+			.ready(
+					function() {
+						$("#search-button")
+								.click(
+										function(event) {
+											event.preventDefault();
+											let query = $("#search-input")
+													.val();
+											$
+													.ajax({
+														url : '../notice/faq_ajaxSearch',
+														type : 'GET',
+														dataType : 'json', // 추가된 부분
+														data : {
+															query : query
+														},
+														success : function(data) {
+															$('tbody').empty();
 
-	            data.forEach(function(faq) {
-	              tbodyContents += '<tr>';
-	              tbodyContents += '<td class="faq_id">' + faq.faq_id + '</td>';
-	              tbodyContents += '<td class="faq_title"><a href="faq_one?id=' + faq.faq_id + '&title=' + faq.faq_title + '">' + faq.faq_title + '</a></td>';
-	              tbodyContents += '<td class="faq_create_date">' + faq.faq_create_date + '</td>';
-	              tbodyContents += '</tr>';
-	            });
+															let tbodyContents = '';
 
-	            $('tbody').html(tbodyContents);
-	          }
-	        });
-	      });
-	  });
+															data
+																	.forEach(function(
+																			faq) {
+																		tbodyContents += '<tr>';
+																		tbodyContents += '<td class="faq_id">'
+																				+ faq.faq_id
+																				+ '</td>';
+																		tbodyContents += '<td class="faq_title"><a href="faq_one?id='
+																				+ faq.faq_id
+																				+ '&title='
+																				+ faq.faq_title
+																				+ '">'
+																				+ faq.faq_title
+																				+ '</a></td>';
+																		tbodyContents += '<td class="faq_create_date">'
+																				+ faq.faq_create_date
+																				+ '</td>';
+																		tbodyContents += '</tr>';
+																	});
+
+															$('tbody')
+																	.html(
+																			tbodyContents);
+														}
+													});
+										});
+					});
 </script>
 </head>
 <body>
 
-	
+
 
 	<header>
 		<nav>
@@ -240,19 +279,29 @@ ul li {
 				<input type="text" id="search-input" name="query"
 					placeholder="검색어를 입력하세요" autocomplete="off">
 				<button type="submit" id="search-button">
-				<svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#000000}</style><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
+					<svg xmlns="http://www.w3.org/2000/svg" height="1.5em"
+						viewBox="0 0 512 512">
+						<!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+						<style>
+svg {
+	fill: #000000
+}
+</style>
+						<path
+							d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" /></svg>
 				</button>
 			</form>
 		</div>
 
-	
 
-		
-</header>
+
+
+	</header>
 
 	<footer>
 		<h1>자주하는 질문</h1>
-		<br><br>
+		<br>
+		<br>
 		<table>
 			<thead>
 				<tr>
@@ -264,13 +313,14 @@ ul li {
 					<!-- 클래스 적용 -->
 				</tr>
 			</thead>
-			
+
 			<tbody>
 				<c:forEach var="faq" items="${list}">
 					<tr>
 						<td class="faq_id">${faq.faq_id}</td>
 						<!-- 클래스 적용 -->
-						<td class="faq_title"><a href="faq_one?id=${faq.faq_id}&title=${faq.faq_title}">${faq.faq_title}</a></td>
+						<td class="faq_title"><a
+							href="faq_one?id=${faq.faq_id}&title=${faq.faq_title}">${faq.faq_title}</a></td>
 						<!-- 클래스 적용 -->
 						<td class="faq_create_date">${faq.faq_create_date}</td>
 						<!-- 클래스 적용 -->
@@ -280,9 +330,32 @@ ul li {
 			</tbody>
 
 		</table>
-	<c:if test="${loginMember eq 'admin'}">
-		<a href="faq_write_post.jsp" class="post-button">게시글 작성하기</a>
-	</c:if>
+
+		<div class="pagination">
+			<a href="../notice/faq?page=1"><<</a>
+			<c:if test="${currentPage > 5}">
+				<a href="../notice/faq?page=${startPage - 1}"><</a>
+			</c:if>
+			<c:forEach var="i" begin="${startPage}" end="${endPage}">
+				<c:choose>
+					<c:when test="${i eq currentPage}">
+						<span class="current-page">${i}</span>
+					</c:when>
+					<c:otherwise>
+						<a href="../notice/faq?page=${i}">${i}</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:if test="${endPage < pages}">
+				<a href="../notice/faq?page=${endPage + 1}">></a>
+			</c:if>
+			<a href="../notice/faq?page=${pages}">>></a>
+		</div>
+
+
+		<c:if test="${loginMember eq 'admin'}">
+			<a href="faq_write_post.jsp" class="post-button">게시글 작성하기</a>
+		</c:if>
 	</footer>
 </body>
 </html>

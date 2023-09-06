@@ -74,7 +74,7 @@ body {
     
     h1 {
 		text-align: left;
-		padding-left: 45px;  /* 왼쪽 간격 20px 추가 */
+		padding-left: 285px;  /* 왼쪽 간격 20px 추가 */
 	}
 
 
@@ -196,6 +196,24 @@ body {
             font-weight: bold;
             font-size: 18px;
         } */
+        .pagination {
+        	display: flex;
+        	justify-content: center;
+        	margin-top: 20px;
+    	}
+    	.pagination a, .pagination .current-page {
+        	display: inline-block;
+        	margin: 0 5px;
+        	padding: 10px 20px;
+        	border: 1px solid #ccc;
+        	border-radius: 4px;
+        	text-align: center;
+    	}
+    	.pagination .current-page {
+        	background-color: #007bff;
+        	color: white;
+        	border-color: #007bff;
+    	}
 </style>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -274,7 +292,7 @@ body {
 		</thead>
 		
 		<tbody>
-			<c:forEach var="board" items="${list}">
+			<c:forEach items="${list}" var="board">
 				<tr>
 					<td class="board_id">${board.board_id}</td>
 					<td class="board_title"><a href="one?id=${board.board_id}&title=${board.board_title}">${board.board_title}</a></td>
@@ -283,6 +301,28 @@ body {
 			</c:forEach>
 		</tbody>
 	</table>
+	
+	<div class="pagination">
+    	<a href="../notice/notice?page=1"><<</a>
+    	<c:if test="${currentPage > 5}">
+        	<a href="../notice/notice?page=${startPage - 1}"><</a>
+    	</c:if>
+    	<c:forEach var="i" begin="${startPage}" end="${endPage}">
+        	<c:choose>
+            	<c:when test="${i eq currentPage}">
+                	<span class="current-page">${i}</span>
+            	</c:when>
+            	<c:otherwise>
+                	<a href="../notice/notice?page=${i}">${i}</a>
+            	</c:otherwise>
+        	</c:choose>
+    	</c:forEach>
+    	<c:if test="${endPage < pages}">
+        	<a href="../notice/notice?page=${endPage + 1}">></a>
+    	</c:if>
+    	<a href="../notice/notice?page=${pages}">>></a>
+	</div>
+	
 <c:if test="${loginMember eq 'admin'}">
 	<a href="board_write_post.jsp" class="post-button">게시글 작성하기</a>
 </c:if>

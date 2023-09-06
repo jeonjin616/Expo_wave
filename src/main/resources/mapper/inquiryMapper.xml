@@ -5,7 +5,7 @@
 
     <insert id="insert" parameterType="InquiryVO" useGeneratedKeys="true" keyProperty="inqu_id">
     	insert into inqu (inqu_title, inqu_question, inqu_create_date, img, writer)
-    	values (#{inqu_title}, #{inqu_question}, NOW(), #{img}, #{writer})
+    	values (#{inqu_title}, #{inqu_question}, CONVERT_TZ(NOW(),@@session.time_zone,'+09:00'), #{img}, #{writer})
 	</insert>
 	
 	<delete id="delete" parameterType="InquiryVO">
@@ -16,7 +16,7 @@
 		update inqu
 		set inqu_title=#{inqu_title},
 		inqu_question=#{inqu_question}, img=#{img},
-		inqu_create_date=DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s')
+		inqu_create_date=DATE_FORMAT(DATE_ADD(NOW(), INTERVAL 9 HOUR), '%Y-%m-%d %H:%i:%s')
 		where inqu_id=#{inqu_id}
 	</update>
 
@@ -37,5 +37,23 @@
     	SELECT * FROM inqu WHERE inqu_title LIKE CONCAT('%', #{query}, '%')
 	</select>
     
+    <select id="listAll" resultType="InquiryVO">
+    	SELECT * FROM inqu
+	</select>
+	
+	<select id="getPagedInqu" resultType="InquiryVO" parameterType="PagingVO">
+    	SELECT *
+    	FROM (
+        	SELECT  @row_number:=@row_number + 1 AS inqu_row_number, b.*
+        	FROM    inqu b, (SELECT @row_number:=0) r
+        	ORDER BY inqu_id DESC
+    	) AS inqu_with_row
+    	WHERE inqu_with_row.inqu_row_number BETWEEN #{start} + 1 AND #{end} + 1
+	</select>
+
+	
+	<select id="count" resultType="Integer">
+		select count(*) from inqu
+	</select>
     
 </mapper>

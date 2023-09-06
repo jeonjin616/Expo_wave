@@ -4,7 +4,7 @@
 	<insert id="insert" parameterType="faqVO"
 		useGeneratedKeys="true" keyProperty="faq_id">
 		insert into faq values
-		(null,#{faq_title},#{faq_content},NOW(),#{img})
+		(null,#{faq_title},#{faq_content},CONVERT_TZ(NOW(),@@session.time_zone,'+09:00'),#{img})
 	</insert>
 
 	<delete id="delete" parameterType="FaqVO">
@@ -15,7 +15,7 @@
 		update faq
 		set faq_title=#{faq_title},
 		faq_content=#{faq_content}, img=#{img},
-		faq_create_date=DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s')
+		faq_create_date=DATE_FORMAT(DATE_ADD(NOW(), INTERVAL 9 HOUR), '%Y-%m-%d %H:%i:%s')
 		where faq_id=#{faq_id}
 	</update>
 
@@ -34,6 +34,21 @@
 	
 	<select id="searchFaq" parameterType="String" resultType="FaqVO">
     	SELECT * FROM faq WHERE faq_title LIKE CONCAT('%', #{query}, '%')
+	</select>
+	
+	<select id="getPagedFaq" resultType="FaqVO" parameterType="PagingVO">
+    	SELECT *
+    	FROM (
+        	SELECT  @row_number:=@row_number + 1 AS faq_row_number, b.*
+        	FROM    faq b, (SELECT @row_number:=0) r
+        	ORDER BY faq_id DESC
+    	) AS faq_with_row
+    	WHERE faq_with_row.faq_row_number BETWEEN #{start} + 1 AND #{end} + 1
+	</select>
+
+	
+	<select id="count" resultType="Integer">
+		select count(*) from faq
 	</select>
 </mapper>
 
