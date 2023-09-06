@@ -242,6 +242,17 @@
 														});
 											});
 						});
+		
+		// '취소' 버튼을 눌렀을 때 모달을 닫음
+		$("#passwordPopup .btn-secondary").click(function(){
+		  $("#passwordPopup").modal("hide");
+		});
+
+		// 'X' 버튼을 눌렀을 때 모달을 닫음
+		$("#passwordPopup .close").click(function(){
+		  $("#passwordPopup").modal("hide");
+		});
+
 	</script>
 </body>
 </html>
