@@ -149,9 +149,8 @@ p {
 	font-weight: bold;
 	color: #393939;
 	padding-top: 30px;
-	padding-left: 180px;
-	/* margin: auto;
-		transition: padding-left 0.5s ease; */
+	padding-left: 110px;
+
 }
 
 @media ( max-width : 1200px) {
