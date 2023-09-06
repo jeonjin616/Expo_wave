@@ -11,7 +11,7 @@ public class PagingVO {
 		//무조건 1부터 시작
 		//1page: 1 + 0 * 10 => start 1
 		//2page: 1 + 1 * 10 => start 11  
-		end = page * 6+1;
+		end = page * 6;
 		//1page: 1 * 10 => end 10
 		//2page: 2 * 10 => end 20
 	}

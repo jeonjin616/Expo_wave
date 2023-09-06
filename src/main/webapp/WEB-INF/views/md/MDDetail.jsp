@@ -72,15 +72,11 @@
 						alt="게시글 이미지2">
 				</c:when>
 				<c:otherwise>
-					<!-- 이미지가 없는 경우 
+					<!-- 이미지가 없는 경우  -->
 					<img
 						src="${pageContext.request.contextPath}/resources/img/logo.png"
-						alt="로고 이미지"> -->
+						alt="로고 이미지">
 
-					<!-- 이미지 가져오는지 정상 테스트용 코드 -->
-					<img
-						src="${pageContext.request.contextPath}/resources/img/${postvo.MD_post_Thumbnail}"
-						alt="게시글 이미지2">
 				</c:otherwise>
 			</c:choose>
 			<br> <br> <br>
