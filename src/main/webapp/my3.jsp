@@ -1,12 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" name="referrer" content="no-referrer-when-downgrade"/>
+<meta charset="utf-8" name="referrer"
+	content="no-referrer-when-downgrade" />
 <link rel="stylesheet" href="resources/css/my/my.css">
 <title>내게 맞는 행사</title>
 </head>
+<style>
+.place-list-item {
+	border: 1px solid #000;
+	width: 250px;
+	margin-bottom: 20px;
+	padding: 10px;
+	cursor: pointer;
+}
+
+.place-name {
+	color: black;
+	font-weight: bold;
+}
+
+.place-image {
+	width: 100%;
+	max-height: 250px;
+	display: block;
+	margin-top: 10px;
+}
+</style>
 <body>
 	<div class="map_wrap">
 		<div id="map"
@@ -30,7 +53,8 @@
 	<script type="text/javascript" src="resources/js/jquery-3.6.1.js"></script>
 	<script type="text/javascript">
 		$(function() {
-			$.ajax({
+			$
+					.ajax({
 						url : "my",
 						dataType : "json",
 						success : function(json_array) {
@@ -41,14 +65,9 @@
 								center : new kakao.maps.LatLng(
 										json_array[0].fsv_lat,
 										json_array[0].fsv_lon), // 지도의 중심좌표
-													
 								level : 10
 							// 지도의 확대 레벨
 							};
-
-							
-							
-							
 							var map = new kakao.maps.Map(mapContainer,
 									mapOption); // 지도를 생성합니다
 							// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
@@ -62,6 +81,13 @@
 							map.addControl(zoomControl,
 									kakao.maps.ControlPosition.RIGHT);
 							map.setMaxLevel(12);
+							// 마커 클러스터러를 생성합니다 
+							var clusterer = new kakao.maps.MarkerClusterer({
+								map : map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
+								averageCenter : true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
+								minLevel : 10
+							// 클러스터 할 최소 지도 레벨 
+							})
 
 							// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
 							if (navigator.geolocation) {
@@ -108,12 +134,8 @@
 											title : json.fsv_name,
 											latlng : new kakao.maps.LatLng(
 													json.fsv_lat, json.fsv_lon)
-										
 										})
 									})
-									
-									
-									
 							// 마커 이미지의 이미지 주소입니다
 							var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 							for (var i = 0; i < positions.length; i++) {
@@ -132,9 +154,17 @@
 								});
 								var ps = new kakao.maps.services.Places();
 								// 마커에 표시할 인포윈도우를 생성합니다 
+								var iwContent = '<div style="padding:5px;">Hello World!</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+								iwPosition = new kakao.maps.LatLng(33.450701,
+										126.570667), //인포윈도우 표시 위치입니다
+								iwRemoveable = false; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+
+								// 인포윈도우를 생성하고 지도에 표시합니다
 								var infowindow = new kakao.maps.InfoWindow({
-									content : positions[i].content
-								// 인포윈도우에 표시할 내용
+									map : map, // 인포윈도우가 표시될 지도
+									position : iwPosition,
+									content : iwContent,
+									removable : iwRemoveable
 								});
 								// 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
 								// 이벤트 리스너로는 클로저를 만들어 등록합니다 
@@ -170,13 +200,6 @@
 									alert('키워드를 입력해주세요!');
 									return false;
 								}
-								
-								
-								
-								
-								
-								
-								
 								// 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
 								$
 										.ajax({
@@ -205,22 +228,27 @@
 												var mapTypeControl2 = new kakao.maps.MapTypeControl();
 												// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
 												// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-												map2.addControl(
+												map2
+														.addControl(
 																mapTypeControl2,
 																kakao.maps.ControlPosition.TOPRIGHT);
 												// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
 												var zoomControl2 = new kakao.maps.ZoomControl();
-												map2.addControl(
+												map2
+														.addControl(
 																zoomControl2,
 																kakao.maps.ControlPosition.RIGHT);
 												map2.setMaxLevel(12);
-												
-												// 마커를 표시할 위치와 title 객체 배열입니다 
+
 												var positions2 = []
-												$(json_array2).each(function(i,json) {
-																positions2.push({
-																	title : json.fsv_name,
-																	latlng : new kakao.maps.LatLng(
+												$(json_array2)
+														.each(
+																function(i,
+																		json) {
+																	positions2
+																			.push({
+																				title : json.fsv_name,
+																				latlng : new kakao.maps.LatLng(
 																						json.fsv_lat,
 																						json.fsv_lon)
 																			})
@@ -241,7 +269,6 @@
 																position : positions2[i].latlng, // 마커를 표시할 위치
 																title : positions2[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 																image : markerImage
-																
 															// 마커 이미지 
 															});
 													var ps2 = new kakao.maps.services.Places();
@@ -283,21 +310,59 @@
 														infowindow2.close();
 													};
 												}
-												//ps2.keywordSearch( keyword, placesSearchCB); 
-												$(json_array2)
-														.each(function(i,json) {
-																	let top = '<table border=1><tr><td>'
-																	let name = '<span style="color:red; font-style:bold;">'
-																			+ json.fsv_name
-																			+ '</span><br>'
-																	let img = '<img src=' + json.fsv_thumb + ' width=100 height=100><br>'
-																	let one = name
-																			+ img
-																	let bottom = '</td></tr></table>'
-																	let total = top
-																			+ one
-																			+ bottom
-																	$('#placesList').append(total)})
+												//검색 데이터 부분------------------------------------
+												$(document)
+														.ready(
+																function() {
+																	$(
+																			json_array2)
+																			.each(
+																					function(
+																							i,
+																							json) {
+																						//console.log('fsv_id:', json.fsv_id);
+																						let listItem = $(
+																								'<div>')
+																								.addClass(
+																										'place-list-item')
+																								.text(
+																										json.fsv_name)
+																								.hover(
+																										function() {
+																											let image = $(
+																													'<img>')
+																													.addClass(
+																															'place-image')
+																													.attr(
+																															'src',
+																															json.fsv_thumb);
+																											$(
+																													this)
+																													.append(
+																															image);
+																										},
+																										function() {
+																											$(
+																													this)
+																													.find(
+																															'.place-image')
+																													.remove();
+																										});
+
+																						listItem
+																								.click(function() {
+																									//console.log('Clicked fsv_id:', json.fsv_id); 
+																									var linkUrl = 'festivaldetail/'
+																											+ json.fsv_id;
+																									window.location.href = linkUrl;
+																								});
+
+																						$(
+																								'#placesList')
+																								.append(
+																										listItem);
+																					});
+																});
 												// 검색결과 항목을 Element로 반환하는 함수입니다
 												function getListItem(index,
 														places) {
@@ -334,7 +399,7 @@
 												alert('my2 error')
 											}
 										})
-								ps2.keywordSearch( keyword, placesSearchCB); 
+								//ps2.keywordSearch( keyword, placesSearchCB); 
 							}
 							// 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
 							function placesSearchCB(data, status, pagination) {
@@ -497,15 +562,8 @@
 								//alert('called ---0 ')
 								searchPlaces()
 							})
-								
 						}//success
 					})//ajax
-					
-					
-					
-					
-					
-				
 		})//$
 	</script>
 </body>
