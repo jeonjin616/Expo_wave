@@ -124,15 +124,15 @@
 </script>
 <style>
 .header {
-	position: relative;
-	margin-top: 125px;
+	 position: relative;
+    margin-top: 200px; 
 }
 
 #header {
 	padding-top: 0px;
 	padding-bottom: 0px;
 	width: 100%;
-}
+} 
 
 .banner {
 	position: relative;
