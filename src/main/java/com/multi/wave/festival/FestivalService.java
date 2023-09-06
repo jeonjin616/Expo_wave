@@ -26,7 +26,7 @@ public class FestivalService {
 		festivalDAO.insert(vo);
 	}
 	//@Scheduled(fixedRate = 180000) // 1분마다 실행 , 60000(1분) 
-	@Scheduled(cron = "0 0 4 1/30 * ?") //30일 마다  4:00 AM 
+	@Scheduled(cron = "0 0 4 * * *") // 4:00 AM 
 	public void fetchDataAndInsert() {
 	    try {
 	    	// 기존 데이터 삭제

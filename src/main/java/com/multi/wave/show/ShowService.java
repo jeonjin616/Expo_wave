@@ -21,18 +21,13 @@ public class ShowService {
     @Autowired
     ShowParser parser;
     
-	/*
-	 * @Value("${show.serviceKey}") // Import this annotation private String key; //
-	 * Define a field to hold the serviceKey value
-	 * 
-	 */
     public void insert(ShowVO vo) {
         showDAO.insert(vo);
         
     }
     
-    //@Scheduled(fixedRate = 300000) // 1분마다 실행 , 60000(1분) 
-    @Scheduled(cron = "0 0 4 1/30 * ?") // 30일 마다  4:00 AM 
+    
+    @Scheduled(cron = "0 0 4 * * *") // 4:00 AM 
     public void fetchDataAndInsert() {
         try {
         	
