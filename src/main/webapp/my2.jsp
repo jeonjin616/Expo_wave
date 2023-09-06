@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,27 @@
 <link rel="stylesheet" href="resources/css/my/my.css">
 <title>내게 맞는 행사</title>
 </head>
+<style>
+.place-list-item {
+    border: 1px solid #000;
+    width: 250px;
+    margin-bottom: 20px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.place-name {
+    color: black;
+    font-weight: bold;
+}
+
+.place-image {
+    width: 100%;
+    max-height: 250px;
+    display: block;
+    margin-top: 10px;
+}
+</style>
 <body>
 	<div class="map_wrap">
 		<div id="map"
@@ -64,19 +86,7 @@
 								minLevel : 10
 							// 클러스터 할 최소 지도 레벨 
 							})
-							/* 			    // 데이터를 가져오기 위해 jQuery를 사용합니다
-							 // 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
-							 $.get("resources/json/clu.json", function(data) {
-							 // 데이터에서 좌표 값을 가지고 마커를 표시합니다
-							 // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
-							 var markers = $(data.positions).map(function(i, position) {
-							 return new kakao.maps.Marker({
-							 position : new kakao.maps.LatLng(position.fsv_lat, position.fsv_lon)
-							 });
-							 });
-							 // 클러스터러에 마커들을 추가합니다
-							 clusterer.addMarkers(markers);
-							 }); */
+						
 							// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
 							if (navigator.geolocation) {
 								// GeoLocation을 이용해서 접속 위치를 얻어옵니다
@@ -217,74 +227,7 @@
 																zoomControl2,
 																kakao.maps.ControlPosition.RIGHT);
 												map2.setMaxLevel(12);
-												/* // 마커 클러스터러를 생성합니다 
-												  					var clusterer2 = new kakao.maps.MarkerClusterer({
-															        map: map2, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
-															        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-															        minLevel: 10 // 클러스터 할 최소 지도 레벨 
-															    })
-																 
-															    // 데이터를 가져오기 위해 jQuery를 사용합니다
-															    // 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
-															    $.get("resources/json/clu.json", function(data2) {
-															        // 데이터에서 좌표 값을 가지고 마커를 표시합니다
-															        // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
-															        var markers2 = $(data2.positions).map(function(i, position2) {
-															            return new kakao.maps.Marker({
-															                position2 : new kakao.maps.LatLng(position2.fsv_lat, position2.fsv_lon)
-															            });
-															        });
-															        // 클러스터러에 마커들을 추가합니다
-															        clusterer2.addMarkers(markers2);
-															    });
-															
-																// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
-																if (navigator.geolocation) {
-																    
-																    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-																    navigator.geolocation.getCurrentPosition(function(position) {
-																        
-																        var lat = position.coords.latitude, // 위도
-																            lon = position.coords.longitude; // 경도
-																        
-																        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-																            message = '<div style="padding:5px;">당신의 현재 위치!</div>'; // 인포윈도우에 표시될 내용입니다
-																        
-																        // 마커와 인포윈도우를 표시합니다
-																        displayMarker(locPosition, message);
-																            
-																      });
-																    
-																} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-																    
-																    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
-																        message = '당신의 위치를 모르겠어요...'
-																        
-																    displayMarker(locPosition, message);
-																}
-																// 지도에 마커와 인포윈도우를 표시하는 함수입니다
-																function displayMarker(locPosition, message) {
-																    // 마커를 생성합니다
-																    var marker2 = new kakao.maps.Marker({  
-																        map: map, 
-																        position: locPosition
-																    }); 
-																    
-																    var iwContent2 = message, // 인포윈도우에 표시할 내용
-																        iwRemoveable2 = true;
-																    // 인포윈도우를 생성합니다
-																    var infowindow2 = new kakao.maps.InfoWindow({
-																        content : iwContent2,
-																        removable : iwRemoveable2
-																    });
-																    
-																    // 인포윈도우를 마커위에 표시합니다 
-																    infowindow2.open(map, marker);
-																    
-																    // 지도 중심좌표를 접속위치로 변경합니다
-																    map2.setCenter(locPosition);      
-																}     */
-												// 마커를 표시할 위치와 title 객체 배열입니다 
+												
 												var positions2 = []
 												$(json_array2).each(function(i,json) {
 																positions2.push({
@@ -351,20 +294,35 @@
 														infowindow2.close();
 													};
 												}
-												$(json_array2)
-														.each(function(i,json) {
-																	let top = '<table border=1><tr><td>'
-																	let name = '<span style="color:red; font-style:bold;">'
-																			+ json.fsv_name
-																			+ '</span><br>'
-																	let img = '<img src=' + json.fsv_thumb + ' width=100 height=100><br>'
-																	let one = name
-																			+ img
-																	let bottom = '</td></tr></table>'
-																	let total = top
-																			+ one
-																			+ bottom
-																	$('#placesList').append(total)})
+										//검색 데이터 부분------------------------------------
+												$(document).ready(function () {
+												    $(json_array2).each(function (i, json) {
+												    	 //console.log('fsv_id:', json.fsv_id);
+												        let listItem = $('<div>')
+												            .addClass('place-list-item')
+												            .text(json.fsv_name)
+												            .hover(
+												                function () {
+												                    let image = $('<img>')
+												                        .addClass('place-image')
+												                        .attr('src', json.fsv_thumb);
+												                    $(this).append(image);
+												                },
+												                function () {
+												                    $(this).find('.place-image').remove();
+												                }
+												            );
+												           
+												                listItem.click(function () {
+												                	//console.log('Clicked fsv_id:', json.fsv_id); 
+												                	var linkUrl = 'festivaldetail/' + json.fsv_id;
+												                    window.location.href = linkUrl;
+												                });
+												           
+
+												            $('#placesList').append(listItem);
+												    });
+												});
 												// 검색결과 항목을 Element로 반환하는 함수입니다
 												function getListItem(index,
 														places) {
