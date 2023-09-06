@@ -7,12 +7,12 @@
 <title>MainPage</title>
 <script type="text/javascript" src="resources/js/jquery-3.6.1.js"></script>
 <script type="text/javascript">
+	// Ajax 요청을 보냅니다.
+	$(function() {
+		// 문서가 준비되면 이 코드 블록이 실행됩니다.
 
-		// Ajax 요청을 보냅니다.
-		$(function() {
-			// 문서가 준비되면 이 코드 블록이 실행됩니다.
-
-			$.ajax({
+		$
+				.ajax({
 					url : "list_festival",
 					success : function(data) {
 						// Ajax 요청이 성공하면 이 코드 블록이 실행됩니다.
@@ -31,7 +31,7 @@
 							var name = festival.querySelector("fsv_name").textContent;
 							var imgSrc = festival.querySelector("fsv_thumb").textContent;
 							if (!imgSrc) {
-							    imgSrc = defaultImageSrc; // Use the default image if no image data is available.
+								imgSrc = defaultImageSrc; // Use the default image if no image data is available.
 							}
 							var defaultImageSrc = 'resources/img/thumb_ing.gif';
 							// 이미지를 클릭할 때 이동할 동적 URL 설정
@@ -50,7 +50,8 @@
 
 							var festivalInfo = document.createElement("div");
 							festivalInfo.className = "festival-info";
-							festivalInfo.innerHTML = "<div class='festival-name'>" + name + "</div>";
+							festivalInfo.innerHTML = "<div class='festival-name'>"
+									+ name + "</div>";
 
 							linkElement.appendChild(imgElement); // <a> 태그 내에 이미지 추가
 							festivalItem.appendChild(linkElement); // 링크된 이미지를 festivalItem에 추가
@@ -83,7 +84,7 @@
 					var name = show.querySelector("show_name").textContent;
 					var imgSrc = show.querySelector("show_poster").textContent;
 					if (!imgSrc) {
-					    imgSrc = defaultImageSrc; // Use the default image if no image data is available.
+						imgSrc = defaultImageSrc; // Use the default image if no image data is available.
 					}
 					var defaultImageSrc = 'resources/img/thumb_ing.gif';
 
@@ -122,6 +123,10 @@
 	});
 </script>
 <style>
+.header {
+	position: relative;
+	margin-top: 125px;
+}
 
 .banner {
 	position: relative;
@@ -177,6 +182,7 @@ p {
 </style>
 </head>
 <body>
+	<div class="header"></div>
 	<%@ include file="header.jsp"%>
 	<div class="banner"></div>
 	<%@ include file="banner.jsp"%>
