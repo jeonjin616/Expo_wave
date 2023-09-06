@@ -6,7 +6,7 @@
 <head>
 <meta charset="utf-8" name="referrer" content="no-referrer-when-downgrade"/>
 <link rel="stylesheet" href="resources/css/my/my.css">
-<title>내게 맞는 행사</title>
+<title>Wave Map</title>
 </head>
 <style>
 .place-list-item {
