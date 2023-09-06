@@ -159,7 +159,7 @@ body {
 					<li class="marginleft"><a
 						href="<c:url value='/notice/notice'/>">고객센터</a></li>
 					<li class="marginleft"><a
-						href="my2.jsp">내게 맞는 행사</a></li>
+						href="<c:url value='/my2.jsp'/>">내게 맞는 행사</a></li>
 						
 				</ul>
 				<div class="search-bar">
