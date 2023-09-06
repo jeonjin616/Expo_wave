@@ -26,6 +26,7 @@
 		<typeAlias type="com.multi.wave.MainFestivalVO" alias="MainFestivalVO"></typeAlias>
 		<typeAlias type="com.multi.wave.md.PagingVO" alias="PagingVO"></typeAlias>
 		<typeAlias type="com.multi.wave.notice.PagingVO2" alias="PagingVO2"></typeAlias>	
+		<typeAlias type="com.multi.wave.review.ReviewVO" alias="ReviewVO"></typeAlias>
 	</typeAliases>
 
 	<mappers>
@@ -47,6 +48,6 @@
 		<mapper resource="mapper/myMapper.xml" />
 		<mapper resource="mapper/reviewMapper.xml" />
 		<mapper resource="mapper/mainMapper.xml" />
-		<mapper resource="mapper/chatBotMapper.xml" />
+	  <mapper resource="mapper/chatBotMapper.xml" />
 	</mappers>
 </configuration>

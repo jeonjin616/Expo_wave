@@ -14,10 +14,9 @@ input {
 	border-radius: 0.1875em;
 }
 
-.login {
+.idSearchRes {
 	width: 400px;
-	/* height: 440px; */
-	height: 375px;
+	height: 300px;
 	margin: 0 auto;
 	margin-top: 100px;
 	margin-bottom: 100px;
@@ -26,7 +25,7 @@ input {
 	border-radius: 21px;
 }
 
-.loginHeader {
+.idSearchResHeader {
 	background-color: #8AAAE5;
 	border-top-left-radius: 1.25em;
 	border-top-right-radius: 1.25em;
@@ -34,7 +33,7 @@ input {
 	padding: 0.5em;
 }
 
-.loginForm {
+.idSearchResBody {
 	border-bottom-left-radius: 1.25em;
 	border-bottom-right-radius: 1.25em;
 	display: grid;
@@ -57,7 +56,8 @@ input {
 }
 
 .btn-1 {
-margin-left: 5px;
+	outline: none;
+	margin-left: 5px;
 	background: #8AAAE5;
 	background: linear-gradient(0deg, #8AAAE5 0%,
 		#8AAAE5 100%);
@@ -68,4 +68,9 @@ margin-left: 5px;
 	background: #8AAAE5;
 	background: linear-gradient(0deg, #8AAAE5 0%,
 		#8a8de5 100%);
+	cursor:pointer;
+}
+
+#pwSearch {
+	display : none;
 }

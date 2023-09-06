@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ include file="/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,13 +30,13 @@
 			<br><br><br>
 			<div class="option" style="text-align: center;">
 				<a href="idSearch.jsp"><span>아이디 찾기</span></a>
-				<span>/</span>
-				<a href=""><span>비밀번호 찾기</span></a>
+				<!-- <span>/</span>
+				<a href=""><span>비밀번호 찾기</span></a> -->
 			</div>
 			<div style="text-align: center;">
 				<br>
-				<button class="btn btn-primary" id="loginBtn">로그인</button>
-				<input class="btn btn-primary" type="button" value="회원가입" onClick="location.href='/wave/member/join.jsp'">
+				<button class="btn btn-primary btn-1" id="loginBtn">로그인</button>
+				<input class="btn btn-primary btn-1" type="button" value="회원가입" onClick="location.href='/wave/member/join.jsp'">
 			</div>
 			<br>
 			<!-- 네이버 로그인 버튼 노출 영역 -->

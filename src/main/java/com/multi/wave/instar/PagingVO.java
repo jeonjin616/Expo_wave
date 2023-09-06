@@ -1,4 +1,4 @@
-package com.multi.wave.md;
+package com.multi.wave.instar;
 
 public class PagingVO {
 	private int start;
@@ -7,11 +7,11 @@ public class PagingVO {
 
 	public void setStartEnd(int page) {
 		//page별로 start, end값만 구해주면 됨.
-		start = 1 + (page - 1) * 6; 
+		start = 1 + (page - 1) * 9; 
 		//무조건 1부터 시작
 		//1page: 1 + 0 * 10 => start 1
 		//2page: 1 + 1 * 10 => start 11  
-		end = page * 6;
+		end = page * 9+1;
 		//1page: 1 * 10 => end 10
 		//2page: 2 * 10 => end 20
 	}
@@ -39,5 +39,12 @@ public class PagingVO {
 	public void setEnd(int end) {
 		this.end = end;
 	}
+
+	@Override
+	public String toString() {
+		return "PagingVO [start=" + start + ", end=" + end + ", page=" + page + "]";
+	}
+	
+	
 
 }

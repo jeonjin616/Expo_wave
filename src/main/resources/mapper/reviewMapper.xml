@@ -5,7 +5,7 @@
 	<insert id="insert" parameterType="reviewVO"
 		useGeneratedKeys="true" keyProperty="review_id">
 		insert into review
-		values (null, #{mem_id}, #{fsv_id}, #{show_id}, #{review_title}, #{review_content}, #{review_image})
+		values (null, #{mem_id}, #{fsv_id}, #{show_id}, #{review_title}, #{review_content}, #{review_image}, #{event_name})
 	</insert>
 
 	<delete id="delete" parameterType="reviewVO">
@@ -15,7 +15,8 @@
 	<update id="update" parameterType="reviewVO" >
 		update review
 		set review_title=#{review_title},
-		review_content=#{review_content}
+		review_content=#{review_content},
+		review_image=#{review_image}
 		where review_id=#{review_id}
 	</update>
 
@@ -27,6 +28,22 @@
 
 	<select id="list" resultType="reviewVO">
 		select * from review
+	</select>
+	
+	<select id="list_fsv" resultType="reviewVO">
+		select * from review where show_id = '0'
+	</select>
+	
+	<select id="list_show" resultType="reviewVO">
+		select * from review where fsv_id = 0
+	</select>
+	
+	<select id="search_fsv" resultType="FestivalVO" parameterType="String">
+		select fsv_id, fsv_name from festival where fsv_name like CONCAT('%', #{q}, '%')
+	</select>
+	
+	<select id="search_show" resultType="ShowVO" parameterType="String">
+		select show_id, show_name from wave.show where show_name like CONCAT('%', #{q}, '%')
 	</select>
 	
 	<select id="one" parameterType="int" resultType="reviewVO">
