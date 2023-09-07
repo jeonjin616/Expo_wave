@@ -3,31 +3,60 @@
 
 <mapper namespace="MD">
 
-	<select id ="PostsAll" resultType="mdPostDTO">
-		select * from md_posts
+	<select id="postsAll" resultType="mdPostVO" parameterType="PagingVO">
+		select * from
+		(select ROW_NUMBER() over(order by MD_id desc) as MD_row_number, b.*
+		from md_posts b) md_posts2
+		where md_posts2.MD_row_number between #{start} and #{end}
 	</select>
-	
-	<insert id ="PostsMake" parameterType="mdPostDTO">
-		insert into md_posts (MD_title, MD_content,MD_create,MD_post_Thumbnail) values (#{MD_title},#{MD_content},now(),#{MD_post_Thumbnail})
+
+	<insert id="postsMake" parameterType="mdPostVO">
+		insert into md_posts
+		(MD_title, MD_content,MD_create,MD_post_Thumbnail) values
+		(#{MD_title},#{MD_content},DATE_ADD(now(), interval 9 HOUR),#{MD_post_Thumbnail})
 	</insert>
 
-	<select id="GetPostsById" resultType="mdPostDTO" parameterType="int">
+	<select id="getPostsById" resultType="mdPostVO"
+		parameterType="int">
 		select * from md_posts
 		where MD_id = #{MD_id}
+
 	</select>
-	
-	<update id="PostUpdate" parameterType="mdPostDTO">
+	<select id="getPostsByTitle" resultType="mdPostVO"
+		parameterType="String">
+		SELECT * FROM md_posts
+		WHERE MD_title LIKE CONCAT('%',
+		#{MD_title}, '%')
+	</select>
+
+	<update id="postUpdate" parameterType="mdPostVO">
 		update md_posts
-		set MD_title = #{MD_title},
-			MD_content = #{MD_content},
-			MD_modifi = now()
+		set
+		MD_title = #{MD_title},
+		MD_content = #{MD_content},
+		MD_modifi = DATE_ADD(now(), interval 9 HOUR),
+		MD_post_Thumbnail = #{MD_post_Thumbnail}
 		where MD_id = #{MD_id}
 	</update>
-	
-	<!-- #{MD_id} -> 파라미터 타입  -->
-	<delete id ="PostDelete" parameterType="mdPostDTO" >
-		delete from md_posts
-		where MD_id = #{MD_id}
-	</delete>
 
+	<!-- #{MD_id} -> 파라미터 타입 -->
+	<delete id="postDelete" parameterType="mdPostVO">
+		delete from
+		md_posts
+		where
+		MD_id = #{MD_id}
+	</delete>
+	
+	<select id="postCount" resultType="mdPostVO" parameterType="PagingVO">
+		select * from
+		(select ROW_NUMBER() over(order by MD_id desc) as MD_row_number, b.*
+		from md_posts b)
+		md_posts2
+		where md_posts2.MD_row_number between ${start} and ${end}
+	</select>
+	
+	<select id="count" resultType="Integer">
+		select count(*) from md_posts
+	</select>
+	
 </mapper>

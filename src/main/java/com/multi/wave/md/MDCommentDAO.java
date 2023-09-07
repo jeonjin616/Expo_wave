@@ -14,24 +14,24 @@ public class MDCommentDAO {
 	@Autowired
 	SqlSessionTemplate mdCommentSST;
 
-	//전체 가져오기
-	public List<MDCommentDTO> getMDCommentById(int id) {
-		List<MDCommentDTO> commentList = mdCommentSST.selectList("MD.GetCommentById", id);
+	//댓글 전체 가져오기
+	public List<MDCommentVO> getMDCommentById(int id) {
+		List<MDCommentVO> commentList = mdCommentSST.selectList("MD.getCommentById", id);
 		return commentList;
 	}
 
 	//댓글 작성하기
-	public int MDCommentinsert(MDCommentDTO mdCommentDTO) {
-		return mdCommentSST.insert("MD.CommentMake",mdCommentDTO);
+	public int MDCommentinsert(MDCommentVO mdCommentvo) {
+		return mdCommentSST.insert("MD.commentMake",mdCommentvo);
 	}
 	
 	//댓글 삭제하기
-	public int MDCommentdelete(MDCommentDTO mdCommentdto) {
-		return mdCommentSST.delete("MD.CommentDelete", mdCommentdto);
+	public int MDCommentdelete(MDCommentVO mdCommentvo) {
+		return mdCommentSST.delete("MD.commentDelete", mdCommentvo);
 	}
 	
 	//댓글 수정하기
-	public int MDCommentupdate(MDCommentDTO mdcommentdto) {
-		return mdCommentSST.update("MD.CommentUpdate",mdcommentdto);
+	public int MDCommentupdate(MDCommentVO mdCommentvo) {
+		return mdCommentSST.update("MD.commentUpdate",mdCommentvo);
 	}
 }

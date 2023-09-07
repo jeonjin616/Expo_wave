@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="my">
+
+	<select id="list" resultType="MyVO">
+		select * from festival
+	</select>
+
+<!-- 	<select id="list2" resultType="MyVO" parameterType="String">
+		SELECT CONCAT(fsv_name, ' from festival') AS result FROM festival WHERE
+		fsv_name LIKE CONCAT('%', #{find}, '%')
+		UNION
+		SELECT CONCAT(show_name, ' from show') AS result FROM show WHERE show_name
+		LIKE CONCAT('%', #{find}, '%');
+
+
+
+	</select> -->
+
+
+
+		<select id="list2" resultType="MyVO" parameterType="String">
+		select * from
+		festival where fsv_name LIKE concat('%',#{find}, '%') </select>
+
+	<!-- <select id="list3" resultType="MyVO2"> select * from show </select> 
+		<select id="list4" resultType="MyVO2" parameterType="String"> select * from 
+		show where show_name LIKE concat('%',#{find}, '%') </select> -->
+</mapper>
+
+
+
+
+
+
+

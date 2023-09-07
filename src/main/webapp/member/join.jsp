@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ include file="/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
+<link rel="stylesheet" type="text/css" href="../resources/css/member/join.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="../resources/js/member/memberJoin.js"></script>
 </head>
@@ -23,12 +25,11 @@
 			</tr>
 			<tr>
 				<th rowspan="2">비밀번호</th>
-				<td><input type="password" id="mem_pw" name="mem_pw" placeholder="비밀번호를 입력해주세요" value="1234"></td>
+				<td><input type="password" class="pw" id="mem_pw" name="mem_pw" placeholder="비밀번호를 입력해주세요" value="1234"></td>
 			</tr>
 			<tr>
 				<td>
-					<input type="password" id="mem_pw2" placeholder="비밀번호를 다시 입력해주세요" value="1234">
-					<span id="pwChk">비밀번호 비교 문구 출력</span>
+					<input type="password" class="pw" id="mem_pw2" placeholder="비밀번호를 다시 입력해주세요" value="1234">
 				</td>
 			</tr>
 			<tr>
@@ -42,17 +43,14 @@
 			<tr>
 				<th>이메일</th>
 				<td>
-					<!-- 컨트롤러에서 이메일 합치기 -->
-					<input type="text" name="memEmail" value="aaaa" >
+					<input type="text" name="memEmail" value="" >
 					&nbsp;<span class="hyphen">@</span>&nbsp;
 					<input type="text" id="domainText">
-							<select name="domainList" id="domainList" class="insertMemInfo">
-								<!-- 이메일(도메인) 선택 -->
-								<!--  <option value="directInput" selected>직접입력</option>-->
-								<option  selected="selected" value="">직접입력</option>
-								<option value="@naver.com">naver.com</option>
-								<option value="@gmail.com">gmail.com</option>
-								<option value="@daum.net">daum.net</option>
+						<select name="domainList" id="domainList" class="insertMemInfo">
+							<option value="directInput" selected>직접입력</option>
+							<option value="naver.com">naver.com</option>
+							<option value="gmail.com">gmail.com</option>
+							<option value="daum.net">daum.net</option>
 						</select>
 				</td>
 			</tr>
@@ -75,10 +73,10 @@
 			</tr>
 			<tr>
 				<th>핸드폰 번호</th>
-				<td><input type="text" name="mem_phone1" maxlength="3" value="010">-<input type="text" name="mem_phone2" maxlength="4" value="1111">-<input type="text" name="mem_phone3" maxlength="4" value="5555">
+				<td><input type="text" class="phone" name="mem_phone1" maxlength="3" value="010">-<input type="text" class="phone" name="mem_phone2" maxlength="4" value="1111">-<input type="text" class="phone" name="mem_phone3" maxlength="4" value="5555">
 			</tr>
 			<tr>
-				<th rowspan="2">선호<br>문화행사</th>
+				<th rowspan="2">선호문화행사</th>
 				<td>
 					<select name="mem_joy1" id="memJoy1">
 						<option hidden="" disabled="disabled" selected="selected" value="">선호 박람회 선택</option>
@@ -102,14 +100,12 @@
 					</select>
 				</td>
 			</tr>
-			<tr>
-				<td>
-					<input type="button" id="cancel" value ="취소">
-					<button id="inserBtn">가입</button>
-				</td>
-			</tr>
 		</table>
 		<c:import url="addressSearchAPI.jsp"/>
+		<div class="button-container">
+			<input type="button" id="cancel" value="취소">
+			<button id="inserBtn">가입</button>
+		</div>
 	</form>
 	<%-- 회원가입 폼 종료 --%>
 </body>

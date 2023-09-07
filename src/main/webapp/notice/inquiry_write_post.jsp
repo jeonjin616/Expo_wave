@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="resources/css/menuCss1.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/notice/menuCss1.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -16,7 +16,7 @@
 		<div id="center">
 			<h3>문의 등록</h3>
 			<hr color="grey">
-			<form action="inquiry" id="form" method="post" enctype="multipart/form-data">
+			<form action="inqu_insert2" id="form" method="post" enctype="multipart/form-data">
 				<span class="label-text">제목</span><br><br>
 				<div class="form-group">
 					<input type="text" class="form-control input-sm" name="inqu_title" placeholder="제목을 입력해주세요">
@@ -24,7 +24,7 @@
 				<br>	
 				<span class="label-text">게시글 작성</span><br><br>	
 				<div class="form-group">
-					<textarea class="form-control form-control-content" name="inqu_content" placeholder="게시글을 작성해주세요"></textarea>
+					<textarea class="form-control form-control-content" name="inqu_question" placeholder="게시글을 작성해주세요"></textarea>
 				</div>
 					<input type="file" name="file" ><br>
 				<div class="btn-submit">

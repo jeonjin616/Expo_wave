@@ -39,6 +39,7 @@
 </style>
 </head>
 <body>
+ <jsp:include page="/header.jsp" />
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
@@ -79,11 +80,15 @@
 						<div class="col-md-3">
 							<div class="card">
 								<!-- 이미지와 제목을 클릭하면 해당 공연의 세부 정보 페이지로 이동 -->
-								<a href="${festival.fsv_name}">
+								<a href=<c:url value='/festivaldetail/${festival.fsv_id}'/>>
 									<div class="image-container">
 										<img
-											src="${not empty festival.fsv_thumb ? festival.fsv_thumb : '/resources/img/thumb_ing.gif'}"
+											src="${not empty festival.fsv_orgimg ? festival.fsv_orgimg : '/resources/img/thumb_ing.gif'}"
+											
 											alt="${festival.fsv_name}" class="card-img-top">
+										<%-- <img
+					src="${empty festival.fsv_orgimg ? '/resources/img/thumb_ing.gif' : festival.fsv_orgimg}"
+				alt="${festival.fsv_name}" class="card-img-top"> --%>
 									</div>
 									<div class="card-body">
 										<h5 class="card-title">${festival.fsv_name}</h5>

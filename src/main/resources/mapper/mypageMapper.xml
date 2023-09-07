@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mypageMapper">
+
+	<update id="changePassword" parameterType="map">
+		UPDATE member
+		SET
+		mem_pw = #{newPassword}
+		WHERE mem_id = #{mem_id}
+	</update>
+
+	<select id="getMemberById" parameterType="string"
+		resultType="com.multi.wave.member.MemberVO">
+		SELECT * FROM member WHERE mem_id = #{mem_id}
+	</select>
+
+
+	<update id="updateProfileImage" parameterType="map">
+		UPDATE member
+		SET mem_img = #{filename}
+		WHERE mem_id = #{mem_id}
+	</update>
+
+</mapper>

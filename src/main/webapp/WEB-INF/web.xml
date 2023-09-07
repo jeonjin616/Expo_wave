@@ -9,6 +9,7 @@
 		<param-value>
 			/WEB-INF/spring/root-context.xml
 			classpath:security-config.xml	<!-- context 파일 목록 등록 -->
+			classpath:mail-config.xml	<!-- context 파일 목록 등록 -->
 		</param-value>
 	</context-param>
 	

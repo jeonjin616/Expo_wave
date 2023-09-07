@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.multi.wave.festivaldetail.FestivalDetailMapper">
+
+<select id="selectOne" parameterType="String"
+    resultType="com.multi.wave.festivaldetail.FestivalDetailVO">
+    SELECT *
+    FROM festival
+    WHERE fsv_id = #{fsv_id}
+</select>
+
+	<select id="selectByDate"
+		resultType="com.multi.wave.festivaldetail.FestivalDetailVO">
+		SELECT * FROM festival
+		WHERE fsv_start BETWEEN NOW() AND DATE_ADD(NOW(), INTERVAL 30 DAY)
+	</select>
+
+</mapper>

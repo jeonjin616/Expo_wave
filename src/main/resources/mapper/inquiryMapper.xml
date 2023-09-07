@@ -1,39 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="inqu">
+<mapper namespace="inquiry">
 
 
-    <insert id="insert" parameterType="InquVO"
-		useGeneratedKeys="true" keyProperty="inqu_id">
-		insert into inqu values
-		(null,#{inqu_title},#{inqu_content},null,null,#{img})
+    <insert id="insert" parameterType="InquiryVO" useGeneratedKeys="true" keyProperty="inqu_id">
+    	insert into inqu (inqu_title, inqu_question, inqu_create_date, img, writer)
+    	values (#{inqu_title}, #{inqu_question}, CONVERT_TZ(NOW(),@@session.time_zone,'+09:00'), #{img}, #{writer})
 	</insert>
-
-	<delete id="delete" parameterType="InquVO">
+	
+	<delete id="delete" parameterType="InquiryVO">
 		delete from inqu where inqu_id = #{inqu_id}
 	</delete>
 
 	<update id="update">
 		update inqu
 		set inqu_title=#{inqu_title},
-		inqu_content=#{inqu_content}, img=#{img},
-		inqu_create_date=DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s')
+		inqu_question=#{inqu_question}, img=#{img},
+		inqu_create_date=DATE_FORMAT(DATE_ADD(NOW(), INTERVAL 9 HOUR), '%Y-%m-%d %H:%i:%s')
 		where inqu_id=#{inqu_id}
 	</update>
 
-	<select id="one" parameterType="map" resultType="InquVO">
+	<select id="one" parameterType="map" resultType="InquiryVO">
 		select * from inqu
 		where inqu_id = #{inqu_id} and inqu_title = #{inqu_title}
 	</select>
 
-	<select id="oneById" resultType="InquVO">
+	<select id="oneById" resultType="InquiryVO">
 		select * from inqu where inqu_id=#{inqu_id}
 	</select>
 
-	<select id="all" resultType="InquVO">
-		select * from inqu
+	<select id="listByWriter" resultType="InquiryVO" parameterType="string">
+    	SELECT * FROM inqu WHERE writer = #{writer}
 	</select>
     
+    <select id="searchInqu" parameterType="String" resultType="InquiryVO">
+    	SELECT * FROM inqu WHERE inqu_title LIKE CONCAT('%', #{query}, '%')
+	</select>
     
+    <select id="listAll" resultType="InquiryVO">
+    	SELECT * FROM inqu
+	</select>
+	
+	<select id="getPagedInqu" resultType="InquiryVO" parameterType="PagingVO">
+    	SELECT *
+    	FROM (
+        	SELECT  @row_number:=@row_number + 1 AS inqu_row_number, b.*
+        	FROM    inqu b, (SELECT @row_number:=0) r
+        	ORDER BY inqu_id DESC
+    	) AS inqu_with_row
+    	WHERE inqu_with_row.inqu_row_number BETWEEN #{start} + 1 AND #{end} + 1
+	</select>
+
+	
+	<select id="count" resultType="Integer">
+		select count(*) from inqu
+	</select>
     
 </mapper>

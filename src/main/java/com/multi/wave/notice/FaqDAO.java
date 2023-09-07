@@ -50,5 +50,16 @@ public class FaqDAO {
 		  return my.selectList("faq.all");
 		}
 
+	public List<FaqVO> searchFaq(String keyword) {
+	    return my.selectList("faq.searchFaq", keyword);
+	  }
+	
+	public List<FaqVO> getPagedFaq(PagingVO2 vo) {
+		return my.selectList("faq.getPagedFaq",vo);
+	}
+	
+	public int pageCount() {
+		return my.selectOne("faq.count");
+	}
 	
 }

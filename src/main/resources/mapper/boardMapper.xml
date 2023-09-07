@@ -5,7 +5,7 @@
 			parameterType="boardVO" 
 			useGeneratedKeys="true" 
 			keyProperty="board_id">
-		insert into board values (null,null,#{board_title},null,#{board_content},#{img})
+		insert into board values (null,null,#{board_title},CONVERT_TZ(NOW(),@@session.time_zone,'+09:00'),#{board_content},#{img})
 	</insert>
 	
 	<delete id="delete" parameterType="BoardVO">
@@ -16,7 +16,7 @@
 		update board
 		set board_title=#{board_title},
 		board_content=#{board_content}, img=#{img},
-		board_create_date=DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s')
+		board_create_date=DATE_FORMAT(DATE_ADD(NOW(), INTERVAL 9 HOUR), '%Y-%m-%d %H:%i:%s')
 		where board_id=#{board_id}
 	</update>
 	
@@ -30,10 +30,27 @@
 		select * from board where board_id=#{board_id}
 	</select>
 	
-	<select id="all" resultType="BoardVO">
+	<!-- <select id="all" resultType="BoardVO">
 		select * from board
-	</select>
+	</select> -->
 	
+	<select id="searchBoard" parameterType="String" resultType="BoardVO">
+    	SELECT * FROM board WHERE board_title LIKE CONCAT('%', #{query}, '%')
+	</select>
 
+	<select id="getPagedBoards" resultType="BoardVO" parameterType="PagingVO">
+    	SELECT *
+    	FROM (
+        	SELECT  @row_number:=@row_number + 1 AS board_row_number, b.*
+        	FROM    board b, (SELECT @row_number:=0) r
+        	ORDER BY board_id DESC
+    	) AS board_with_row
+    	WHERE board_with_row.board_row_number BETWEEN #{start} + 1 AND #{end} + 1
+	</select>
+
+	
+	<select id="count" resultType="Integer">
+		select count(*) from board
+	</select>
 	
 </mapper>

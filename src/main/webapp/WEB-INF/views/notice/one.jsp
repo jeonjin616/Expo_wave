@@ -3,12 +3,15 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<% pageContext.setAttribute("replaceChar", "\n"); %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="resources/css/menuCss2.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/notice/menuCss2.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -95,12 +98,22 @@
 		<div id="center">
 			<p class="title">${dto.board_title}</p>
     		<p class="date">작성일 ${dto.board_create_date}</p>
-    		<p class="link"><a href="javascript:void(0);" onclick="deleteConfirmation(${dto.board_id})">삭제</a> &nbsp; &nbsp; <a href="edit?board_id=${dto.board_id}">수정</a></p>
+    		<p class="link">
+    		<c:if test="${loginMember eq 'admin'}">
+    			<a href="javascript:void(0);" onclick="deleteConfirmation(${dto.board_id})">삭제</a> &nbsp; &nbsp; <a href="edit?board_id=${dto.board_id}">수정</a>
+    		</c:if>
+    		</p>
 			<hr color="grey">
-			
 			<br>
-			<img src="<c:url value='/resources/img/${dto.img}' />" alt="이미지를 불러오는데 실패하였습니다."> <br> <br> 
-			${dto.board_content}<br> <br> 
+			<c:choose>
+    			<c:when test="${not empty dto.img}">
+        			<img src="<c:url value='../resources/upload/${dto.img}' />" alt="이미지를 불러오는데 실패하였습니다.">
+    			</c:when>
+    			<c:otherwise>
+        			
+    			</c:otherwise>
+			</c:choose> <br> <br> 
+			${fn:replace(dto.board_content,replaceChar,"<br/>")}<br> <br> 
 			<p class="back"><a href="notice" >이전페이지</a></p>
 
 		</div>

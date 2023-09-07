@@ -1,0 +1,10 @@
+diff a/src/main/resources/mapper/festivalMapper.xml b/src/main/resources/mapper/festivalMapper.xml	(rejected hunks)
+@@ -24,7 +24,7 @@
+ 		select *
+ 		from (
+ 		select ROW_NUMBER() over(order by fsv_id desc) as fsv_no,
+-		fsv_id, fsv_name, fsv_start, fsv_end fsv_orgimg
++		fsv_id, fsv_name, fsv_start, fsv_end, fsv_orgimg
+ 		from festival f) festival2
+ 		where
+ 		festival2.fsv_no between ${start} and ${end}

@@ -14,12 +14,16 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+
+
 @Component
 public class FestivalParser {
 
+	public ArrayList<FestivalVO> parse(int page) throws Exception {
 	
-		public ArrayList<FestivalVO> parse(int page) throws Exception {
-			String numOfRows = "100";
+		
+		    
+			String numOfRows = "500";
 			String pageNo = "1";
 			String mobileOS = "ETC";
 			String mobileApp = "APPTest";
@@ -30,7 +34,7 @@ public class FestivalParser {
 			String eventStartDate = sdf.format(new Date());
 
 			String str = "http://apis.data.go.kr/B551011/KorService1/searchFestival1?"
-					+ "serviceKey=H4XP2iKQgbcN1FUv3TvI3JXLrN1OKDumB0jcEj5KPz%2F8FuVt4784DvJXodia69ed32T5pBCmCh%2BBw8HvqYVeSA%3D%3D"
+					+ "serviceKey="
 					+ "&numOfRows=" + numOfRows + "&pageNo=" + pageNo + "&MobileOS=" + mobileOS + "&MobileApp=" + mobileApp
 					+ "&_type=" + type + "&listYN=" + listYN + "&arrange=" + arrange + "&eventStartDate=" + eventStartDate;
 
@@ -56,11 +60,11 @@ public class FestivalParser {
 			}
 			br.close();
 			String str2 = buf.toString();
-			System.out.println(str2);
+			//System.out.println(str2);
 
 			RestTemplate restTemplate = new RestTemplate();
 			String jsonResponse = restTemplate.getForObject(uri.toString(), String.class);
-			System.out.println(jsonResponse);
+			//System.out.println(jsonResponse);
 			JSONObject response = new JSONObject(str2);
 			JSONObject body = response.getJSONObject("response").getJSONObject("body");
 			JSONObject items = body.getJSONObject("items");
@@ -83,7 +87,7 @@ public class FestivalParser {
 
 				list.add(vo);
 				System.out.println(list.size());
-				System.out.println(list);
+				//System.out.println(list);
 			}
 			return list;
 		}

@@ -1,0 +1,111 @@
+/* MD/mdDetailstyle.css */
+form {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.MDTitle input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+#MD_post_Thumbnail {
+    display: inline-block;
+    margin-bottom: 10px;
+    max-width: 100%; /* 이미지 가로 크기 최대 값 */
+    height: auto;
+}
+
+/* 이미지 업로드 미리보기 이미지 스타일 */
+
+/* common.css */
+.MDContent input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+/* 전체 페이지 스타일 */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+}
+
+/* 제목 스타일 */
+h1 {
+  color: #333;
+}
+
+/* 이미지 스타일 */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 버튼 스타일 */
+button {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* 테이블 스타일 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table{
+  border: 1px solid #ccc;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+}
+
+/* 댓글 수정 폼 */
+.updateComment {
+  display: none;
+  margin-top: 10px;
+}
+
+.updateComment input[type="text"] {
+  width: 80%;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+/* 구분선 스타일 */
+hr {
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid #ccc;
+}
+
+/* 경고 메시지 스타일 */
+.alert {
+  background-color: #f44336;
+  color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Instar">
+
+	<!-- 인스타 가져오기 -->
+	<select id="InstarAll" resultType="InstarVO">
+		select * from instar
+	</select>
+	<!-- 페이징용 -->
+	<select id="InstarAll2" resultType="InstarVO" parameterType="PagingVO">
+    select * from
+    (select ROW_NUMBER() over(order by id desc) as row_number1, b.*
+    from instar b) instar2
+    where instar2.row_number1 between #{start} and #{end}
+</select>
+
+	<!-- 인스타 삭제 -->
+	<delete id="deleteAll">
+		delete from instar
+	</delete>
+	<!-- 인스타 넣기 -->
+
+	<insert id="InstarUpdate" parameterType="InstarVO">
+		insert into instar
+		(id,
+		media_type,media_url,permalink,username,caption) values
+		(#{id},#{media_type},#{media_url},#{permalink},#{username},#{caption})
+	</insert>
+
+	<select id="InstarCount" resultType="InstarVO"
+		parameterType="PagingVO">
+		select * from
+		(select ROW_NUMBER() over(order by id
+		desc)
+		as row_number, b.*
+		from instar b)
+		instar2
+		where
+		instar2.row_number between
+		${start} and ${end}
+	</select>
+
+	<select id="count" resultType="Integer">
+		select count(*) from instar
+	</select>
+
+
+</mapper>

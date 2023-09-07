@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.multi.wave.showdetail.showDetailMapper">
+
+	<select id="selectOne" parameterType="string"
+		resultType="com.multi.wave.showdetail.ShowDetailVO">
+		SELECT *
+		FROM `show`
+		WHERE show_id = #{show_id}
+	</select>
+
+	<select id="selectByGenre" resultType="com.multi.wave.showdetail.ShowDetailVO">
+		SELECT * FROM `show`
+		WHERE show_genre = #{show_genre}
+	</select>
+
+</mapper>

@@ -1,0 +1,116 @@
+/* MD/mdDetailstyle.css */
+
+/* 전체 페이지 스타일 */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+}
+
+/* 제목 스타일 */
+h1 {
+  color: #333;
+}
+
+/* 이미지 스타일 */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 버튼 스타일 */
+button {
+  background-color: #8AAAE5;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  border-radius: 3px; /* 완만한 꼭지점을 위해 더 큰 값으로 조절 */
+}
+
+.custom-button {
+    background-color: #8AAAE5;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 3px; /* 완만한 꼭지점을 위해 더 큰 값으로 조절 */
+}
+.cancelUpdateButton{
+	background-color: #8AAAE5;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 3px; /* 완만한 꼭지점을 위해 더 큰 값으로 조절 */
+}
+.cancelUpdateButton:hover{
+	    background-color: #0056b3;
+	
+}
+
+.custom-button:hover {
+    background-color: #0056b3;
+}
+.showUpdateCommentButton{
+	background-color: #8AAAE5;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 3px; /* 완만한 꼭지점을 위해 더 큰 값으로 조절 */
+}
+
+.showUpdateCommentButton:hover {
+    background-color: #0056b3;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* 테이블 스타일 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table{
+  border: 1px solid #ccc;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+}
+
+/* 댓글 수정 폼 */
+.updateComment {
+  display: none;
+  margin-top: 10px;
+}
+
+.updateComment input[type="text"] {
+  width: 80%;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+/* 구분선 스타일 */
+hr {
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid #ccc;
+}
+
+/* 경고 메시지 스타일 */
+.alert {
+  background-color: #f44336;
+  color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}

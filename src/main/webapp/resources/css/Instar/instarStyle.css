@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f8f9fa;
+	margin: 0;
+	padding: 0;
+	font-co
+}
+
+.add-button {
+    background-color: #8AAAE5;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    width:38px;
+    height: 35px;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+     display: flex; /* 내부 요소를 가운데 정렬하기 위해 */
+    align-items: center; /* 세로 중앙 정렬 */
+    justify-content: center;
+}
+
+.add-button:hover {
+    background-color: #0056b3;
+}
+
+.card-news {
+	border: 1px solid #ccc;
+	padding: 10px;
+	margin: 10px;
+	width: 300px;
+	height: 380px;
+	display: inline-block;
+	background-color: white;
+}
+
+.card-news img {
+	width: 100%;
+	height: auto;
+}
+
+.card-news h2 {
+	font-size: 18px;
+	margin: 10px 0;
+}
+
+.card-news p {
+	font-size: 14px;
+	color: #ffffff;
+}
+
+.card-news a {
+	text-decoration: none;
+	display: block; /* <a> 태그를 블록 레벨 요소로 설정 */
+	color: black;
+	text-decoration: none; /* 링크 텍스트의 밑줄 제거 */
+}
