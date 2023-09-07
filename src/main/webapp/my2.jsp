@@ -4,29 +4,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" name="referrer" content="no-referrer-when-downgrade"/>
+<meta charset="utf-8" name="referrer"
+	content="no-referrer-when-downgrade" />
 <link rel="stylesheet" href="resources/css/my/my.css">
-<title>Wave Map</title>
+<title>내게 맞는 행사</title>
 </head>
 <style>
 .place-list-item {
-    border: 1px solid #000;
-    width: 250px;
-    margin-bottom: 20px;
-    padding: 10px;
-    cursor: pointer;
+	border: 1px solid #000;
+	width: 250px;
+	margin-bottom: 20px;
+	padding: 10px;
+	cursor: pointer;
 }
 
 .place-name {
-    color: black;
-    font-weight: bold;
+	color: black;
+	font-weight: bold;
 }
 
 .place-image {
-    width: 100%;
-    max-height: 250px;
-    display: block;
-    margin-top: 10px;
+	width: 100%;
+	max-height: 250px;
+	display: block;
+	margin-top: 10px;
 }
 </style>
 <body>
@@ -52,7 +53,8 @@
 	<script type="text/javascript" src="resources/js/jquery-3.6.1.js"></script>
 	<script type="text/javascript">
 		$(function() {
-			$.ajax({
+			$
+					.ajax({
 						url : "my",
 						dataType : "json",
 						success : function(json_array) {
@@ -86,7 +88,7 @@
 								minLevel : 10
 							// 클러스터 할 최소 지도 레벨 
 							})
-						
+
 							// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
 							if (navigator.geolocation) {
 								// GeoLocation을 이용해서 접속 위치를 얻어옵니다
@@ -152,19 +154,22 @@
 								});
 								var ps = new kakao.maps.services.Places();
 								// 마커에 표시할 인포윈도우를 생성합니다 
+								var iwContent = '<div style="padding:5px;">Hello World!</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+								iwPosition = new kakao.maps.LatLng(33.450701,
+										126.570667), //인포윈도우 표시 위치입니다
+								iwRemoveable = false; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+
+								// 인포윈도우를 생성하고 지도에 표시합니다
 								var infowindow = new kakao.maps.InfoWindow({
-									content : positions[i].content
-								// 인포윈도우에 표시할 내용
+									map : map, // 인포윈도우가 표시될 지도
+									position : iwPosition,
+									content : iwContent,
+									removable : iwRemoveable
 								});
 								// 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
 								// 이벤트 리스너로는 클로저를 만들어 등록합니다 
 								// for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-								kakao.maps.event.addListener(marker,
-										'mouseover', makeOverListener(map,
-												marker, infowindow));
-								kakao.maps.event
-										.addListener(marker, 'mouseout',
-												makeOutListener(infowindow));
+
 							}
 							// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
 							function makeOverListener(map, marker, infowindow) {
@@ -218,21 +223,27 @@
 												var mapTypeControl2 = new kakao.maps.MapTypeControl();
 												// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
 												// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-												map2.addControl(
+												map2
+														.addControl(
 																mapTypeControl2,
 																kakao.maps.ControlPosition.TOPRIGHT);
 												// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
 												var zoomControl2 = new kakao.maps.ZoomControl();
-												map2.addControl(
+												map2
+														.addControl(
 																zoomControl2,
 																kakao.maps.ControlPosition.RIGHT);
 												map2.setMaxLevel(12);
-												
+
 												var positions2 = []
-												$(json_array2).each(function(i,json) {
-																positions2.push({
-																	title : json.fsv_name,
-																	latlng : new kakao.maps.LatLng(
+												$(json_array2)
+														.each(
+																function(i,
+																		json) {
+																	positions2
+																			.push({
+																				title : json.fsv_name,
+																				latlng : new kakao.maps.LatLng(
 																						json.fsv_lat,
 																						json.fsv_lon)
 																			})
@@ -262,22 +273,7 @@
 																content : positions2[i].content
 															// 인포윈도우에 표시할 내용
 															});
-													// 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
-													// 이벤트 리스너로는 클로저를 만들어 등록합니다 
-													// for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-													kakao.maps.event
-															.addListener(
-																	marker2,
-																	'mouseover',
-																	makeOverListener(
-																			map2,
-																			marker2,
-																			infowindow2));
-													kakao.maps.event
-															.addListener(
-																	marker2,
-																	'mouseout',
-																	makeOutListener(infowindow2));
+						
 												}
 												// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
 												function makeOverListener(map,
@@ -294,35 +290,59 @@
 														infowindow2.close();
 													};
 												}
-										//검색 데이터 부분------------------------------------
-												$(document).ready(function () {
-												    $(json_array2).each(function (i, json) {
-												    	 //console.log('fsv_id:', json.fsv_id);
-												        let listItem = $('<div>')
-												            .addClass('place-list-item')
-												            .text(json.fsv_name)
-												            .hover(
-												                function () {
-												                    let image = $('<img>')
-												                        .addClass('place-image')
-												                        .attr('src', json.fsv_thumb);
-												                    $(this).append(image);
-												                },
-												                function () {
-												                    $(this).find('.place-image').remove();
-												                }
-												            );
-												           
-												                listItem.click(function () {
-												                	//console.log('Clicked fsv_id:', json.fsv_id); 
-												                	var linkUrl = 'festivaldetail/' + json.fsv_id;
-												                    window.location.href = linkUrl;
-												                });
-												           
+												//검색 데이터 부분------------------------------------
+												$(document)
+														.ready(
+																function() {
+																	$(
+																			json_array2)
+																			.each(
+																					function(
+																							i,
+																							json) {
+																						//console.log('fsv_id:', json.fsv_id);
+																						let listItem = $(
+																								'<div>')
+																								.addClass(
+																										'place-list-item')
+																								.text(
+																										json.fsv_name)
+																								.hover(
+																										function() {
+																											let image = $(
+																													'<img>')
+																													.addClass(
+																															'place-image')
+																													.attr(
+																															'src',
+																															json.fsv_thumb);
+																											$(
+																													this)
+																													.append(
+																															image);
+																										},
+																										function() {
+																											$(
+																													this)
+																													.find(
+																															'.place-image')
+																													.remove();
+																										});
 
-												            $('#placesList').append(listItem);
-												    });
-												});
+																						listItem
+																								.click(function() {
+																									//console.log('Clicked fsv_id:', json.fsv_id); 
+																									var linkUrl = 'festivaldetail/'
+																											+ json.fsv_id;
+																									window.location.href = linkUrl;
+																								});
+
+																						$(
+																								'#placesList')
+																								.append(
+																										listItem);
+																					});
+																});
 												// 검색결과 항목을 Element로 반환하는 함수입니다
 												function getListItem(index,
 														places) {
