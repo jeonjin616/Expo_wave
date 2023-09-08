@@ -74,15 +74,12 @@ public class MypageController {
 			model.addAttribute("mem_id", member.getMem_id());
 			model.addAttribute("mem_name", member.getMem_name());
 			model.addAttribute("mem_nickname", member.getMem_nickname());
-			model.addAttribute("mem_joy1", member.getMem_joy1());
-			model.addAttribute("mem_joy2", member.getMem_joy2());
 			model.addAttribute("mem_pw", member.getMem_pw());
 		}
 		return "mypage/mypage"; // JSP 페이지 경로
 	}
 
 	@PostMapping("/changePassword") // URL 경로 수정
-	@ResponseBody // Ajax 요청에 대한 응답을 직접 반환하도록 설정
 	public String changePassword(String oldPassword, String newPassword, HttpSession session) {
 		MemberVO member = (MemberVO) session.getAttribute("member");
 

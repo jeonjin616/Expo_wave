@@ -16,8 +16,8 @@ public class PlaceSearchController {
 
     @GetMapping("showdetail/caferestaurant")
     public String searchPlaces(
-        @RequestParam(required = false) String address, // 주소 파라미터 (필수 아님)
-        @RequestParam(required = false) String type, // 타입 파라미터 (필수 아님, 예: 음식점, 카페)
+        @RequestParam(required = false) String address, // 주소 파라미터
+        @RequestParam(required = false) String type, // 타입 파라미터
         Model model) {
         
         if (address != null && type != null) {
