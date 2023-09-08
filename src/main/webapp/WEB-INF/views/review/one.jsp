@@ -84,17 +84,18 @@
 	<div class="main">
 		<h2>게시글 상세보기</h2>
 		<hr>
-		<% ReviewVO one = (ReviewVO)request.getAttribute("one");
-		if(session.getAttribute("loginMember").equals("admin") || session.getAttribute("loginMember").equals(one.getMem_id())) { %>
 		<div class="button" style="margin-bottom: 10px;">
+		<% ReviewVO one = (ReviewVO)request.getAttribute("one");
+		String loginMember = (String) session.getAttribute("loginMember");
+		if (loginMember != null && (loginMember.equals("admin") || loginMember.equals(one.getMem_id()))) { %>
 			<button>
 				<a href="review_update.jsp?review_id=${one.review_id}
 				&review_title=${one.review_title}
 				&review_content=${one.review_content}&review_image=${one.review_image}">수정</a>
 			</button>
 			<input id="b1" type="button" value="삭제">
-		</div>
 		<% } %>
+		</div>
 		<br>
 		<table class="container">
 			<colgroup>
@@ -119,7 +120,7 @@
 				</tr>
 				<tr>
 					<td colspan="4" style="height: 200px;">
-						<img src="../resources/upload/${one.review_image}" id="preview" src="#" style="max-width: 200px; max-height: 200px; align-content: flex-end;">
+						<img src="${pageContext.request.contextPath}/resources/upload/${one.review_image}" id="preview" src="#" style="max-width: 200px; max-height: 200px; align-content: flex-end;">
 						</td>
 				</tr>
 			</tbody>

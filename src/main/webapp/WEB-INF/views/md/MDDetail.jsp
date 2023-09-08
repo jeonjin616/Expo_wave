@@ -65,7 +65,7 @@
 		<div style="text-align: center;">
 			<br> <br>
 			<c:choose>
-				<c:when test="${not empty vo.MD_post_Thumbnail}">
+				<c:when test="${not empty postvo.MD_post_Thumbnail}">
 					<!-- 이미지가 있는 경우 -->
 					<img
 						src="${pageContext.request.contextPath}/resources/img/${postvo.MD_post_Thumbnail}"
@@ -75,8 +75,7 @@
 					<!-- 이미지가 없는 경우  -->
 					<img
 						src="${pageContext.request.contextPath}/resources/img/logo.png"
-						alt="로고 이미지">
-
+						alt="로고 이미지2">
 				</c:otherwise>
 			</c:choose>
 			<br> <br> <br>

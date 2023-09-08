@@ -111,35 +111,27 @@
 	    border-right: none;
 	}
 	
-	/* 테이블의 너비와 관련된 스타일 */
-	.board_list, .board_list td, .board_list th {
-	    width: 100% !important;
-	}
-
-	table, td, th {
-    width: 100%;
-	}
-	
 	.board_list {
 	    border-collapse: collapse;
 	    border: 1px solid black;
 	    table-layout: fixed; 
+	    width: 100% !important;
 	}
 	
 	.board_list col:nth-child(1) {
-	    width: 15% !important;
+	    width: 30% !important;
 	}
-	
+		
 	.board_list col:nth-child(2) {
-	    width: 55% !important;
+	    width: 25% !important;
 	}
-	
+		
 	.board_list col:nth-child(3) {
 	    width: 20% !important;
 	}
-	
+		
 	.board_list col:nth-child(4) {
-	    width: 10% !important;
+	    width: 15% !important;
 	}
 	
 	a {

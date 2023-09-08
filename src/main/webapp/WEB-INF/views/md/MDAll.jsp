@@ -34,7 +34,8 @@
 								<!-- 이미지가 있는 경우 -->
 								<img
 									src="${pageContext.request.contextPath}/resources/img/${vo.MD_post_Thumbnail}"
-									alt="게시글 이미지2">
+									alt="게시글 이미지2"
+									style="max-width: 100px; max-height: 100px;">
 							</c:when>
 							<c:otherwise>
 								<!-- 이미지가 없는 경우 -->
